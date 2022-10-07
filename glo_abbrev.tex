@@ -1,0 +1,281 @@
+%\makeglossaries
+
+% use this if you go for nomenclature section at the beginning
+%\setabbreviationstyle[abbreviation]{short} %set all abbreviations to short form in the main text
+
+
+% DOES NOT WORK WITH \preto\chapter{\glsresetall} IN THE PREAMBLE.
+% http://packages.oth-regensburg.de/ctan/macros/latex/contrib/glossaries-extra/samples/sample-entrycount.tex
+%\GlsXtrEnableEntryCounting
+%{abbreviation}% list of categories to use entry counting
+%{1}% trigger value
+% The entry counting has been enabled to the abbreviation category. This means that abbreviations will only be added to the glossary if they have been used more than $n$ times in this document.
+% This gets the atribute of \glsgetcategoryattribute{abbreviation}{entrycount} in the document.
+
+
+% OVERLEAF DOES NOT RECOGNIZE THE "abbreviations" glossary defined with \usepackage[abbreviations]{glossaries-extra}
+% 
+\setglossarypreamble[\glsxtrabbrvtype]{
+	The abbreviations and acronyms used in this doctoral dissertation are listed below.
+	The goal is to keep, as much as possible, a consistent notation throughout the text. 
+	%Ambiguities and double meaning have been avoided as much as possible.
+	%However, the notations might be redefined in the accepted manuscripts presented from Chapters x to x, as those are presented in the form they were accepted for publication.
+	%The manuscript under review in Chapter x also has notations that differ from the ones defined herein.
+	\vspace{0.25cm}
+	%\glsfindwidesttoplevelname[\currentglossary] % TOO BIG OF "TAB"
+	%\glsfindwidesttoplevelname[\glsxtrabbrvtype] % TOO BIG OF "TAB"
+	\glssetwidest{lowemission}
+}
+
+
+%\newabbreviation{longestsone}{LONGABBREVIATION}{long abbreviation to define the spacing in the abbreviation list}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ----- Acronyms -----
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% A           % \newabbreviation[description={on the list}]{label}{SHORT}{long version on text}   %%% [description={}]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation
+    [description={Alternate current}]
+	{ac} % label
+	{AC} % abbreviation
+	{alternate current} % long text, not abbreviated
+\newabbreviation
+    [description={\Glsfmtshort{ac} power system}]
+	{acps}
+	{ACPS}
+	{AC power system}
+%\newabbreviation{ag}{AG}{asynchronous generator}
+\newabbreviation
+    [description={Automatic generation control}]
+	{agc}
+	{AGC}
+	{automatic generation control}
+%\newabbreviation{avr}{AVR}{automatic voltage regulator}
+%\newabbreviation{ama}{AMA}{adaptive moving average}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% A
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation[description={Battery converter}]
+	{bc}{BC}{battery converter}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% C
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation{ch}{CH}{chopper}
+\newabbreviation[description={Capacitive-resistive}]
+	{cr}{CR}{capacitive-resistive}
+%\newabbreviation{crb}{CRB}{crowbar}
+%\newabbreviation{csc}{CSC}{current source converter}
+\newabbreviation[description={Converter-interfaced generator}]
+	{cig}{CIG}{Converter-interfaced generator}
+\newabbreviation[description={Converter-interfaced load}]
+	{cil}{CIL}{Converter-interfaced load}
+\newabbreviation[description={Constant power source}]
+    {cps}{CPS}{constant power source}
+\newabbreviation[description={Constant power load}]
+    {cpl}{CPL}{constant power load}
+\newabbreviation[description={Constant power device}]
+    {cpd}{CPD}{constant power device}
+\newabbreviation[description={Constant impedance load}]
+    {czl}{CZL}{constant impedance load}
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\%%%%%%
+%% D
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation[description={Direct current}]
+	{dc}{DC}{direct current}
+%\newabbreviation{dcl}{DCL}{direct current link}
+%\newabbreviation{dfag}{DFAG}{doubly fed asynchronous generator}
+%\newabbreviation{ddsrf}{DDSRF}{decoupled double synchronous reference frame}
+%\newabbreviation{ddrrf}{DDRRF}{decoupled double rotating reference frame}
+%\newabbreviation{dsc}{DSC}{delayed signal cancellation}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% E
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation{emt}{EMT}{electromagnetic transients}
+\newabbreviation[description={Energy storage system}]
+	{ess}{ESS}{energy storage system}
+\newabbreviation[description={Energy storage device}]
+	{esd}{ESD}{energy storage device}
+\newabbreviation[description={Energy management system}]
+	{ems}{EMS}{energy management system}
+\newabbreviation[description={Energy storage}]
+	{es}{ES}{energy storage}
+%\newabbreviation{etfe}{ETFE}{empirical transfer function estimation}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% F
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation{emt}{EMT}{electromagnetic transients}
+%\newabbreviation{ft}{FT}{Fourier transform}
+%\newabbreviation{fft}{FFT}{fast Fourier transform}
+%\newabbreviation{fir}{FIR}{finite impulse response}
+\newabbreviation[description={Fuel cell converter}]{fcc}{FCC}{fuel cell converter}
+\newabbreviation[description={Frequency-locked loop}]{fll}{FLL}{frequency-locked loop}
+\newabbreviation[description={Frequency sensitivity mode}]{fsm}{FSM}{frequency sensitivity mode}
+\newabbreviation[description={Frequency containment reserves}]{fcr}{FCR}{frequency containment reserves}
+\newabbreviation[description={Fast frequency reserves}]{ffr}{FFR}{fast frequency reserves}
+\newabbreviation[description={Fast restoration reserves}]{frr}{FRR}{fast restoration reserves}
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% G
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation{gb}{GB}{gear box}
+\newabbreviation
+    [longplural={greenhouse gasses},description={Greenhouse gas}]
+    {ghg}
+    {GHG}
+    {greenhouse gas}
+%\newabbreviation{gsc}{GSC}{generator side converter}
+%\newabbreviation{gui}{GUI}{graphical user interfaces}
+%\newabbreviation{gen}{GEN}{generator}
+\newabbreviation[description={Turbogenertor or gas turbine}]
+    {gt}
+    {GT}
+    {turbogenerator}
+\newabbreviation[description={Grid converter}]{gc}{GC}{grid converter}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% H
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation{hvac}{HVAC}{high voltage alternate current}
+%\newabbreviation{hvdc}{HVDC}{high voltage direct current}
+\newabbreviation[description={High-voltage}]{hv}{HV}{high-voltage}
+\newabbreviation{hesoff}{HES-OFF}{Innovative Hybrid Energy System for Stable Power and Heat Supply in Offshore O\&G Installation Project}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% I
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation{ieee}{IEEE}{Institute of Electrical and Electronics Engineers}
+\newabbreviation{iec}{IEC}{International Electrotechnical Commission}
+\newabbreviation{iev}{IEV}{International Electrotechnical Vocabulary}
+\newabbreviation[description={Insulated-gate bipolar transistor}]{igbt}{IGBT}{insulated-gate bipolar transistor}
+\newabbreviation{iel}{IEL}{Department of Electric Power Engineering}
+\newabbreviation{ie}{IE}{Faculty of Information Technology and Electrical Engineering}
+%\newabbreviation{iir}{IIR}{infinite impulse response}
+%\newabbreviation{iae}{IAE}{integral of the absolute error}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% K
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation{kcl}{KCL}{Kirchhoff's current law}
+\newabbreviation{kvl}{KVL}{Kirchhoff's voltage law}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% L
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation[description={Inductive-capacitive-inductive}]{lcl}{LCL}{inductive-capacitive-inductive}
+\newabbreviation[description={Inductive-capacitive}]{lc}{LC}{inductive-capacitive}
+\newabbreviation[description={Low-pass filter}]{lpf}{LPF}{low-pass filter}
+%\newabbreviation{lsc}{LSC}{line side converter}
+\newabbreviation[description={Low-voltage}]{lv}{LV}{low-voltage}
+%\newabbreviation{lpg}{LPG}{liquified petroleum gas}
+%\newabbreviation{lpf}{LPF}{low-pass filter}
+\newabbreviation
+    [description={\href{https://prosjektbanken.forskningsradet.no/en/project/FORISS/296207}{LowEmission Research Centre}},
+    name={LowEmission~}]
+	{lowemission}{LowEmission}{LowEmission Research Centre}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation{msc}{MSC}{mechanically switched capacitor bank}
+%\newabbreviation{ma}{MA}{moving average}
+%\newabbreviation{maw}{MAW}{moving average window}
+%\newabbreviation{msc}{MSC}{machine side converter}
+%\newabbreviation{mlc}{MLC}{multilevel converter}
+%\newabbreviation{mimo}{MIMO}{multiple-input multiple-output}
+\newabbreviation{mg}{MG}{microgrid}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% N
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation{ncs}{NCS}{Norwegian continental shelf}
+\newabbreviation[description={Nitrogen oxides}]{nox}{NO$_\textrm{x}$}{nitrogen oxides}
+\newabbreviation{nok}{NOK}{Norwegian kroner}
+%\newabbreviation{npc}{NPC}{neutral point clamped}
+%\newabbreviation{nsrrf}{NSRRF}{negative sequence rotating reference frame}
+\newabbreviation{ntnu}{NTNU}{Norwegian University of Science and Technology}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% O
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation[description={Oil and gas}]{oilandgas}{O\&G}{oil and gas}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% P
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation[description={Power electronic converter}]{pec}{PEC}{power electronic converter}
+\newabbreviation[description={Phase-locked loop}]{pll}{PLL}{phase-locked loop}
+\newabbreviation[description={Pulse-width modulation}]{pwm}{PWM}{pulse-width modulation}
+\newabbreviation[description={Power management system}]{pms}{PMS}{power management system}
+%\newabbreviation{pmsg}{PMSG}{permanent-magnet synchronous generator}
+\newabbreviation[description={Proportional and integral}]{pi}{PI}{proportional and integral}
+\newabbreviation[description={Proportional, integral, and derivative}]{pid}{PID}{proportional, integral, and derivative}
+%\newabbreviation{pcc}{PCC}{point of common coupling}
+\newabbreviation[description={Per unit}]{pu}{pu}{per unit}
+\newabbreviation{pesc}{PESC}{Power Electronic Systems and Components}
+\newabbreviation{phd}{PhD}{Philosophiae Doctor}
+\newabbreviation[description={Proton exchange membrane}]{pem}{PEM}{proton exchange membrane}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% R                    %%% [description={}]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation[description={Renewable energy source}] {res}{RES}{renewable energy source}
+%\newabbreviation {rl}{RL}{resistive and inductive}
+%\newabbreviation {rlc}{RLC}{resistance, inductance and capacitance}
+%\newabbreviation {rms}{RMS}{root-mean-square}
+\newabbreviation[description={Rotating reference frame}] {rrf}{RRF}{rotating reference frame}
+\newabbreviation[description={Rate of change of frequency}] {rocof}{RoCoF}{rate of change of frequency}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% S
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation[description={Supervisory control and data acquisition}] {scada}{SCADA}{supervisory control and data acquisition}
+%\newabbreviation {ssr}{SSR}{subsynchronous resonance}
+%\newabbreviation {srf}{SRF}{synchronous reference frame}
+%\newabbreviation {srf}{SRF}{stationary reference frame}
+%\newabbreviation {siso}{SISO}{single-input single-output}
+\newabbreviation[description={Sulphur oxides}]{sox}{SO$_\textrm{x}$}{sulphur oxides}
+\newabbreviation[description={State of charge}]{soc}{SOC}{state of charge}
+\newabbreviation[description={Synchronous machine}]{sm}{SM}{synchronous machine}
+
+
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% T
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation{tsc}{TSC}{thyristor switched capacitor bank}
+\newabbreviation[description={Total harmonic distortion}]{thd}{THD}{total harmonic distortion}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% V
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation{vrrag}{VRRAG}{variable rotor resistance asynchronous generator}
+%\newabbreviation{vsc}{VSC}{voltage source converter}
+%\newabbreviation{vsd}{VSD}{variable speed drive}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% X
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newabbreviation {xoverr}{$X/R$}{reactance-resistance ratio}%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% W
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newabbreviation[description={Wind farm}]{wf}{WF}{wind farm}
+\newabbreviation[description={Wind turbine}]{wt}{WT}{wind turbine}
+%\newabbreviation{wtr}{WTR}{wind turbine rotor}

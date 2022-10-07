@@ -1,0 +1,115 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GREEK LETTERS - --- Symbols -----
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newglossaryentry{greekletter}
+{	name={\textbf{Greek variables and constants:}},
+	text={g Greek},
+	sort=B,
+	description={variables and constants in Greek letters can be capitalized or not depending on the context. Some Greek letters may be used as mathematical operators.} %Text after the name of the glossary
+}
+
+
+%% Greek 		alphabet order
+% alpha			A
+% beta			B
+% gamma			C
+% delta			D
+% epsilon		E
+% zeta			F
+% eta			G
+% theta			H
+% iota			I
+% kappa			K
+% lambda		L
+% mu			M
+% nu			N
+% xi			Nxi
+% omicron		O
+% pi			P
+% rho			R
+% sigma			S
+% tau			T
+% phi			Tphi
+% chi 			X
+% psi			Xpsi	
+% omega 		Z
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Greek 		alphabet order
+% alpha			A
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\glsxtrnewsymbol
+	[description={angle},
+	sort=Aa, 
+	parent=greekletter]%description
+	{alphaandotherangles}%label
+	{\ensuremath{\alpha,\beta, \gamma, \delta, \theta, \varphi}}%symbol
+
+\glsxtrnewsymbol
+	[description={axes of the stationary reference frame for three-phase measurements},
+	sort=Ab, 
+	parent=greekletter]%description
+	{alphabetaaxis}%label
+	{\ensuremath{\alpha,\beta}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Greek 		alphabet order
+% zeta			F
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={damping coefficient},
+	sort=Fa, 
+	parent=greekletter]%description
+	{zetadamping}%label
+	{\ensuremath{\zeta}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Greek 		alphabet order
+% eta			G
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={efficiency},
+	sort=Ge, 
+	parent=greekletter]%description
+	{etaefficiency}%label
+	{\ensuremath{\eta}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Greek 		alphabet order
+% pi			P
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={well known transcendental constant},
+	sort=Pi,
+	parent=greekletter]%description
+	{pigrnum}%label
+	{\ensuremath{\pi}}%symbol
+
+%\glsxtrnewsymbol
+%	[description={a type of model of transmission lines composed of one inductor and two capacitors},parent=greekletter]%description
+%	{Pigrnum}%label
+%	{\ensuremath{\Pi}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Greek 		alphabet order
+% tau			T
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={time},
+	sort=Tau,
+	parent=greekletter]%description
+	{tautime}%label
+	{\ensuremath{\tau}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Greek 		alphabet order
+% omega			Z
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={angular frequency},
+	sort=Zomega, 
+	parent=greekletter]%description
+	{omega}%label
+	{\ensuremath{\omega}}%symbol
+

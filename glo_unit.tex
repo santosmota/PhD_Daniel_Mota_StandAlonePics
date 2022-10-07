@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% UNITS  --- Symbols -----
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newglossaryentry{units}{name={\textbf{Units}},
+	text={Units},
+	description={\\Mostly \href{https://www.bipm.org/en/home}{SI} units from the Bureau International des Poids et Mesures \href{https://www.bipm.org/en/home}{BIPM} with nomenclature adapted from the International Electrotechnical Vocabulary (\href{https://www.electropedia.org/iev/iev.nsf/6d6bdd8667c378f7c12581fa003d80e7?OpenForm}{IEV}) of the International Electrotechnical Commission (\href{https://www.iec.ch/homepage}{IEC})}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={ampere, SI base unit of elecric current, IEV \href{http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=112-02-07}{112-02-07}},parent=units]%description
+	{ampere}%label
+	{\ensuremath{\mathrm{A}}}%\enspace}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% C
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\glsxtrnewsymbol
+%	[description={temperature in degrees Celsius},parent=units]%description
+%	{celsius}%label
+%	{\ensuremath{^\circ\mathrm{C}}}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% F
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={farad, capacitance, in SI base units $ \si{\farad} = \si{\per \meter \squared \second \tothe{4} \per \kilo \gram \ampere \squared }$, IEV \href{http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=131-12-90}{131-12-90} },parent=units]%description defined by $\si{\farad} \coloneqq \si{\coulomb}/\si{\volt}$
+	{farad}%label
+	{\ensuremath{\mathrm{F}}}%\enspace}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% H
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={henry, inductance, in SI base units $\si{\henry} = \si{\meter \squared \per \second \squared \kilo \gram \per \ampere \squared}$, IEV \href{http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=131-12-91}{131-12-91}},parent=units]%description  and permeance defined by $\si{\henry} \coloneqq \si{\weber \per \ampere}$, 
+	{henry}%label
+	{\ensuremath{\mathrm{H}}}%\enspace}%symbol
+\glsxtrnewsymbol
+	[description={hour, time, sixty minutes},parent=units]%description
+	{hour}%label
+	{\ensuremath{\mathrm{h}}}%\enspace}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% K
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% M
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={metre, SI unit of length, IEV \href{https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=112-02-05}{112-02-05}},
+	parent=units]%description
+	{metres}%label
+	{\ensuremath{\mathrm{m}}}%\enspace}%symbol
+
+\glsxtrnewsymbol
+	[description={minute, time, sixty seconds}, 
+	parent=units]%description
+	{min}%label
+	{\ensuremath{\mathrm{min}}}%\enspace}%symbol
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% N
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={newton, force, in SI base units $\si{\newton} \coloneqq \si{\kilo \gram \meter \per \second \squared}$, IEV \href{https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=113-03-15}{113-03-15}},
+	parent=units]%description
+	{newton}%label
+	{\ensuremath{\mathrm{N}}}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% P
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\glsxtrnewsymbol
+	[description={per unit, a quantity in a given unit that is divided by a constant expressed in the same unit},parent=units]%description
+	{perunit}%label
+	{\ensuremath{\mathrm{pu}}}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% S
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={second, SI unit of time, IEV \href{https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=112-02-04}{112-02-04}}
+				, parent=units]%description
+	{seconds}%label
+	{\ensuremath{\mathrm{s}}}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% V
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={volt, unit of the scalar quantity equal to the line integral of the electric field strength along a specific path, IEV \href{https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-11-27}{121-11-27} },parent=units]%description
+	{volt}%label
+	{\ensuremath{\mathrm{V}}}%symbol
+
+\glsxtrnewsymbol
+	[description={voltampere, product of the rms voltage betwen the terminals of an element by the rms current through the element},parent=units]%description
+	{voltampere}%label
+	{\ensuremath{\mathrm{VA}}}%symbol
+
+\glsxtrnewsymbol
+	[description={voltampere reactive, special name of voltampere, $\SI{1}{\voltamperereactive} \coloneqq \SI{1}{\voltampere}$, IEV \href{http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=131-11-45}{131-11-45}},parent=units]%description
+	{voltamperereactive}%label
+	{\ensuremath{\mathrm{var}}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% W
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={watt, power, time derivative of energy being transferred or transformed, IEV \href{https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=113-03-52}{113-03-52}},
+	parent=units]%description
+	{watt}%label
+	{\ensuremath{\mathrm{W}}}%symbol
+\glsxtrnewsymbol
+	[description={watt hour, convenient unit of energy, IEV \href{https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=131-11-58}{131-11-58}},parent=units]%description % calculated by integrating power (\si{\watt}) in time (\si{\hour})
+	{watthour}%label
+	{\ensuremath{\mathrm{Wh}}}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Omega
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={ohm, unit of resistance defined $\Omega \coloneqq \si{\volt \per \ampere}$, IEV \href{http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=131-12-88}{131-12-88}},parent=units]%description
+	{zohm}%label
+	{\ensuremath{\Omega}}%symbol
+

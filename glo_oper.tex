@@ -1,0 +1,148 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OPERATORS --- Symbols -----
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newglossaryentry{operators}{name={\textbf{Mathematical operators:}},
+	text={Operators},
+	description={capitalized and lowercase Latin and Greek letters, as well as stylized characters, are used to represent mathematical operators.}
+}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% C
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={for any complex number $a+\cmplxnum b$, its complex conjugate is represented as $(a+\cmplxnum b)^*$ and is equal to  $a - \cmplxnum b$},
+	parent=operators]%description
+	{complexconjungate}%label
+	{\ensuremath{*}}%symbol %\left(\right)^*
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% D
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={infinitesimal variation of a variable, i.e., $\partial x$; used in the context of partial derivatives}, %toerhwhen used as $\partial f / \partial x$ denotes the partial derivative of the function $f$ with respect to the scalar $x$}, % If $f$ is a vector, the operator is applied to each of the vector's components},
+	sort=del,
+	parent=operators]%description
+	{del}%label
+	{\ensuremath{\partial}}%symbol
+
+\glsxtrnewsymbol
+	[description={finite variation of a variable, i.e., $\Delta x$}, % indicates a small finite variation of the variable $x$}, % If $f$ is a vector, the operator is applied to each of the vector's components},
+	sort=delta,
+	parent=operators]%description
+	{deltavariation}%label
+	{\ensuremath{\Delta}}%symbol
+	
+\glsxtrnewsymbol
+	[description={infinitesimal variation of a variable, i.e., $\inftsml x$}, %; when used as $\frac{\mathrm{d}f}{\mathrm{d}x}$ denotes the derivative of the function $f$ with respect to the variable $x$}, % art of a variable as in $\mathrm{d}x$     If $x$ or $f$ are a vector, the operator is applied to each of the vector's components
+	sort=d,
+	parent=operators]%description
+	{dinfinitesimal}%label
+	{\ensuremath{\mathrm{d}}}%symbol
+
+\glsxtrnewsymbol
+	[description={dot product of two column vectors $\matr{x}$ and $\matr{y}$ is $\matr{x} \cdot \matr{y} = \matr{x}^{\gls{transpose}} \matr{y}$.},
+	sort=DotProduct,
+	parent=operators]%description
+	{dotproduct}%label
+	{\ensuremath{\cdot}}%symbol   % \bullet
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% I
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={integral},
+	sort=Int,
+	parent=operators]%description
+	{integral}%label
+	{\ensuremath{\int}}%symbol
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={multiplication of scalars, vectors or matrices; however, in most cases the multiplication is indicated without any symbol, $x \times y = x y$},parent=operators]%description
+	{multiplication}%label
+	{\ensuremath{\times}}%symbol
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% N
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\glsxtrnewsymbol
+%	[description={is a vector of partial derivative operators, $\begin{bmatrix} \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z}\end{bmatrix}^\top$},
+%	parent=operators]%description
+%	{nabla}%label
+%	{\ensuremath{\nabla}}%symbol
+%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% P
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={paralleling of two impedances, $Z_1 \parallel Z_2 = \left( Z_1^{-1} + Z_2^{-1}  \right)^{-1}$},
+	parent=operators]%description
+	{parallel}%label
+	{\ensuremath{\parallel}}%symbol
+
+\glsxtrnewsymbol
+	[description={product},
+	sort=Product,
+	parent=operators]%description
+	{Piproduct}%label
+	{\ensuremath{\Pi}}%symbol
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% S
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={sum},
+	sort=Sum,
+	parent=operators]%description
+	{sum}%label
+	{\ensuremath{\Sigma}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% T
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={transpose of a matrix $\matr{T}$ is represented as $\matr{T}^\top$},
+	parent=operators]%description
+	{transpose}%label
+	{\ensuremath{\top}}%symbol %\left[ \right]^\top
+
+\glsxtrnewsymbol
+	[description={time derivative, $\frac{\inftsml x}{\inftsml t} = \overset{\sbullet}{x} $},
+	sort=TimeDerivative,
+	parent=operators]%description
+	{dotderivative}%label
+	{\ensuremath{\sbullet}}%symbol
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Transformations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={matrix used in the $abc \leftrightarrow dq0$ transformation},
+	parent=operators,
+	sort=Tpark]%description
+	{Tpark}%label
+	{\ensuremath{\mathcal{T}}}%symbol
+
+\glsxtrnewsymbol
+	[description={matrix used in the $\alpha \beta 0 \leftrightarrow dq0$ transformation},
+	parent=operators,
+	sort=Ppark]%description
+	{Ppark}%label
+	{\ensuremath{\mathcal{P}}}%symbol
+
+
+\glsxtrnewsymbol
+	[description={matrix used an the $abc \leftrightarrow \alpha \beta 0$ transformation},
+	parent=operators,
+	sort=Cclarke]%description
+	{Cclarke}%label
+	{\ensuremath{\mathcal{C}}}%symbol
+

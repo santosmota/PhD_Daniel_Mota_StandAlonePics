@@ -1,0 +1,52 @@
+#############
+# Latex
+# A
+*.alg
+*.acn
+*.acr
+*.aux
+#############
+# B
+*.bbl
+*.blg
+*.brf
+#############
+# C D E F
+*.dvi
+#############
+# G 
+*.glg
+*.glg-abr
+*.glo
+*.glo-abr
+*.gls
+*.gls-abr
+#############
+# H I J 
+*.idx
+*.ist
+*.ilg
+*.ind
+#############
+# K L
+*.log
+*.lof
+*.lot
+#############
+# M N 
+*.maf
+*.mtc
+*.mtc1
+#############
+# O P Q R 
+*.out
+*converted-to.pdf
+#############
+# S T 
+*.synctex.gz
+*.sls
+*.slg
+*.slo
+#############
+# T 
+*.toc

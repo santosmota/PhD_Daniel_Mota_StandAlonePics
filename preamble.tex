@@ -1,0 +1,426 @@
+\usepackage[utf8]{inputenc}
+%=======================================================================
+%%% Fonts used in this PhD thesis
+
+\usepackage[T1]{fontenc}
+
+\usepackage{csquotes}
+\usepackage[english]{babel}
+
+%% serif, as a main font %%
+\usepackage{crimson}
+
+%% sans serif, as decoration %%
+\usepackage{roboto} %figure caption fonts
+
+% math font
+%\usepackage[libertine]{newtxmath} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATRIX NOTATION AND MATHS NOTATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb,amsfonts}
+\newcommand{\matr}[1]{\mathbf{#1}} % undergraduate algebra version
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version - I need a the bm package for that version 
+\newcommand{\euler}{\mathrm{e}}
+\newcommand{\inftsml}{\mathrm{d}}
+\newcommand{\cmplxnum}{\mathrm{j}}
+\newcommand{\setangles}{\mathbb{S}}
+\newcommand{\realnumbers}{\mathbb{R}}
+%\newcommand{\realnumbers}{\rm I\!R}
+\newcommand{\realpart}{\mathrm{Re}}
+\newcommand{\complexpart}{\mathrm{Im}}
+%\newcommand{\complexnumbers}{\rm I\!I}
+\newcommand{\complexnumbers}{\mathbb{C}}
+
+\usepackage{nicefrac}
+
+%small bullet
+% https://tex.stackexchange.com/questions/389238/is-there-a-black-dot-symbol-that-i-can-use
+\usepackage{scalerel}
+\newcommand\sbullet[1][.5]{\mathbin{\ThisStyle{\vcenter{\hbox{
+					\scalebox{#1}{$\SavedStyle\bullet$}}}}}
+}
+
+\usepackage{mathtools} % \colloneq
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% calligraphical font
+\usepackage{calligra}
+
+% hiragana/kanji
+\usepackage{CJKutf8}
+
+
+
+\usepackage{graphicx} % [draft]{graphicx} to remove all images
+\graphicspath{ {images/} }
+\usepackage{wrapfig}
+
+\usepackage{breakcites}
+
+\usepackage[strict]{changepage} % for CV. As the "section" of bch font is slightly off the balance compared with "main text" of crimson font. the balance is then fixed by placing the bch font in the main text, and the "section" of bch font is adjusted accordingly.
+
+%=======================================================================
+%%% thesis geometry
+
+%\usepackage[text={115mm,197.2mm},hmarginratio=1:1,vmarginratio=1:1,marginparwidth=12mm]{geometry} 
+
+%=======================================================================
+
+%\usepackage{lipsum} %generating lorem ipsum
+%\usepackage{kantlipsum}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Units
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{siunitx}
+\DeclareSIUnit \voltampere { VA } %apparent power
+\DeclareSIUnit \voltamperereactive { var } %var %https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=131-11-45
+\DeclareSIUnit \watthour { Wh } %watt hour
+\DeclareSIUnit \perunit { pu } %per unit
+\DeclareSIUnit \degree { \ensuremath{^\circ} } %per unit
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{setspace}
+\usepackage{booktabs}
+
+%\usepackage{emptypage} %remove header, footer along with the page number in an empty page
+%\newcommand\mybar{\kern1pt\rule[-\dp\strutbox]{1pt}{\baselineskip}\kern1pt} %vertical bar
+%\usepackage{pdfpages} %[draft]{pdfpages} to remove all pdf
+
+\usepackage{float} %force image position
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BREAKS URLs ON THE HYPHEN AS WELL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[hyphens]{url}
+\PassOptionsToPackage{hyphens}{url}
+% ckeck third answer to https://tex.stackexchange.com/questions/49788/hyperref-url-long-url-with-dashes-wont-break
+\urlstyle{same}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[super]{nth}
+
+\usepackage{textgreek}
+
+\usepackage[hang,flushmargin]{footmisc}
+\renewcommand*{\footnotelayout}{\scriptsize}
+
+\usepackage{multirow}
+
+\usepackage[many,listings]{tcolorbox} % color box surrounding anything
+
+%=======================================================================
+%%% Minimize overfull hbox output problem
+
+\usepackage{microtype}
+
+%=======================================================================
+%%% Abbreviations and add this section to table of contents
+
+\usepackage{multicol} % multicolumns
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% WILL NOT USE THE NOMENCLATURE PACKAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%\usepackage[intoc]{nomencl}
+\usepackage{ifthen}
+%%%%\setlength{\nomitemsep}{-2pt} % this modifies item vertical separation
+%%%%\setlength{\nomlabelwidth}{1.6cm} % this modifies label horizontal separation; {2.5cm} for single column; {1.8cm} for two column, long acronyms
+
+%%%% %%% Grouped multi-column nomenclature %%%
+
+%%%%\makenomenclature
+
+\setlength{\columnsep}{1.67pc} % column separation
+
+%%%%\makeatletter
+%%%%\newif\if@nomlist
+%%%%
+%%%%\newcommand*\nomlist{%
+  %%%%\@nomlisttrue
+  %%%%\list{}{%
+    %%%%\labelwidth\nom@tempdim
+    %%%%\leftmargin\labelwidth
+    %%%%\advance\leftmargin\labelsep
+    %%%%\itemsep\nomitemsep
+    %%%%\let\makelabel\nomlabel}}
+
+%%%%\renewcommand*\thenomenclature{%
+  %%%%\@ifundefined{chapter}%
+    %%%%{\section*{\nomname}\if@intoc\addcontentsline{toc}{section}{\nomname}\fi}%
+    %%%%{\chapter*{\nomname}\if@intoc\addcontentsline{toc}{chapter}{\nomname}\fi}%
+  %%%%\nompreamble
+  %%%%\@nomlistfalse
+%%%%}
+
+%%%%\renewcommand\nomgroup[1]{%
+  %%%%\if@nomlist\endlist\end{multicols}\fi
+  %%%%\ifx#1A\relax % "1A" can't be replaced with "1a". "a" is fine though in the nomenclature.tex
+    %%%%\def\nomgroupname{\textbf{Acronyms}}%
+  %%%%\else
+    %%%%\ifx#1B\relax % "1B" can't be replaced with "1b". "b" is fine though in the nomenclature.tex
+      %%%%\def\nomgroupname{\textbf{Roman symbols}}%
+    %%%%\else
+      %%%%\def\nomgroupname{\textbf{Greek symbols}}%
+    %%%%\fi
+  %%%%\fi
+  %%%%\begin{multicols}{2}[\raggedcolumns\noindent\textbf{\hspace*{-1pt}\fontfamily{bch}\selectfont\scshape\small{\nomgroupname}}]
+  %%%%\nomlist
+%%%%}
+%%%%
+%%%%\renewcommand*\nompreamble{}
+%%%%\renewcommand*\nompostamble{\end{multicols}}
+%%%%\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%=======================================================================
+%%% Modifying the listing items
+
+\usepackage{enumitem}  
+\usepackage{pgfornament}
+\usepackage{adforn}
+
+%=======================================================================
+%%% Unique colors used in this PhD thesis
+\usepackage{xcolor}
+\definecolor{sophia}{RGB}{125,0,45}
+\definecolor{ntnu}{RGB}{0,80,158} % ntnu blue https://i.ntnu.no/wiki/-/wiki/Norsk/Farger+i+grafisk+profil
+\definecolor{heidelberg}{RGB}{0,65,120} % was used as background on the Part page
+\definecolor{PartPageBackground}{RGB}{215,220,220} % 
+\definecolor{PartPageText}{RGB}{0,0,0} % 
+\definecolor{DedicationPageBackground}{RGB}{215,220,220} % 
+
+
+
+\usepackage{colortbl} % coloring the table
+\definecolor{Gray}{gray}{0.9}
+\definecolor{White}{RGB}{255,255,255}
+
+% for abstract in chapters 5-9
+\definecolor{abstractback}{RGB}{255,248,220}
+
+\definecolor{Test}{RGB}{231,231,231} % must be CAPITALIZED!!!
+\definecolor{Test3}{RGB}{128,128,128}
+\definecolor{Black}{RGB}{0.0, 0.0, 0.0}
+% for figure & table captions, marginnote, etc
+
+\newcommand{\sophia}[1]{\textcolor{sophia}{#1}}
+% too late, only used in Acknowledgement
+
+%=======================================================================
+%%% hyperref
+
+\usepackage[backref=page]{hyperref}
+
+\hypersetup{hidelinks, colorlinks=true, linkcolor=ntnu, citecolor=ntnu, urlcolor=ntnu, breaklinks, linktocpage}% for TITLETOC: need to use this to make page number, not text be linked (automatically colored to "ntnu"). if this option is not used, then any text in toc or lof can't be customized in TITLETOC.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GLOSSARIES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% From the package manual: If you use hyperref and glossaries, you must load hyperref first (although hyperref should be loaded after most other packages)
+% Use the automake if nomenclature, also put the makeglossaries in the abreviacoes.tex
+
+% LAST ONE BEFORE STRIPPING DOWN TO FIND THE CAUSE
+%\usepackage[abbreviations, symbols, postdot, nogroupskip, nomain, nohypertypes={symbols}, automake]{glossaries-extra} 
+\usepackage[symbols,postdot]{glossaries-extra} 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CLEVERREF
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[nameinlink,noabbrev]{cleveref} % I WILL USE \autoref from the hyperref package...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% ENUMERATED ASSUMPTIONS LIST
+\newlist{assumptions}{enumerate}{2}
+\setlist[assumptions]{label=\textbf{ Assumption \arabic{assumptionsi} ---}, ref=\arabic{assumptionsi}, itemindent=*} 
+\crefname{assumptionsi}{assumption}{assumptions}
+\Crefname{assumptionsi}{Assumption}{Assumptions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% ENUMERATED CASE LIST
+\newlist{casos}{enumerate}{2}
+\setlist[casos]{label=\textbf{Case \arabic{casosi} ---}, ref=\arabic{casosi}, itemindent=*} 
+\crefname{casosi}{case}{cases}
+\Crefname{casosi}{Case}{Cases}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESET GLOSSARIES COUNTERS FOR EACH CHAPTER... WILL MOST LIKELY COMMENT OUT!!!!!!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{etoolbox}
+%\preto\chapter{\glsresetall} % FODEU COM O GLOSSARIO quando tem entry count
+%https://tex.stackexchange.com/questions/428290/reset-of-the-acronym-with-glossaries-extra
+%I think the simplest method is to add \glsresetall to the start of each chapter with etoolbox's \preto command. (etoolbox is automatically loaded by glossaries and therefore by glossaries-extra but I've loaded it explicitly below for clarity.)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% === back references == 
+
+%\newcommand{\citedbox}[1]{%
+%  \begingroup\setlength{\fboxsep}{1pt}% 1pt is the default value; height
+%  \colorbox{White}{\hspace*{-1pt}\vphantom{Ay}#1\hspace*{-1pt}}% each 2pt is the default value; width
+%  \endgroup % originally the colorbox is set to "Test". it is good, but draws too much attention.
+%}
+
+\usepackage{etoolbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GAMBIARRAS ORIGINAIS POR NÃO USAR CLEEVEREF... TO BE COMMENTED LATER!!!!!!!
+
+%\def\backref#1{{\citedbox{\textcolor{Test3}{Cited on page/s} #1\textcolor{Test3}{.}}}} % use this when \citedbox command is used. 
+
+% === \ref = \autoref == %
+
+%% to make the word "Figure" clickable in addition to its number label
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOT necessary as I used [nameinlink] cleveref
+%\makeatletter
+%\renewcommand{\p@figure}{\figurename\ }
+%\makeatother
+
+%% to make the word "Table" clickable in addition to its number label
+%\makeatletter
+%\renewcommand{\p@table}{\tablename\ }
+%\makeatother
+
+% === explicitly mention the Section name === %
+
+%\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}}
+
+%\renewcommand{\sectionautorefname}{Section}
+
+% ======================== %
+
+%%% Capitalize [C]hapter, [S]ection and [S]ubsection in \autoref (default is not capitalized)
+
+%\newcommand{\Autoref}[1]{%
+%  \begingroup%
+%  \def\chapterautorefname{Chapter}%
+%  \def\sectionautorefname{Section}%
+%  \def\subsectionautorefname{Subsection}%
+%  \autoref{#1}%
+%  \endgroup%
+%}
+
+%=======================================================================
+
+%\usepackage{bookmark} % Adding package bookmark improves bookmarks handling, and enable \pdfbookmark for TOC in the main.tex.
+
+% add #(number) in front of the chapter title when it is exported to pdf
+
+%\bookmarksetup{numbered}
+
+%\makeatletter
+%\bookmarksetup{%
+%  addtohook={%
+%    \ifnum\toclevel@chapter=\bookmarkget{level}\relax
+%      \renewcommand*{\numberline}[1]{#1. }%
+%    \fi
+%  },
+%}
+%\makeatother
+
+%=======================================================================
+%%% Placing any extra information on the margin of the page
+
+\usepackage{marginnote}
+
+\renewcommand{\marginfont}{\fontsize{6.97}{6}\selectfont\roboto}
+
+\newcounter{mynote}% a new counter for use in margin notes
+ 
+\newcommand{\mynote}[2][0]{% a simple margin note
+    \refstepcounter{mynote}% step counter
+    \mbox{\textcolor{Test3}{\textsuperscript{\themynote}}}% the number (superscript) in text
+    \marginnote{\mbox{\textcolor{Test3}{\textsuperscript{\themynote}}}\hspace{0pt}#2}[#1\baselineskip]% the note
+    % \marginnote{\mbox{\textsuperscript{\themynote}}\color{sophia}\hspace{0pt}#2}[#1\baselineskip]% the note
+}
+
+\newcommand{\mynoteref}[2][0]{% a simple margin note
+    \marginnote{\hspace{0pt}#2}[#1\baselineskip]% the note
+}
+
+
+% coloring the page number (referencing) in the copyright
+\newcommand{\colpageref}[1]{{\hypersetup{linkcolor=sophia}{\pageref{#1}}}} % or \autopageref
+
+% coloring the word "page" (referencing) in the copyright
+\newcommand{\pcol}[1]{{\textcolor{Test3}{#1}}}
+
+% to have a shortcut for coloring the caption, e.g., a, b, c, etc
+\newcommand{\capcol}[1]{{\textcolor{ntnu}{#1}}}
+
+%=======================================================================
+%%% Bibliography at the end of each chapter, based on NATBIB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHANGED THE REFERENCES AS THEY APPEARED AS FOOTNOTES
+%%% \usepackage[super,comma,sort&compress]{natbib} 
+%\usepackage[numbers,comma,sort&compress]{natbib} % numbers = numbers between []
+
+%\usepackage{bibentry}
+
+%\usepackage[sectionbib]{chapterbib} % put ref at the end of each chapter. however, the spacing in the TOC will be messed up. it can be fixed using "numbib" option as shown below
+%\usepackage[nottoc,numbib]{tocbibind} % numbib (for numbering reference section) is used to enable cross-ref with TOC
+
+%\usepackage{hypernat} % to fix the missing page citation "\usepackage[backref=page]{hyperref}" that is nested in between, e.g., 19 is not missing if the refs is from 18-20, i.e., "sort&compress" in natbib is activated
+
+%\addto{\captionsenglish}{% if BABEL is used
+%  \renewcommand{\bibname}{References}
+%}
+
+%\renewcommand*{\bibfont}{\footnotesize}
+
+%\setlength{\bibsep}{0.7pt}
+
+%=======================================================================
+%=======================================================================
+%=======================================================================
+%%% Header (and/or footer)
+%=======================================================================
+%=======================================================================
+%=======================================================================
+
+%\usepackage{fancyhdr}
+%\pagestyle{fancy} % this must be placed as a general. DON'T REMOVE IT!
+
+%% with number in front of the title
+%\renewcommand{\chaptermark}[1]{ \markboth{Chap. \thechapter\ \ \enspace #1}{} } %\chaptername or "Chap."
+%\renewcommand{\sectionmark}[1]{ \markright{\thesection\ \ \quad #1} }
+
+%==========================================================================%
+%=================== header style for regular section =====================%
+%==========================================================================%
+
+
+\usepackage{tikz}
+\newcommand{\simplelinesep}[1]{\noindent% to be optionally used, as an alternative to the \movedornament in the titleformat chapter; for separating PART in TOC
+    \begin{tikzpicture}
+    \tikz \draw[line width=0.3pt] (0,0) -- (2,0); % line
+    \end{tikzpicture}%
+}
+
+\usetikzlibrary{shapes,arrows,calc}
+\usetikzlibrary{intersections}
+\usetikzlibrary{quotes,angles}
+\usepackage[RPvoltages,siunitx]{circuitikz}
+\usepackage{tikz-3dplot}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17, width=10cm}
+
+
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{array} % para tables com alinhamento centralizado verticalmente
+
+%
+\usepackage[hhmmss]{datetime}
+\advance\currenthour by 2
+% activate this if "\noindent\emph{Final Version} as of \today \ at \ \currenttime" in backmatter/colophone is used

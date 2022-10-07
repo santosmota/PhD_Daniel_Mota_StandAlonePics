@@ -1,0 +1,63 @@
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+\tikzstyle{trafowind} = [circle, draw, minimum size=0.4cm]
+\tikzstyle{fonte} = [font=\footnotesize]
+\tikzstyle{quadrado} = [shape=regular polygon, regular polygon sides=4, minimum size=0.80cm,draw]
+\begin{tikzpicture}
+	%\draw [help lines] (0,3) grid (6,-3);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Busbar
+	\draw [thick] (-0.5,0) to (6.5,0);
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% synchronous generation
+	\draw [fonte] ($(0,1.5)+(0,-0.245)$) coordinate (GTs) to [sV] ($(0,1.5)+(0,0.2455)$) coordinate (GTn);
+	\node at (0,1.7) () [fonte, anchor=south] {\begin{tabular}{c}Synchronous\\dispatchable generation\end{tabular}};
+	\draw [] (GTs) to (0,0);
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% energy storage
+	\node at (3,0.4) (ESShv) [trafowind] {};
+    \node at (3,0.6) (ESSlv) [trafowind] {};
+    % power electronic converter
+	\node at (3,1.5) [fonte, quadrado] (ESSPEC) {};  
+	\node at (3,1.7) [fonte, anchor=south] () {\begin{tabular}{c}Converter-interfaced\\energy storage\end{tabular}};
+	\draw [] (ESSPEC) to (ESSlv);
+    \draw [] (ESShv) to (3,0);
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% non-synchronous generation
+	%\draw [fonte] ($(3,2.5)+(0,-0.245)$) coordinate (RESs) to [sV] ($(3,2.5)+(0,0.2455)$) coordinate (RESn);
+	%\node at (RESn) () [fonte, anchor=south] {\begin{tabular}{c}Non-synchronous\\generation\end{tabular}};
+	% power electronic converter
+	\node at (6,1.5) [fonte, quadrado] (RESPEC) {};  
+	%\node at (RESPEC.east) [fonte, anchor=west] () {\begin{tabular}{l}Power electronic\\converter\end{tabular}};
+	\node at (6,1.7) [fonte, anchor=south] () {\begin{tabular}{c}Converter-interfaced\\intermittent generation\end{tabular}};
+	% transformer
+	\node at (6,0.6) (RESlv) [trafowind] {};
+	\node at (6,0.4) (REShv) [trafowind] {};
+    % lines
+    \draw [] (RESPEC) to (RESlv);
+    \draw [] (REShv) to (6,0);
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% constant impedance loads
+	\draw (0,0) to [short] (0,-0.6) to [european resistor] (0,-1.4); 
+	\node at (0,-1.7) [fonte, anchor=north] () {\begin{tabular}{c}Constant impedance\\loads\end{tabular}};
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% constant power loads
+	\node at (3,-1) [shape=regular polygon, rotate=180, regular polygon sides=3, draw] (CPL) {}; 
+	\draw (3,0) to (CPL);
+	\node at (3,-1.7) [fonte, anchor=north] () {\begin{tabular}{c}Constant power\\loads\end{tabular}};
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% flexible
+	\node at (6,-0.4) (FLXhv) [trafowind] {};
+    \node at (6,-0.6) (FLXlv) [trafowind] {};
+    % power electronic converter
+	\node at (6,-1.5) [fonte, quadrado] (FLXPEC) {};  
+	\node at (6,-1.7) [fonte, anchor=north] () {\begin{tabular}{c}Converter-interfaced\\flexible loads\end{tabular}};
+	\draw [] (FLXPEC) to (FLXlv);
+    \draw [] (FLXhv) to (6,0);
+\end{tikzpicture}
+	

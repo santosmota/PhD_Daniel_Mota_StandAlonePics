@@ -1,0 +1,225 @@
+\newignoredglossary{ignore}
+
+\setglossarypreamble[symbols]{
+	A list of symbols, operators, and units used in this doctoral dissertation is presented below.
+	%	It is the author's intention to use the notation as consistently as possible.
+	Ambiguities and double meaning of symbols and operators have been avoided as much as possible.
+	However, the notations might be redefined in the accepted manuscripts presented from Chapters x to x, as those are presented in the form they were accepted for publication.
+	The manuscript under review in Chapter x also has notations that differ from the ones defined herein.
+	Notwithstanding, it is the author's intention to use the notation as consistently as possible throughout the text. %is Doctoral dissertation.
+	\vspace{0.25cm}
+	\glsfindwidesttoplevelname[\currentglossary]
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ROMAN LETTERS --- Symbols -----
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newglossaryentry{romanletter}
+{
+	name={\textbf{Latin Variables and Constants}},
+	text={l Roman},
+	sort=A,
+	description={\\ Variables in Latin letters can be capitalized or not depending on the context, they are mostly represented in italic, whereas constants are represented in roman (upright) form, matrices are represented in bolded roman}	
+}
+
+\glsxtrnewsymbol
+	[description={axes of the natural reference frame for three-phase measurements},	parent=romanletter]%description
+	{abcaxis}%label
+	{\ensuremath{a,b,c}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={conductance},parent=romanletter]%description
+	{bvar}%label
+	{\ensuremath{B}}%symbol
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% C
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={capacitance},	parent=romanletter]%description
+	{capacitance}%label
+	{\ensuremath{C}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% D
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\glsxtrnewsymbol
+%	[description={generic constant, usually denoting a distance or the length of a physical object},parent=romanletter]%description
+%	{dlength}%label
+%	{\ensuremath{d}}%symbol
+
+\glsxtrnewsymbol
+	[description={axes of the rotating reference frame for three-phase measurements},	parent=romanletter]%description
+	{dqaxis}%label
+	{\ensuremath{d,q}}%symbol
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={voltage},parent=romanletter]%description
+	{evoltage}%label
+	{\ensuremath{E,e,V,v,U,u}}%symbol
+
+\glsxtrnewsymbol
+	[description={Euler's number given by $\lim\limits_{n \rightarrow \infty} \left(1 + \frac{1}{n}\right)^n$},parent=romanletter]%description
+	{euler}%label
+	{\ensuremath{\mathrm{e}}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={frequency or a generic function},parent=romanletter]%description
+	{fvar}%label
+	{\ensuremath{F,f}}%symbol
+
+\glsxtrnewsymbol
+	[description={conductance or a generic function},parent=romanletter]%description
+	{gvar}%label
+	{\ensuremath{G,g}}%symbol
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% I
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={current},parent=romanletter]%description
+	{icurrent}%label
+	{\ensuremath{I,i}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% J
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\glsxtrnewsymbol
+	[description={complex number equal to $\sqrt{-1}$},parent=romanletter]%description
+	{jcomplex}%label
+	{\ensuremath{\mathrm{j}}}%symbol
+
+\glsxtrnewsymbol
+	[description={moment of inertia},parent=romanletter]%description
+	{jmomentinertia}%label
+	{\ensuremath{\mathrm{J}}}%symbol
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% L
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={inductance},parent=romanletter]%description
+	{inductance}%label
+	{\ensuremath{L}}%symbol
+%\glsxtrnewsymbol
+%	[description={generic constant, usually denoting the length of a physical object},parent=romanletter]%description
+%	{llength}%label
+%	{\ensuremath{l}}%symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% K
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={an index or a gain},parent=romanletter]%description
+	{kvariable}%label
+	{\ensuremath{K,k}}%symbol
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% N
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={usually an integer number},parent=romanletter]%description
+	{nvarible}%label
+	{\ensuremath{n}}%symbol
+
+\glsxtrnewsymbol
+	[description={power},parent=romanletter]%description
+	{ppower}%label
+	{\ensuremath{P,p}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% S
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={complex frequency in the Laplace domain},parent=romanletter]%description
+	{slaplace}%label
+	{\ensuremath{s}}%symbol
+
+\glsxtrnewsymbol
+	[description={apparent power},parent=romanletter]%description
+	{sapparentpower}%label
+	{\ensuremath{S}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% T
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsxtrnewsymbol
+	[description={time},
+	parent=romanletter]%description
+	{ttime}%label
+	{\ensuremath{t}}%symbol
+	
+\glsxtrnewsymbol
+	[description={torque},parent=romanletter]%description
+	{ttorque}%label
+	{\ensuremath{T}}%symbol
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% V
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\glsxtrnewsymbol
+%[description={phase velocity in the direction of propagation of the wavefront, IEV \href{http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=103-10-13}{103-10-13}},
+%parent=romanletter]%description
+%{vphasevelocity}%label
+%{\ensuremath{v_\varphi}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% X
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\glsxtrnewsymbol
+%	[description={generic variable, usually denoting distance},
+%	parent=romanletter]%description
+%	{xlength}%label
+%	{\ensuremath{x}}%symbol
+
+\glsxtrnewsymbol
+	[description={reactance, state variable, or a generic variable},
+	parent=romanletter]%description
+	{xvariable}%label
+	{\ensuremath{X,x}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Y
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\glsxtrnewsymbol
+%	[description={generic variable, usually denoting distance},
+%	parent=romanletter]%description
+%	{xlength}%label
+%	{\ensuremath{x}}%symbol
+
+\glsxtrnewsymbol
+	[description={admittance, output variable, or a generic variable},
+	parent=romanletter]%description
+	{yvariable}%label
+	{\ensuremath{Y,x}}%symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Z
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\glsxtrnewsymbol
+%[description={the impedance seen by a travelling wave in a specific medium, the subscript $m$ denotes the medium but may be omitted in this thesis, IEV \href{http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=705-03-23}{705-03-23}},
+%parent=romanletter]%description
+%{zcharacteristic}%label
+%{\ensuremath{Z_m}}%symbol
+
+\glsxtrnewsymbol
+	[description={impedance},
+	parent=romanletter]%description
+	{zimpedance}%label
+	{\ensuremath{Z,z}}%symbol
+
