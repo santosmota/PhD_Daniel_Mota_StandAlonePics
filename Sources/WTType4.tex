@@ -1,0 +1,71 @@
+% \tikzstyle{fonte} = [font=\footnotesize]
+
+\tikzstyle{gb} = [rectangle, draw, densely dashed, thick, minimum height=1cm, minimum width=0.8cm, font=\small]
+\tikzstyle{trafowind} = [circle, draw, thick, minimum size=0.6cm]
+\tikzstyle{genrotor} = [circle, draw, fill=white, thick, minimum size=0.7cm]
+\tikzstyle{genstator} = [circle, draw, thick, minimum size=1.0cm]
+\tikzstyle{fonte} = [font=\small]
+	
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+
+\begin{tikzpicture}
+	%\draw [help lines] (0,-3) grid (9,2);
+		
+	% wind turbine
+	\draw [thick] (-0.75,1) ellipse (0.15cm and 0.8cm);
+	\draw [thick] (-0.75,-0.6) ellipse (0.15cm and 0.8cm);
+	\draw [line width=2pt, line cap=round] (-0.75,0.2) to (0.6,0.2);
+	\node at (-0.75,1.8) [fonte, anchor=south] (WTREtiq) {Rotor};
+		
+	% gear box
+	\node at (0.5,0) [gb] (GB) {};	
+	\node at (0.5,1.5) [fonte] (GBEtiq) {Gear box};
+		
+	%Generator side converter
+	\node at (3.5,1.5) [fonte] {\begin{tabular}{c} Machine \\ converter\end{tabular}};
+	\node at (0.2,0.2) [shift={(3.5,0)}, rotate=0, fonte] {$=$};
+	\node at (-0.2,-0.2) [shift={(3.5,0)}, rotate=0, fonte] {$\sim$};
+	\draw [shift={(3.5,0)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	\draw [thick, shift={(3.5,0)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to cycle;
+		
+	% generator
+	%\draw (2,-0.425) to [sV] (2,0.425);
+	\node at (2,0) [genrotor] (GenRotor) {};
+	\node at (2,0) [genstator] (GenStator) {};
+	\node at (2,1) [fonte] (GenEtiq) {Generator};
+	\draw [ultra thick, line cap=round] (0.4,0) to (2,0);
+	\draw (GenStator) -- (3.1,0);
+		
+	%Grid side converter
+	\node at (8.5,1.5) [fonte] {\begin{tabular}{c} Grid \\ converter\end{tabular}};
+	\node at (0.2,0.2) [shift={(8.5,0)}, rotate=0, fonte] {$\sim$};
+	\node at (-0.2,-0.2) [shift={(8.5,0)}, rotate=0, fonte] {$=$};
+	\draw [shift={(8.5,0)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	\draw [thick, shift={(8.5,0)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to cycle;
+		
+	% DCLINK
+	\node at (6,1) [fonte] {DC link};
+	\node at (5,0.3) [fonte, anchor=south] {Capacitance};
+ 	\node at (7,0.3) [fonte, anchor=south] {Chopper};
+	\draw (5,-1.5) to [C,*-*] (5,0.3); % 
+	\draw (7,-1.5) to [european resistor,*-](7,-0.3) to (7.2,0.1); % l=$\textrm{CH}$
+	\draw (7,0.1) to [short,-*] (7,0.3);
+	\draw (3.9,0.3) to (8.1,0.3);
+	\draw (3.9,-0.3) to (4.2,-0.3) to (4.2,-1.5) to (7.8,-1.5) to (7.8,-0.3) to (8.1,-0.3);
+		
+	%Main reactor and shunt capactitance
+	\draw (8.9,0) to [L,-*] ++(1.6,0) to [C] ++(0,-0.75) to [R] ++(0,-0.75);
+	\node at (9.7,0.2) [fonte, anchor=south] {Reactor};
+	\node at (10.5,-1.5) [fonte, anchor=north] {Shunt branch};
+	
+	%trafo
+	\node at (11.5,1) [fonte] (TrafoEtiq) {Transformer};
+	\node at (11.35,0) [trafowind] (LVTrafo) {};
+	\node at (11.65,0) [trafowind] (HVTrafo) {};
+	\draw (10,0) to (LVTrafo);
+		
+	\draw (HVTrafo) to (12.5,0);
+	\draw [ultra thick](12.5,-0.3) to ++(0,0.6);
+
+\end{tikzpicture}
