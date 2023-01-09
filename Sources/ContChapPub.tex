@@ -2,17 +2,11 @@
                     text width=3cm, text centered, minimum height=1cm,
                     rounded corners=2, font=\footnotesize, fill=white ]
 
-\tikzstyle{legenda} = [rectangle, draw, thick,
-                    text width=0.6cm, text centered, minimum height=0.35cm,
-                    rounded corners=2]
-
-\tikzstyle{linha} = [line width=1.25mm, black!25] % [fill=white] %
+\tikzstyle{linha} = [line width=1.5mm, black!75, opacity=0.55] % [fill=white] %
 \tikzstyle{curvas} = [smooth, tension=0.5]
 
 \tikzstyle{fonte} = [font=\footnotesize]
-\tikzstyle{cordecisao} = [fill=red!15] % [fill=white] %
-\tikzstyle{correinicio} = [fill=blue!20]
-\tikzstyle{corstart} = [fill=yellow!20]
+
 \begin{tikzpicture}[>=stealth]
 
     %%%%%%%%%%%%%%%%% Publications
@@ -151,12 +145,6 @@
                     ($(CoorCha6)+(-1.5,0)$)
                     (CoorCha6) } ;
 
-    \draw [linha] plot [curvas] 
-        coordinates {(CoorContSiz)
-                    ($(CoorContSiz)+(1.5,0)$)
-                    ($(CoorCha5)+(-1.5,0)$)
-                    (CoorCha5) } ;
-                    
     %%%%%%%%%%%%%%%%% Lines %%%%% Contribution V DSCdq to Chapters
     \draw [linha] plot [curvas] 
         coordinates {(CoorContDSC)

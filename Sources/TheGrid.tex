@@ -8,12 +8,12 @@
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% Busbar
-	\draw [thick] (-0.5,0) to (6.5,0);
+	\draw [thick] (-0.5,0) to node [fonte, anchor=south west, pos=0.12] () {Common busbar} (6.5,0);
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% synchronous generation
 	\draw [fonte] ($(0,1.5)+(0,-0.245)$) coordinate (GTs) to [sV] ($(0,1.5)+(0,0.2455)$) coordinate (GTn);
-	\node at (0,1.7) () [fonte, anchor=south] {\begin{tabular}{c}Synchronous\\dispatchable generation\end{tabular}};
+	\node at (0,1.7) () [fonte, anchor=south] {\begin{tabular}{c}Dispatchable\\ synchronous generation\end{tabular}};
 	\draw [] (GTs) to (0,0);
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
