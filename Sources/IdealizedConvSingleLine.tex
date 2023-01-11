@@ -1,0 +1,24 @@
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+\tikzstyle{trafowind} = [circle, draw, minimum size=0.4cm]
+\tikzstyle{fonte} = [font=\footnotesize]
+\tikzstyle{quadrado} = [shape=regular polygon, regular polygon sides=4, minimum size=0.80cm,draw]
+\begin{tikzpicture}
+    %\draw [help lines] (0,3) grid (6,-3);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Busbar
+    %\draw [thick] (-0.5,0) to node [fonte, anchor=south west, pos=0.12] () {Common busbar} (6.5,0);
+	
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % converter
+    \draw [fonte] (0,0) 
+        to [sV,v=$v_c$] ++(0,1)
+        to [R,l=$R$] ++(1,0)
+        to [short,i=$i$] ++(0.5,0)
+        to [L,l=$L$] ++(1,0)
+        to [sV,v<=$v_g$] ++(0,-1)
+        to [short] (0,0);
+	
+\end{tikzpicture}
+	
