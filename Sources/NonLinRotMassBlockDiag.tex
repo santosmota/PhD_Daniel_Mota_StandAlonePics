@@ -1,0 +1,119 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simplified Block diagram of a System with 
+%     GT1 + GT2 as primary providers
+%     ESS as primary provider
+%     Rotating mass model
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.25cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{junction} = [coordinate]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[auto, >=latex']
+
+%summing point powers
+\node at (0,0) [sum] (SumP) {$\Sigma$};
+
+\draw [fonte,<-] (SumP) to
+    node[anchor=west, pos=0.25] () {$+$} ++(0,1) to 
+    node[anchor=east, pos=1] () {$\dfrac{P_\textrm{P}}{S_n}$ } ++(-1,0);
+
+\draw [fonte,<-] (SumP) to
+    node[anchor=south, pos=0.25] () {$+$}
+    node[anchor=east, pos=1] () {$\dfrac{P_\textrm{S}}{S_n}$} ++(-1,0);
+
+\draw [fonte,<-] (SumP) to
+    node[anchor=east, pos=0.25] () {$-$} ++(0,-1) to 
+    node[anchor=east, pos=1] () {$\dfrac{P_\textrm{L}}{S_n}$ } ++(-1,0);
+    
+% division box - Torque
+\node at ($(SumP)+(3.5,-0.25)$) [caixa] (div) {};
+\node at ($(div.west) + (0,0.25)$) [fonte, anchor=west] (pin) {$p$}; 
+\node at ($(div.west) + (0,-0.25)$) [fonte, anchor=west] (win) {$\mathtt{f}$}; 
+\node at (div.east) [fonte, anchor=east] (tauout) {$\dfrac{p}{\mathtt{f}}=\uptau$}; 
+\node at (div.north) [fonte, anchor=south] () {Power to torque};
+\draw [->, fonte] (SumP) to node [anchor=south,pos=0.5] () {$(\widetilde{\mathtt{f}} + 1) M \dfrac{\textrm{d} \widetilde{\mathtt{f}}}{\textrm{d} t}$} (pin);
+\draw [<-, fonte] (win) to ++(-0.5,0) to ++(0,-0.75) to
+    node [anchor=east,pos=1.0] () {$\widetilde{\mathtt{f}}+1$} ++(-0.25,0);
+
+% dividing by M
+\node at ($(div)+(3.25,0)$) [block] (DivMs) {$\dfrac{1}{M}  \displaystyle \int \textrm{d} \widetilde{\mathtt{f}} $}; 
+\node at (DivMs.north) [fonte, anchor=south] () {Torque to frequency};
+\draw [->, fonte] (tauout) to  
+    node [anchor=south,pos=0.5] () {$M \dfrac{\textrm{d} \widetilde{\mathtt{f}}}{\textrm{d} t}$} (DivMs);  % \uptau_\textrm{acc}
+\draw [->, fonte] (DivMs) to  
+    node [anchor=west,pos=1] () {$\widetilde{\mathtt{f}}$} ++(1.75,0);
+
+% rotating mass block
+\draw [densely dotted, fonte] ($(SumP)+(-0.75,1.2)$)
+    to node [anchor=south, pos=0.5] () {Rotating Mass} ++(9,0)
+    to ++(0,-2.75) to ++(-9,0) to cycle; 
+
+
+% dividing to get torque
+
+
+%Primary, secondary, and inertial response
+%\node at (0,1.5) [caixa] (Kp) {Proport.\\$K$};
+%\node at (0,0) [rectangle, draw, fill=white, text width=2cm, text centered, minimum height=1cm, font=\footnotesize] (Ti) {Anti-windup\\integrator: $T_i$};
+%\node at (0,-1.5) [caixa] (Td) {Low-pass\\ filter: $T_d$};
+%\node at (2,-1.5) [caixa] (Kd) {Derivat.\\$K_d$};
+
+
+%texts of the responses and other texts
+%\node at (Kp.north) [fonte, anchor=south] () {Primary response};
+%\node at (Ti.north) [fonte, anchor=south] () {Secondary response};
+%\node at (Td.north) [fonte, anchor=south] () {Inertial response};
+%\node at (3,2) [fonte, anchor=south] () {Power management};
+%\node at (3,1.7) [fonte, anchor=south] () {and secondary response};
+
+%division box
+%\node at (5,-0.25) [caixa] (div) {};
+%\node at ($(div.west) + (0,0.25)$) [fonte, anchor=west] (pin) {$p$}; 
+%\node at ($(div.west) + (0,-0.25)$) [fonte, anchor=west] (vin) {$v$}; 
+%\node at (div.east) [fonte, anchor=east] (vin) {$\dfrac{p}{v}=i$}; 
+%\node at (div.north) [fonte, anchor=south] () {Power to current};
+
+%limiters
+%\draw (5.8,-1.0) to (6.2,-1.0) to (6.4,0.5) to (6.8,0.5);
+%\node at (6,-1) [fonte, anchor=north] () {$\overset{*}{i}_{b\min}$}; 
+%\node at (6.6,0.5) [fonte, anchor=south] () {$\overset{*}{i}_{b\max}$}; 
+%\node at (7,1.25) [fonte, anchor=south] () {Dynamic limits of $\overset{*}{i}_{b}$};
+%\node at (7.5,-0.9) [fonte, anchor=north] () {Dynamic limiters};
+
+%battery converter
+%\node at (7.5,-0.25) [caixa] (didtlim) {$\inftsml \overset{*}{i}_b/\inftsml t$\\ $\max,\min$};
+%\draw [->] (div) to node[fonte, anchor=south, pos=0.4] () {$\overset{*}{i}_{b\textrm{ulim}}$} (didtlim);
+%\draw [->] (div) to (didtlim);
+%\draw [->] (didtlim) to node[fonte, anchor=south, pos=1] () {$\overset{*}{i}_{b}$} (9,-0.25);
+%\node at (8.6,0.5) [fonte, anchor=south] () {Reference};
+%\node at (8.6,0.25) [fonte, anchor=south] () {to controller};
+
+
+%frequency measurement and other lines
+%summing point frequency
+%\node at (-2,1.5) [sum] (somaf) {$\Sigma$};
+%\draw [->] (-2.75,0.5) -| node[fonte, anchor=south, pos=0.0] () {$\widehat{\omega}_g$} node[fonte, anchor=east, pos=0.8] () {$-$} (somaf);
+%\draw [->] (-2.75,1.5) to node[fonte, anchor=south, pos=0.0] () {$1$} node[fonte, anchor=south, pos=0.8] () {$+$} (somaf);
+%\node at (-2.4,0.5) [fonte, anchor=north] () {Grid freq.};
+%\draw [->] (somaf) to (Kp);
+%\fill (-1.5,1.5) circle [radius=1pt];
+%\fill (-1.5,0) circle [radius=1pt];
+%\draw [->] (-1.5,0) to (Ti.west);
+%\draw [->] (-1.5,1.5) |- (Td.west);
+
+%power management reference
+%\draw [->]  (3,1.25) to node[fonte, anchor=west, pos=0.8] () {$+$} node[fonte, anchor=south, pos=0.0] () {$\overset{*}{p}_{pm}$} (soma.north);
+
+%lines from blocks the power summation point
+%\draw [->] (Kp.east) to ++(1,0) to node[fonte, anchor=west, pos=0.75] () {$+$} (soma.135);
+%\draw [->] (Ti) to node[fonte, anchor=south, pos=0.85] () {$+$} (soma);
+%\draw [->] (Td) to (Kd);
+%\draw [->] (Kd) -| node[fonte, anchor=east, pos=0.9] () {$+$} (soma);
+
+%lines from the summation to the division block
+%\draw [->] (soma) to ($(div.west) + (0,0.25)$);
+%\draw [->] (3.8,-1) |- node[fonte, anchor=north, pos=0.0] () {$\widehat{v}_b$} ($(div.west) + (0,-0.25)$);
+
+\end{tikzpicture}
