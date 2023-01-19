@@ -1,0 +1,133 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simplified Primary Power Reserves
+%     GT1 + GT2
+%     ESS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.25cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{junction} = [coordinate]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[auto, >=latex']
+
+%%%%%%%%%%%%%%%%%%
+% ROTATING MASS
+%%%%%%%%%%%%%%%%%%%
+%summing point powers
+\node at (0,3.5) [sum] (SumP) {$\Sigma$};
+
+\draw [fonte,<-] (SumP) to
+    node[anchor=south west, pos=0] () {$+$} ++(0,1) to 
+    node[anchor=east, pos=1] () {Primary: $\dfrac{P_\textrm{P}}{S_n}$ } ++(-1,0);
+
+\draw [fonte,<-] (SumP) to
+    node[anchor=south east, pos=0] () {$+$}
+    node[anchor=east, pos=1] () {Secondary: $\dfrac{P_\textrm{S}}{S_n}$} ++(-1,0);
+
+\draw [fonte,<-] (SumP) to
+    node[anchor=north east, pos=0] () {$-$} ++(0,-1) to 
+    node[anchor=east, pos=1] () {Load: $\dfrac{P_\textrm{L}}{S_n}$ } ++(-1,0);
+    
+% division box - Torque
+\node at ($(SumP)+(3.5,-0.25)$) [caixa] (div) {};
+\node at ($(div.west) + (0,0.25)$) [fonte, anchor=west] (pin) {$p$}; 
+\node at ($(div.west) + (0,-0.25)$) [fonte, anchor=west] (win) {$\mathtt{f}$}; 
+\node at (div.east) [fonte, anchor=east] (tauout) {$\dfrac{p}{\mathtt{f}}=\uptau$}; 
+\node at (div.north) [fonte, anchor=south] () {Power to torque};
+\draw [->, fonte] (SumP) to node [anchor=south,pos=0.5] () {$(\widetilde{\mathtt{f}} + 1) M \dfrac{\textrm{d} \widetilde{\mathtt{f}}}{\textrm{d} t}$} (pin);
+\draw [<-, fonte] (win) to ++(-0.5,0) to
+    node [anchor=west,pos=1.0] () {~For linearization, assume $(\widetilde{\mathtt{f}}+1) \approx 1$.} ++(0,-0.75) to
+    node [anchor=east,pos=1.0] () {$\widetilde{\mathtt{f}}+1$} ++(-0.25,0);
+
+% dividing by M
+\node at ($(div)+(3.25,0)$) [block] (DivMs) {$\dfrac{1}{M}  \displaystyle \int \textrm{d} \widetilde{\mathtt{f}} $}; 
+\node at (DivMs.north) [fonte, anchor=south] () {Torque to frequency};
+\draw [->, fonte] (tauout) to  
+    node [anchor=south,pos=0.5] () {$M \dfrac{\textrm{d} \widetilde{\mathtt{f}}}{\textrm{d} t}$} (DivMs);  % \uptau_\textrm{acc}
+\draw [->, fonte] (DivMs) to  
+    node [anchor=west,pos=1] () {$\widetilde{\mathtt{f}}$} ++(1.75,0);
+
+% rotating mass block
+\draw [densely dotted, fonte] ($(SumP)+(-0.75,1.2)$)
+    to node [anchor=south, pos=0.5] () {Rotating Mass} ++(9,0)
+    to ++(0,-2.75) to ++(-9,0) to cycle; 
+
+%%%%%%%%%%%%%%%%%%
+% PRIMARY POWER
+%%%%%%%%%%%%%%%%%%%
+
+%frequency to power gains
+\node at (0.5,0) [block] (kgt1) {$k_{\textrm{GT}}$};
+\node at ($(kgt1)+(0,-1.5)$) [block] (kgt2) {$k_{\textrm{GT}}$};
+\node at ($(kgt2)+(0,-1.5)$) [block] (kess) {$k_{\textrm{ESS}}$};
+
+\node at (kgt1.north) [fonte, anchor=south] () {Frequency to power};
+
+\draw [<-, fonte] (kgt1) to 
+    node[anchor=east, pos=1.0] () {$-\widetilde{\mathtt{f}}$} ++(-1.5,0);
+\draw [->, fonte] ($(kgt1)+(-1,0)$) |- (kgt2);
+\draw [->, fonte] ($(kgt2)+(-1,0)$) |- (kess);
+\fill ($(kgt1)+(-1,0)$) circle [radius=1pt];
+\fill ($(kgt2)+(-1,0)$) circle [radius=1pt];
+
+%first LPF
+\node at ($(kgt1)+(2.25,0)$) [block] (LPF1gt1) {$\dfrac{1}{sT_{\textrm{fv}}+ 1} $};
+\node at ($(kgt2)+(2.25,0)$) [block] (LPF1gt2) {$\dfrac{1}{sT_{\textrm{fv}}+ 1}$};
+\node at ($(kess)+(2.25,0)$) [block] (LPF1ess) {$\dfrac{1}{sT_{\textrm{ESS}}+ 1}$};
+
+\node at (LPF1gt1.north) [fonte, anchor=south] () {Fuel valve delay};
+\node at (LPF1ess.north) [fonte, anchor=south] () {Converter delay};
+
+\draw [->, fonte] (kgt1) to (LPF1gt1);
+\draw [->, fonte] (kgt2) to (LPF1gt2);
+\draw [->, fonte] (kess) to (LPF1ess);
+
+
+%second LPF
+\node at ($(LPF1gt1)+(2,0)$) [block] (LPF2gt1) {$\dfrac{1}{sT_{\textrm{t}}+ 1}$};
+\node at ($(LPF1gt2)+(2,0)$) [block] (LPF2gt2) {$\dfrac{1}{sT_{\textrm{t}}+ 1}$};
+
+\node at (LPF2gt1.north) [fonte, anchor=south] () {Turbine delay};
+
+\draw [->, fonte] (LPF1gt1) to (LPF2gt1);
+\draw [->, fonte] (LPF1gt2) to (LPF2gt2);
+
+%saturations
+\draw[fonte] ($(LPF2gt1)+(1,-0.6)$) to
+    node [anchor=south east,pos=1] () {min} ++(0.25,0) to
+    ++(0.25,1.2) to
+    node [anchor=south west,pos=0] () {max} ++(0.25,0);
+
+\draw[fonte] ($(LPF2gt2)+(1,-0.6)$) to
+    node [anchor=south east,pos=1] () {min} ++(0.25,0) to
+    ++(0.25,1.2) to
+    node [anchor=south west,pos=0] () {max} ++(0.25,0);
+
+\draw[fonte] ($(LPF1ess)+(3,-0.6)$) to
+    node [anchor=south east,pos=1] () {min} ++(0.25,0) to
+    ++(0.25,1.2) to
+    node [anchor=south west,pos=0] () {max} ++(0.25,0);
+
+%summing point primary 
+\node at ($(LPF2gt2)+(3,0)$) [sum] (SumPprim) {$\Sigma$};
+
+\draw[fonte, ->] (LPF2gt1) -| 
+    node [anchor=south,pos=0.3] () {$p_\textrm{PGT1}$}
+    node [anchor=south west,pos=1] () {$+$} (SumPprim);
+\draw[fonte, ->] (LPF2gt2) to
+    node [anchor=south,pos=0.6] () {$p_\textrm{PGT2}$}
+    node [anchor=south east,pos=1] () {$+$} (SumPprim);
+\draw[fonte, ->] (LPF1ess) -| 
+    node [anchor=south,pos=0.4] () {$p_\textrm{PESS}$}
+    node [anchor=north east,pos=1] () {$+$} (SumPprim);
+
+\draw[fonte, ->] (SumPprim) to 
+    node [anchor=west,pos=1] () {$p_\textrm{P} = \dfrac{P_\textrm{P}}{S_n}$} ++(0.75,0);
+
+% primary power block
+\draw [densely dotted, fonte] ($(kgt1)+(-1.25,1.2)$)
+    to node [anchor=south, pos=0.5] () {Primary Reserve Providers} ++(9,0)
+    to ++(0,-5) to ++(-9,0) to cycle; 
+
+\end{tikzpicture}
