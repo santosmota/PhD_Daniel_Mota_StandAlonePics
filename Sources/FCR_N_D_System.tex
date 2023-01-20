@@ -1,0 +1,58 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRN and FCRD - FREQUENCY TO POWER CHARACTERISTIC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{line0} = [color=DaltBlue, dashed, thick]
+\tikzstyle{text0} = [color=DaltBlue]
+\tikzstyle{line1} = [color=DaltRed, densely dotted, very thick]
+\tikzstyle{text1} = [color=DaltRed]
+\tikzstyle{line2} = [color=black, dashdotted, thick]
+\tikzstyle{text2} = [color=black]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[>=latex'] %https://www.youtube.com/watch?v=5jmIHOWpEg0 minute 12:16
+\begin{axis}[   %clip=false,
+                xmin=-2.75, xmax=2.75,
+                ymin=-10.5, ymax=11,
+                axis lines=middle,
+                grid style=dotted,
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                xlabel=$\widetilde{f}$,
+                xtick={-2,-1,1,2},  % FN = 1,  FD = 2
+                xticklabels={$-\widetilde{f}_{\textrm{D}}$,$-\widetilde{f}_{\textrm{N}}$,$\widetilde{f}_{\textrm{N}}$,$\widetilde{f}_{\textrm{D}}$},
+                xticklabel style={anchor=north},
+                xmajorgrids=true,
+                xlabel style={anchor=south east},
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                ylabel=$P_\textrm{FCR}$,
+                ytick={-9,-6,-3,3,6,9}, % PN = 3  , PD = 9
+                yticklabels={$-P_{\textrm{D}}$,$-P_{\textrm{D}}+P_{\textrm{N}}$,$-P_{\textrm{N}}$,$P_{\textrm{N}}$,$P_{\textrm{D}}-P_{\textrm{N}}$,$P_{\textrm{D}}$},
+                ymajorgrids=true,
+                ylabel style={anchor=west}
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                ] %axis lines=left
+%%%%%%%%%%%%%%
+% FCRN: FN = 1, PN = 3
+\addplot[line0, samples=2, domain=-2.75:-1]{3}
+    node [pos=0, anchor=south west, text0] {FCR$_\textrm{N}$};
+\addplot[line0, samples=2, domain=-1:1]{-3*x};
+\addplot[line0, samples=2, domain=1:2.75]{-3} 
+    node [pos=1, anchor=north east, text0] {FCR$_\textrm{N}$};
+%%%%%%%%%%%%%%
+% FCRD: FD = 2, PD = 9 
+\addplot[line1, samples=2, domain=-2.75:-2]{6}
+    node [pos=0, anchor=south west, text1] {FCR$_\textrm{D}$};
+\addplot[line1, samples=2, domain=-2:-1]{-6*x-6};
+\addplot[line1, samples=2, domain=-1:1]{0};
+\addplot[line1, samples=2, domain=1:2.0]{-6*x+6};
+\addplot[line1, samples=2, domain=2:2.75]{-6}
+    node [pos=1, anchor=north east, text1] {FCR$_\textrm{D}$};
+%%%%%%%%%%%%
+% System
+\addplot[line2, samples=2, domain=-2.75:-2]{9}
+    node [pos=0, anchor=south west, text2] {FCR$_\textrm{N}$+FCR$_\textrm{D}$};
+\addplot[line2, samples=2, domain=-2:-1]{-6*x-3};
+\addplot[line2, samples=2, domain=-1:1]{-3*x};
+\addplot[line2, samples=2, domain=1:2]{-6*x+3};
+\addplot[line2, samples=2, domain=2:2.75]{-9}
+    node [pos=1, anchor=north east, text2] {FCR$_\textrm{N}$+FCR$_\textrm{D}$};;
+\end{axis}
+\end{tikzpicture}
