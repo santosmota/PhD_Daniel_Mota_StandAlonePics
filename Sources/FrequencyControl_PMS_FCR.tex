@@ -1,0 +1,166 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FREQUENCY CONTROL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.25cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[>=latex'] %https://www.youtube.com/watch?v=5jmIHOWpEg0 minute 12:16
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCR - frequency summation
+\node at (0,0) [sum] (sumFFCR) {$\Sigma$};
+\draw [<-] (sumFFCR) -- 
+    node[pos=1, anchor=east, fonte] () {$f_\textrm{n}$}
+    node[pos=0, anchor=south east, fonte] () {$+$} ++(-0.75,0); 
+\draw [<-] (sumFFCR) --
+    node[pos=0, anchor=north east, fonte] () {$-$} ++(0,-1) --
+    node[pos=1, anchor=east, fonte] () {$\widehat{f}$}
+     ++(-0.75,0); 
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRN - deadband 
+%%%%%%%%%%%%%%%%%%%%%%%%
+\node at ($(sumFFCR)+(1.5,0)$) [block] (dbFCRN) {};
+\node at ($(dbFCRN.north)+(0.75,0)$) [anchor=south, fonte] () {FCR$_\textrm{N}$ Controller};
+\draw [<-] (dbFCRN) -- ++(0,-1) --
+    node[pos=1, anchor=south, fonte] () {$f_{\textrm{dbN}}$} ++(-0.5,0); 
+\draw [->] (sumFFCR) -- 
+    node[pos=0.5, anchor=south, fonte] () {$-\widetilde{f}$} (dbFCRN);
+% deadband sign
+\draw [->] ($(dbFCRN.west)+(0.1,0)$) -- ($(dbFCRN.east)+(-0.1,0)$);
+\draw [->] ($(dbFCRN.south)+(0,0.1)$) -- ($(dbFCRN.north)+(0,-0.1)$);
+\draw [] ($(dbFCRN.south)+(-0.3,0.1)$) -- ($(dbFCRN.west)+(0.4,0)$) -- ($(dbFCRN.east)+(-0.4,0)$) -- ($(dbFCRN.north)+(0.3,-0.1)$);
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRN proportional gain
+%%%%%%%%%%%%%%%%%%%%%%%%
+\node at ($(dbFCRN)+(1.5,0)$) [block] (KN) {$K_{\textrm{N}}$};
+\draw [->] (dbFCRN) -- (KN);
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRN limiter 
+%%%%%%%%%%%%%%%%%%%%%%%%
+\draw ($(KN)+(0.5,-0.7)$) -- 
+    node [pos=1, anchor=east, fonte, shift={(0.1,-0.1)}] () {$\overset{*}{P}_{\textrm{N}\min}$} ++(0.25,0) --
+    ++(0.15,1.4) --
+    node [pos=0.5, anchor=south, fonte] () {$\overset{*}{P}_{\textrm{N}\max}$} ++(0.25,0);
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRD deadband   % -2.75
+%%%%%%%%%%%%%%%%%%%%%%%%
+\node at ($(sumFFCR)+(1.5,-2.4)$) [block] (dbFCRD) {};
+\node at ($(dbFCRD.north)+(0.75,0)$) [anchor=south, fonte] () {FCR$_\textrm{D}$ Controller};
+\draw [<-] (dbFCRD) -- ++(0,-1) --
+    node[pos=1, anchor=south, fonte] () {$\widetilde{f}_{\textrm{N}}$} ++(-0.5,0); 
+\draw [->] ($(sumFFCR)+(0.5,0)$) |- (dbFCRD);
+\fill ($(sumFFCR)+(0.5,0)$) circle [radius=1pt];
+% deadband sign
+\draw [->] ($(dbFCRD.west)+(0.1,0)$) -- ($(dbFCRD.east)+(-0.1,0)$);
+\draw [->] ($(dbFCRD.south)+(0,0.1)$) -- ($(dbFCRD.north)+(0,-0.1)$);
+\draw [] ($(dbFCRD.south)+(-0.3,0.1)$) -- ($(dbFCRD.west)+(0.4,0)$) -- ($(dbFCRD.east)+(-0.4,0)$) -- ($(dbFCRD.north)+(0.3,-0.1)$);
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRD  proportional gain
+%%%%%%%%%%%%%%%%%%%%%%%%
+\node at ($(dbFCRD)+(1.5,0)$) [block] (KD) {$K_{\textrm{D}}$};
+\draw [->] (dbFCRD) -- (KD);
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRD limiter   
+%%%%%%%%%%%%%%%%%%%%%%%%
+\draw ($(KD)+(0.5,-0.7)$) -- 
+    node [pos=1, anchor=east, fonte, shift={(0.1,-0.1)}] () {$\overset{*}{P}_{\textrm{D}\min}$} ++(0.25,0) --
+    ++(0.15,1.4) --
+    node [pos=0.5, anchor=south, fonte] () {$\overset{*}{P}_{\textrm{D}\max}$} ++(0.25,0);
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCR + SECONDARY  summation point
+%%%%%%%%%%%%%%%%%%%%%%%%
+\node at ($(KN)+(2.25,0)$) [sum] (somasec) {$\Sigma$};
+\draw [->] (KN) --
+    node [pos=1,anchor=south east, fonte] () {$\overset{*}{P}_{\textrm{N}} \; +$}
+    (somasec);
+\draw [->] (KD) -| 
+    node [pos=0.3, anchor=south, fonte] () {$\overset{*}{P}_\textrm{D}$}
+    node [pos=1, anchor=north east, fonte] () {$+$} (somasec);
+\draw [<-] (somasec) -- 
+    node [pos=0, anchor=south west, fonte] () {$+$}   
+    node [pos=1, anchor=north east, fonte] (FCRinputS) {$\overset{*}{P}_{\textrm{S}}$} ++(0,1.5);
+\draw [<-] ($(somasec)+(0,1.5)$) -- ++(0,0.25) -- ++(1.5,0) -- ++(0,0.6);
+\draw [->] (somasec) --
+    node [pos=1, anchor=south east, fonte] () {$\overset{*}{P}$} ++(1.25,0);
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FCR + SECONDARY  - limiters
+%%%%%%%%%%%%%%%%%%%%%%%%
+\draw ($(somasec)+(0.5,-0.7)$) -- 
+    node [pos=0.5, anchor=north, fonte] () {$\overset{*}{P}_{\min}$} ++(0.25,0) --
+    ++(0.15,1.4) --
+    node [pos=0.5, anchor=south, fonte] () {$\overset{*}{P}_{\max}$} ++(0.25,0);
+%%%%%%%%%%%%%%%%%%%%%%%%
+% FREQUENCY RESERVE PROVIDER - rectangles
+%%%%%%%%%%%%%%%%%%%%%%%%
+\draw [dashed] ($(sumFFCR)+(-1.25,1.5)$) --
+    node [pos=0, anchor=north west, fonte] () {\textbf{{\small R}ESERVE {\small P}ROVIDER}}  ++(8,0) --
+    ++(0,-5.5) --
+    node [pos=0.5, anchor=south, fonte] () {\textbf{Primary Frequency Controller}} ++(-8,0) -- ++(0,5.5) -- cycle; 
+\draw [dashed] ($(sumFFCR)+(-1.25,1.5)+(8,-0.1)$) -- ++(0.1,0) --
+    ++(0,-5.5) -- ++(-8,0) -- ++(0,0.1); 
+\draw [dashed] ($(sumFFCR)+(-1.25,1.5)+(8.1,-0.2)$) -- ++(0.1,0) --
+    ++(0,-5.5) -- ++(-8,0) -- ++(0,0.1); 
+\draw [dashed] ($(sumFFCR)+(-1.25,1.5)+(8.2,-0.3)$) -- ++(0.1,0) --
+    ++(0,-5.5) -- ++(-8,0) -- ++(0,0.1); 
+%%%%%%%%%%%%%%%%%%%%%%%%
+% SECONDARY - summation point
+%%%%%%%%%%%%%%%%%%%%%%%%
+\node at (-0.55,4) [sum] (sumFSEC) {$\Sigma$};
+\draw [<-] (sumFSEC) -- 
+    node[pos=1, anchor=east, fonte] () {$f_\textrm{n}$}
+    node[pos=0, anchor=south east, fonte] () {$+$} ++(-0.75,0); 
+\draw [<-] (sumFSEC) --
+    node[pos=0, anchor=north east, fonte] () {$-$} ++(0,-1) --
+    node[pos=1, anchor=east, fonte] () {$\widehat{f}$}
+     ++(-0.75,0); 
+%%%%%%%%%%%%%%%%%%%%%%%%
+% SECONDARY - activation logic
+%%%%%%%%%%%%%%%%%%%%%%%%
+\node at ($(sumFSEC)+(1.5,0)$) [block] (actlog) {};
+\draw [->] (sumFSEC) -- 
+    node [pos=0.5, anchor=south] () {$-\widetilde{f}$} (actlog);
+\draw [<-] (actlog) -- ++(0,-1.5) --
+    node [pos=1, anchor=east, fonte] () {$f_\textrm{dbS},T_\textrm{onS}, T_\textrm{offS}$} ++(-0.25,0);
+\node at (actlog.west) [anchor=west, fonte] () {$x$}; % \widetilde{f}
+\node at (actlog.east) [anchor=east, fonte] () {$y$}; % \widetilde{f}_\textrm{S}
+\node at (actlog.north) [anchor=south, fonte] () {Activation};     
+%%%%%%%%%%%%%%%%%%%%%%%%
+% SECONDARY - PI controller
+%%%%%%%%%%%%%%%%%%%%%%%%
+%limiters
+\draw ($(actlog)+(1.675,-0.7)$) -- 
+    node [pos=0.5, anchor=north, fonte] () {$\overset{*}{P}_{\textrm{S}\!\min}$} ++(0.25,0) --
+    ++(0.15,1.4) --
+    node [pos=0.5, anchor=south, fonte] () {$\overset{*}{P}_{\textrm{S}\!\max}$} ++(0.25,0);
+% pi itself
+\node at ($(actlog)+(2,0)$) [block] (piS) {$ K_\textrm{S} + \dfrac{1}{s T_\textrm{iS}} $};
+\draw [->] (actlog) -- 
+     (piS); % node [pos=0.5, anchor=south, fonte] () {$\widetilde{f}_\textrm{S}$}
+%%%%%%%%%%%%%%%%%%%%%%%%
+% SECONDARY - sharing logic
+%%%%%%%%%%%%%%%%%%%%%%%%
+\node at ($(piS)+(2,0)$) [block] (sharlog) {};
+\node at (sharlog.west) [anchor=west, fonte] () {$\overset{*}{P}_\textrm{S}$};
+\node at (sharlog.east) [anchor=east, fonte] () {};
+\node at (sharlog.north) [anchor=south, fonte] () {Sharing};
+\draw [->] (piS) --
+    node [pos=0.5, anchor=south, fonte] () {$\overset{*}{P}_\textrm{S}$} (sharlog);
+\draw [<-] (sharlog.south) --  
+    node [pos=1, anchor=north, fonte] () {$\widehat{P}_\textrm{FC},\widehat{P}_\textrm{EL}$} ++(0,-1);  
+\draw [->] ($(sharlog.east)+(0,0.3)$) -- ++(0.2,0) -- ++(0,0.9) -- node [pos=1,anchor=west, fonte] () {$\overset{*}{P^\textrm{GT1}_\textrm{S}}$} ++(0.8,0);
+\node at ($(sharlog.east)+(0,0.3)$) [anchor=east, font=\tiny] () {GT1};
+\draw [->] ($(sharlog.east)+(0,0.1)$) -- ++(0.4,0) -- ++(0,0.4) -- node [pos=1,anchor=west, fonte] () {$\overset{*}{P^\textrm{GT2}_\textrm{S}}$} ++(0.6,0);
+\node at ($(sharlog.east)+(0,0.1)$) [anchor=east, font=\tiny] () {GT2};
+\draw [->] ($(sharlog.east)+(0,-0.1)$) -- ++(0.4,0) -- ++(0,-0.4) -- node [pos=1,anchor=west, fonte] () {$\overset{*}{P^\textrm{EL}_\textrm{S}}$} ++(0.6,0);
+\node at ($(sharlog.east)+(0,-0.1)$) [anchor=east, font=\tiny] () {EL};
+\draw [->] ($(sharlog.east)+(0,-0.3)$) -- ++(0.2,0) -- ++(0,-0.9) -- node [pos=1,anchor=west, fonte] () {$\overset{*}{P^\textrm{FC}_\textrm{S}}$} ++(0.8,0);
+\node at ($(sharlog.east)+(0,-0.3)$) [anchor=east, font=\tiny] () {FC};
+%%%%%%%%%%%%%%%%%%%%%%%%
+% CENTRALIZED SECONDARY FREQUENCY CONTROLLER
+%%%%%%%%%%%%%%%%%%%%%%%%
+\draw [dashed] ($(sumFSEC)+(-1.25,1.5)$) --
+    node [pos=0, anchor=north west, fonte] () {\textbf{{\small P}OWER {\small M}ANAGEMENT {\small S}YSTEM}} ++(7.9,0) --
+    ++(0,-3.6) --
+    node [pos=0.5, anchor=south, fonte] () {\textbf{Secondary Frequency Controller}} ++(-7.9,0) --
+    ++(0,3.6) -- cycle; 
+\end{tikzpicture}
