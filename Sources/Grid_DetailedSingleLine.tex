@@ -178,26 +178,26 @@
 \node at (13,-2) () [anchor=south, fonte] {WF $\SI{33}{\kilo \volt}$};
 
 %export cable
-\draw [fonte] (wfhv.south) to [short] (14,-3) to [L, a=$\Pi$, l=\SI{4}{\kilo \meter}] ++(0,-1) to [short] ++(0,-4);
-\draw [fonte] (14,-3) to [C] ++(-1.2,0);
-\draw [fonte] (14,-4) to [C] ++(-1.2,0);
-\node at (10.5,-6) () [fonte] {Underwater collector system ($\Pi$-models)}; 
+\draw [fonte] (wfhv.south) to [short] (14,-5) to [L, a=$\Pi$, l=\SI{4}{\kilo \meter}] ++(0,-1) to [short] ++(0,-2.5);
+\draw [fonte] (14,-5) to [C] ++(-1.2,0);
+\draw [fonte] (14,-6) to [C] ++(-1.2,0);
+\node at (10.5,-6.5) () [fonte] {Underwater collector system ($\Pi$-models)}; 
 
 %WT ac 33kV busbar
-\draw [ultra thick] (14.5,-8) to ++(-2,0);
-\node at (13.5,-8) () [anchor=south, fonte] {$\SI{33}{\kilo \volt}$};
-\node at (13.2,-8) () [anchor=north, fonte] {Floating WT1};
+\draw [ultra thick] (14.5,-8.5) to ++(-2,0);
+\node at (13.5,-8.5) () [anchor=south, fonte] {$\SI{33}{\kilo \volt}$};
+\node at (13.2,-8.5) () [anchor=north, fonte] {Floating WT1};
 
-\draw [ultra thick] (12,-8) to ++(-3,0);
-\node at (10.55,-8) () [anchor=south, fonte] {$\SI{33}{\kilo \volt}$};
-\node at (10.55,-7.75) () [anchor=south, fonte] {Floating WT2};
+\draw [ultra thick] (12,-8.5) to ++(-3,0);
+\node at (10.55,-8.5) () [anchor=south, fonte] {$\SI{33}{\kilo \volt}$};
+\node at (10.55,-8.25) () [anchor=south, fonte] {Floating WT2};
 
-\draw [ultra thick] (8.5,-8) to ++(-2,0);
-\node at (7.5,-8) () [anchor=south, fonte] {$\SI{33}{\kilo \volt}$};
-\node at (7.9,-8) () [anchor=north, fonte] {Floating WT3};
+\draw [ultra thick] (8.5,-8.5) to ++(-2,0);
+\node at (7.5,-8.5) () [anchor=south, fonte] {$\SI{33}{\kilo \volt}$};
+\node at (7.9,-8.5) () [anchor=north, fonte] {Floating WT3};
 
 %inter WT 33kV cables
-\foreach \x/\y in {8/-8, 11.5/-8}
+\foreach \x/\y in {8/-8.5, 11.5/-8.5}
 {
     \draw [fonte] (\x,\y) to [short] ++(0,1) to [L, l=\SI{2}{\kilo \meter}, a=$\Pi$] ++(1.5,0) to [short] ++(0,-1); 
     \draw [fonte] (\x,\y+1) to [C] ++(0,0.75); 
@@ -205,14 +205,14 @@
 }
 
 %WT trafos and MORE
-\foreach \x/\y/\t in {7/-8/WT3, 10.5/-8/WT2, 14/-8/WT1}
+\foreach \x/\y/\t in {7/-8.5/WT3, 10.5/-8.5/WT2, 14/-8.5/WT1}
 {
     %trafo
     \node at (\x,\y-0.65) (wthv) [trafowind] {};
     \node at (\x,\y-0.95) (wtlv) [trafowind] {};
     \draw [] (\x,\y) to (wthv.north);
-    \node at (wthv.east) () [anchor=west, fonte] {{\t}TR};
-    \node at (wtlv.east) () [anchor=west, fonte] {$\SI{5}{\mega \voltampere}$};
+    \node at (wthv.west) () [anchor=east, fonte] {{\t}TR};
+    \node at (wtlv.west) () [anchor=east, fonte] {$\SI{5}{\mega \voltampere}$};
     
     %LCL main reactor
     \draw [fonte] (wtlv.south) to [short] (\x,\y-2) to [L, l={\t}L$_{\textrm{ac}}$] (\x,\y-3);
@@ -226,8 +226,8 @@
 	\node at (-0.2,-0.2) [shift={(\x,\y-3.4)}, rotate=0] () {$=$}; %{\tiny DC};
 	\draw [shift={(\x,\y-3.4)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
 	\draw [thick, shift={(\x,\y-3.4)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
-	\node at (0.4,0.15) () [shift={(\x,\y-3.4)}, rotate=0, anchor=west, fonte] {{\t}GC};
-	\node at (0.4,-0.15) () [shift={(\x,\y-3.4)}, rotate=0, anchor=west, fonte] {\SI{5}{\mega \voltampere}};
+	\node at (-0.4,0.15) () [shift={(\x,\y-3.4)}, rotate=0, anchor=east, fonte] {{\t}GC};
+	\node at (-0.4,-0.15) () [shift={(\x,\y-3.4)}, rotate=0, anchor=east, fonte] {\SI{5}{\mega \voltampere}};
 	
 	% DC link
 	\draw [fonte] (\x,\y-3.8) to [short] ++(0,-0.8) to [C, a={\t}C$_{\textrm{dc}}$] ++(-1.5,0);
