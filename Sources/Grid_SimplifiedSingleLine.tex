@@ -1,0 +1,128 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Case Platform
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{trafowind} = [circle, draw, thick, minimum size=0.6cm]
+%\tikzstyle{converter} = [shape=regular polygon, regular polygon sides=4, minimum size=0.9cm,draw]
+\begin{tikzpicture}
+%\draw [help lines] (-1,0) grid (10,-10);
+%\node [] at (0,0) () {0,0};
+%\node [] at (10,0) () {10,0};
+%\node [] at (0,-10) () {0,-10};
+%\node [] at (0,-10) () {0,-10};
+
+%gray rectangles
+%\node [rectangle, fill=gray!15, minimum height=1cm, minimum width=1cm] at (4,-4) () {};
+%\node [rectangle, fill=gray!15, minimum height=2cm, minimum width=1cm] at (9,-4.5) () {};
+%\node at (5,-4) () [] {GC};
+%\node at (10,-4) () [] {GC};
+%\node at (10,-5) () [] {BC};
+
+\node at (3.25,-4) () [] {GC};
+\node at (6.25,-4) () [] {GC};
+\node at (6.25,-5) () [] {MC};
+\node at (2.25,-5.75) () [] {BC};
+
+%\node [] at (0.5,-6) () {\textbf{in work}};
+
+%Parque eolico
+%\foreach \x/\y in {1/0, 2/0, 3/0} %three units
+\foreach \x/\y in {7/-6, 8/-6, 9/-6} %three units spaced for dots at the second place
+{
+	\draw (\x,\y-0.425) to [sV]	(\x,\y+0.425) to (\x,\y+0.6); 
+	
+	\node at (0.2,0.2) [shift={(\x,\y+1)}, rotate=0] () {$=$}; %{\tiny DC};
+	\node at (-0.2,-0.2) [shift={(\x,\y+1)}, rotate=0] () {$\sim$}; %{\tiny AC}; %
+	\draw [shift={(\x,\y+1)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	\draw [thick, shift={(\x,\y+1)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+	
+	\draw (\x,\y+1.4) to (\x,\y+1.6);		
+	\node at (0.2,0.2) [shift={(\x,\y+2)}, rotate=0] () {$\sim$}; %{\tiny AC}; %
+	\node at (-0.2,-0.2) [shift={(\x,\y+2)}, rotate=0] () {$=$}; %{\tiny DC};
+	\draw [shift={(\x,\y+2)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	\draw [thick, shift={(\x,\y+2)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+	
+	\draw (\x,\y+2.4) to (\x,\y+2.7);		
+	\node at (\x,\y+3) () [trafowind] {};
+	\node at (\x,\y+3.3) () [trafowind] {};
+	\draw (\x,\y+3.6) to (\x,\y+4);		
+}	
+%\node at (8,-5) () [] {\dots};
+%\node at (8,-6.75) () [] {Offshore Wind Power};
+\node at (8,-7.25) () [] {Offshore Wind power};
+\node at (7,-6.75) () [] {WT1};
+\node at (8,-6.75) () [] {WT2};
+\node at (9,-6.75) () [] {WT3};
+
+%trafo windfarm
+\draw [] (5.5,-2) to (5.5,-2.4);
+\node at (5.5,-2.7) () [trafowind] {};
+\node at (5.5,-3) () [trafowind] {};
+
+%cable from windfarm to ac busbar
+\draw [] (5.5,-3.3) to (5.5,-3.6) to ++ (0.8,0) to ++(0,1.6) to ++(2.7,0);
+%\draw [] (5.5,-2) to (5.5,-3.6) to ++ (0.8,0) to ++(0,1.6) to ++(2.7,0);
+\node at (8,-2) () [anchor=south] {Underwater Cables};
+
+%Main ac busbar
+\draw [ultra thick] (-0.5,-2) to (6,-2);
+\node at (2.75,-2) () [anchor=south] {High Voltage AC Busbar};
+
+
+%trafo energy storage system
+\node at (4,-2.7) () [trafowind] {};
+\node at (4,-3.0) () [trafowind] {};
+\draw (4,-2) to (4,-2.4);
+\draw (4,-3.3) to (4,-3.6);
+%LSC ESS
+\foreach \x/\y in {4/-4}
+{
+	\node at (0.2,0.2) [shift={(\x,\y)}, rotate=0] () {$\sim$}; %{\tiny AC}; %
+	\node at (-0.2,-0.2) [shift={(\x,\y)}, rotate=0] () {$=$}; %{\tiny DC};
+	\draw [shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	\draw [thick, shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+}	
+%DC LINK ESS
+\draw (4,-4.4) to (4,-5);
+\draw [ultra thick] (2.5,-5) to (5.5,-5);
+\node at (3,-5) () [anchor=south] {DC Link};
+%BSC, ESC, FSC ESS
+\foreach \x/\y in {3/-5.75, 4/-5.75, 5/-5.75}
+{
+	\draw (\x,\y+0.75) to (\x,\y+0.4);
+	\node at (0.2,0.2) [shift={(\x,\y)}, rotate=0] () {$=$}; %{\tiny DC};
+	\node at (-0.2,-0.2) [shift={(\x,\y)}, rotate=0] () {$=$}; %{\tiny DC};
+	\draw [shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	\draw [thick, shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+}	
+%Battery
+\draw (3,-7.15) to [battery1] (3,-6.15);
+%Electrolyzer and Fuel Cell
+\foreach \x/\y in {4/-6.75, 5/-6.75}
+{
+	\draw (\x,\y+0.6) to (\x,\y+0.4);
+	\draw [thick, shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+	\node at (\x,\y+0.1) () [] {\small H$_2$};
+}	
+%arrows for electrolyzer and fuel cell
+\draw [-Stealth, thick] (4,-6.8) to (4,-7.1);
+\draw [Stealth-, thick] (5,-6.8) to (5,-7.1);
+%text ESS, batt. plus electrolyzer + fuel cell
+\node at (4,-7.5) () [] {Energy Storage System};
+\node at (4,-7.9) () [] {Battery + Electrolyzer + Fuel Cell};
+
+%gas power
+\foreach \x/\y in {0/-3.5, 1/-3.5}
+{
+	\draw (\x,\y-0.425) to [sV]	(\x,\y+0.425) to (\x,\y+1.5);
+	%\draw (1,-3.85) to [sV] (1,-3); 
+	%\draw (1,-2) to (1,-3);
+}
+\node at (0,-4.3) () [] {GT1};
+\node at (1,-4.3) () [] {GT2};
+\node at (0.5,-4.8) () [] {Gas Power};
+
+%local loads
+\draw (2.5,-2) to (2.5,-3);
+\node at (2.5,-3) (locload) [shape=regular polygon, fill=white, rotate=180, regular polygon sides=3, label=north:Load, draw] {};
+
+\end{tikzpicture}
