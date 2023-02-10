@@ -1,0 +1,140 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simplified Primary Power Reserves
+%     GT1 + GT2
+%     ESS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.25cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{junction} = [coordinate]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[auto, >=latex']
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%current D
+% reference minus id
+\node at (0,0) [sum] (SumId) {$\Sigma$};
+
+\draw [fonte,<-] (SumId) to
+    node[anchor=south east, pos=0] () {$+$}
+    node[anchor=south east, pos=1] () {$\overset{*}{i}_d$} ++(-1,0); % reference
+
+\draw [fonte,<-] (SumId) to
+    node[anchor=north east, pos=0] () {$-$} ++(0,-1) to 
+    node[anchor=east, pos=1] () {$\widehat{i}_d$}
+    %node[anchor=north, pos=1] () {Measurement}
+    ++(-1,0);
+
+% PI regulator id
+\node at ($(SumId)+(2,0)$) [block] (PId) {$k_i \left( \dfrac{1 + s T_{i}}{s T_{i}} \right)$};
+\draw [->, fonte] (SumId) to (PId);
+
+% Sum for Decoupling and feed forward 
+\node at ($(PId)+(2,0)$) [sum] (SumPId) {$\Sigma$};
+\draw [->, fonte] (PId) to
+    node[anchor=south east, pos=1] () {$+$} (SumPId);
+
+\draw [fonte,<-] (SumPId) to
+    node[anchor=north east, pos=0] () {$+$} 
+    node[anchor=north, pos=1] () {$\widehat{v}_{gd}$} ++(0,-1);
+
+\draw [fonte,<-] (SumPId) to
+    node[anchor=south west, pos=0] () {$-$}  
+    node[anchor=south, pos=1] () {$\widehat{\omega} L \widehat{i}_q$} ++(0,1);
+
+% Sum for grid and coupling d 
+\node at ($(SumPId)+(3,0)$) [sum] (SumCoupId) {$\Sigma$};
+\draw [->, fonte] (SumPId) to
+    node[anchor=south east, pos=0.5] () {$\overset{*}{v}_{cd}$}
+    node[anchor=south west, pos=0.5] () {$v_{cd}$}
+    node[anchor=south east, pos=1] () {$+$} (SumCoupId);
+
+\draw [fonte,<-] (SumCoupId) to
+    node[anchor=north east, pos=0] () {$-$} 
+    node[anchor=north, pos=1] () {$v_{gd}$} ++(0,-1);
+
+\draw [fonte,<-] (SumCoupId) to
+    node[anchor=south west, pos=0] () {$+$}  
+    node[anchor=south, pos=1] () {$\omega L i_q$} ++(0,1);
+
+% LPF current id
+\node at ($(SumCoupId)+(2,0)$) [block] (LPFId) {$\dfrac{1/R}{1 + s L/R}$};
+\draw [->, fonte] (SumCoupId) to (LPFId);
+\draw [->, fonte] (LPFId) to
+    node[anchor=west, pos=1] () {$i_d$} ++(1.5,0);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%current Q
+% reference minus i1
+\node at (0,-3.5) [sum] (SumIq) {$\Sigma$};
+
+\draw [fonte,<-] (SumIq) to
+    node[anchor=south east, pos=0] () {$+$}
+    node[anchor=south east, pos=1] () {$\overset{*}{i}_q$} ++(-1,0); % reference
+
+\draw [fonte,<-] (SumIq) to
+    node[anchor=north east, pos=0] () {$-$} ++(0,-1) to 
+    node[anchor=east, pos=1] () {$\widehat{i}_q$}
+    %node[anchor=north, pos=1] () {Measurement}
+    ++(-1,0);
+
+% PI regulator iq
+\node at ($(SumIq)+(2,0)$) [block] (PIq) {$k_i \left( \dfrac{1 + s T_{i}}{s T_{i}} \right)$};
+\draw [->, fonte] (SumIq) to (PIq);
+
+% Sum for Decoupling and feed forward  iq
+\node at ($(PIq)+(2,0)$) [sum] (SumPIq) {$\Sigma$};
+\draw [->, fonte] (PIq) to
+    node[anchor=south east, pos=1] () {$+$} (SumPIq);
+
+\draw [fonte,<-] (SumPIq) to
+    node[anchor=north east, pos=0] () {$+$} 
+    node[anchor=north, pos=1] () {$\widehat{\omega} L \widehat{i}_d$} ++(0,-1);
+
+\draw [fonte,<-] (SumPIq) to
+    node[anchor=south west, pos=0] () {$+$}  
+    node[anchor=south, pos=1] () {$\widehat{v}_{gq}$} ++(0,1);
+
+% Sum for grid and coupling q 
+\node at ($(SumPIq)+(3,0)$) [sum] (SumCoupIq) {$\Sigma$};
+\draw [->, fonte] (SumPIq) to
+    node[anchor=south east, pos=0.5] () {$\overset{*}{v}_{cq}$}
+    node[anchor=south west, pos=0.5] () {$v_{cq}$}
+    node[anchor=south east, pos=1] () {$+$} (SumCoupIq);
+
+\draw [fonte,<-] (SumCoupIq) to
+    node[anchor=north east, pos=0] () {$+$} 
+    node[anchor=north, pos=1] () {$\omega L i_d$} ++(0,-1);
+
+\draw [fonte,<-] (SumCoupIq) to
+    node[anchor=south west, pos=0] () {$-$}  
+    node[anchor=south, pos=1] () {$v_{gq}$} ++(0,1);
+
+% LPF current iq
+\node at ($(SumCoupIq)+(2,0)$) [block] (LPFIq) {$\dfrac{1/R}{1 + sL/R}$};
+\draw [->, fonte] (SumCoupIq) to (LPFIq);
+\draw [->, fonte] (LPFIq) to
+    node[anchor=west, pos=1] () {$i_q$} ++(1.5,0);
+
+%%%%% 
+% Labels
+\draw[densely dotted] (5.5,2) to (5.5,-5.5);
+
+\node at ($(SumId)+(0,1)$) [fonte, anchor=south] () {\textbf{CONTROLLER SIDE}};
+\node at ($(LPFId)+(0,1)$) [fonte, anchor=south] () {\textbf{ELECTRICAL SIDE}};
+
+\node at (PId.north) [fonte, anchor=south] () {PI regulator};
+\node at (PIq.north) [fonte, anchor=south] () {PI regulator};
+
+\node at ($(SumPId)+(0,-1.75)$) [fonte] () {Feed forwarding};
+\node at ($(SumCoupId)+(0,-1.75)$) [fonte] () {Grid voltage};
+
+\node at ($(SumPId)+(0,1.5)$) [fonte, anchor=south] () {Decoupling axes};
+\node at ($(SumPIq)+(0,-1.5)$) [fonte, anchor=north] () {Decoupling axes};
+
+\node at ($(SumCoupId)+(0,1.5)$) [fonte, anchor=south] () {Coupling of axes};
+\node at ($(SumCoupIq)+(0,-1.5)$) [fonte, anchor=north] () {Coupling of axes};
+
+
+
+\end{tikzpicture}
