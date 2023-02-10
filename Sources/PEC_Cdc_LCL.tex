@@ -1,0 +1,60 @@
+
+\tikzstyle{gb} = [rectangle, draw, densely dashed, thick, minimum height=1cm, minimum width=0.8cm, font=\small]
+%\tikzstyle{trafowind} = [circle, draw, thick, minimum size=0.6cm]
+%\tikzstyle{genrotor} = [circle, draw, fill=white, thick, minimum size=0.7cm]
+%\tikzstyle{genstator} = [circle, draw, thick, minimum size=1.0cm]
+\tikzstyle{fonte} = [font=\footnotesize]
+	
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+
+\begin{tikzpicture}
+
+    %\draw [fonte] (-2,-0.75) to [american controlled current source,l=I$_\textrm{WT}$] ++(0,1.5)
+	%	to [short,i=$I_\textrm{WT}$] ++(1.5,0)
+	%	to [C,l_=C$_\textrm{DC}$,*-] ++(0,-1.5)
+	%	to [short,*-] ++(-1.5,0);
+
+    \draw [fonte] (-2,-0.75) to [open,*-, v^>=$V_\textrm{dc}$] ++(0,1.5)
+		to [short,*-] ++(1.5,0)
+		to [C,l_=$C_\textrm{dc}$,*-] ++(0,-1.5)
+		to [short,*-] ++(-1.5,0);
+
+    \node at (-2,0.75) [fonte, anchor=south] () {DC Grid};
+    
+	\draw [fonte] (-0.5,0.75) to [short] ++(0.5,0)
+	    to [short] ++(0,-0.45)
+	    to [short, i=$I_\textrm{dc}$] ++(1.1,0);
+	
+	%\draw [fonte] (1,0.3) to [open, v=$V_\textrm{dc}$] ++(0,-0.6);
+	
+	\draw [fonte] (-0.5,-0.75) to [short] ++(0.5,0)
+	    to [short] ++(0,0.45)
+	    to [short] ++(1.1,0);
+			
+	\node at (0.2,0.2) [shift={(1.5,0)}, rotate=0, fonte] {$\sim$};
+	\node at (-0.2,-0.2) [shift={(1.5,0)}, rotate=0, fonte] {$=$};
+	\draw [shift={(1.5,0)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	\draw [thick, shift={(1.5,0)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to cycle;
+
+    \node at (0,0.75) [fonte, anchor=south, shift={(1.5,0)}] () {Converter};
+
+	%Main reactor and shunt capactitance
+	\draw [fonte] (1.9,0) to [L,-*,l=$L_\textrm{r}$,i>^=$I_\textrm{r}$] ++(2.1,0)
+	    to [C,l_=$C_\textrm{ac}$] ++(0,-1)
+		to [R,l_=$R_\textrm{ac}$] ++(0,-1);
+
+    \node at (3,0.75) [fonte, anchor=south] () {Reactor};
+				
+	\node at (4,0) [fonte,anchor=south] () {$V_\textrm{ac}$};
+			
+	%trafo
+    \draw [fonte] (4,0) to [L,-*,l=$L_\textrm{tr}$,i>^=$I_\textrm{tr}$] ++(2.5,0);	
+    \draw [ultra thick] (6.5,-0.3) to ++(0,0.6);
+    
+    \node at (5.25,0.75) [fonte, anchor=south] () {Transformer};
+    \node at (6.5,0.3) [fonte, anchor=south] () {AC Grid};
+
+    
+
+\end{tikzpicture}
