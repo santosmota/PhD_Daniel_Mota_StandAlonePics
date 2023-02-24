@@ -1,0 +1,56 @@
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+\tikzstyle{trafowind} = [circle, draw, thick, minimum size=0.4cm]
+\tikzstyle{caixa} = [rectangle, draw, thick, text width=1.6cm, text centered, minimum height=1.2cm, font=\footnotesize ]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}
+    %\draw [help lines] (-1,0) grid (10,-10);
+    %\node [color=gray] at (0,0) () {0,0};
+
+    % DC grid emulator
+    \node at (-2,0) (DCEmuPic) {\includegraphics[width=0.5cm]{figures/battery.pdf}};
+
+    \node at (-2,0) (DCGridEmu) [caixa] {}; %dc \\ grid \\ emulator
+    \node at (DCGridEmu.north) [fonte, anchor=south] () {Battery model}; % ac \\ grid \\ emulator
+    \node at (DCGridEmu.south) [fonte, anchor=north] () {DC grid emulator}; % ac \\ grid \\ emulator
+
+    %ESS DC Link
+    \draw [fonte] (DCGridEmu.east) to [short] (-0.5,0) to [C, l=$C_{dc}$] ++(0,-1.2);
+    \draw [fonte] (-0.5,0) to [short, i_=$I_{dc}$] (0.3,0);
+    \node at (-0.5,0) () [anchor=south, fonte] {$V_{dc}$};
+    \fill (-0.5,0) circle [radius=1pt];
+
+    %LSC ESS
+    \foreach \x/\y in {0.7/0}
+    {
+	    \node at (0.2,0.2) [shift={(\x,\y)}, rotate=0] () {$\sim$}; %{\tiny AC}; %
+	    \node at (-0.2,-0.2) [shift={(\x,\y)}, rotate=0] () {$=$}; %{\tiny DC};
+	    %\node at (0.4,0.15) () [anchor=west, fonte, shift={(\x,\y)}, rotate=0] {ESSGC};
+	    %\node at (0.4,-0.15) () [anchor=west, fonte, shift={(\x,\y)}, rotate=0] {\SI{10}{\mega \voltampere}};
+	    %\node at (0.4,0) () [anchor=west, fonte, shift={(\x,\y)}, rotate=0] {ac/dc};
+	    \draw [shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	    \draw [thick, shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+	    \node at (0,0.4) [fonte,anchor=south,shift={(\x,\y)}, rotate=0] () {PEC};
+    }	
+
+    \draw [fonte] (1.1,0) to [L, l=${L_{r},R_r}$, i>_=$I_{ac}$] (2.5,0); % coordinate (esscf); 
+    \draw [fonte] (2.5,0) to [short, i>_=${P,Q}$] (2.6,0); % coordinate (esscf); 
+    \draw [fonte] (3,0) to [C, l=$C_{ac}$] ++(0,-1.2);
+    \node at (3,0) () [anchor=south, fonte] {$V_{ac}$};
+    \fill (3,0) circle [radius=1pt];
+
+    %trafo energy storage system
+    \node at (3.55,0) (esstrlv) [trafowind] {};
+    \node at (3.85,0) (esstrhv) [trafowind] {};
+    \draw [] (2.6,0) to (esstrlv.west);
+
+    \node at (3.7,0.15) () [anchor=south, fonte] {$L_{t} \: R_{t}$};
+
+    % DC grid emulator
+    \node at (5.25,0) (ACEmuPic) {\includegraphics[width=1.1cm]{figures/smartgrid.pdf}};
+    \node at (5.25,0) (ACGridEmu) [caixa] {}; % ac \\ grid \\ emulator
+    \node at (ACGridEmu.north) [fonte, anchor=south] () {Grid model}; % ac \\ grid \\ emulator
+    \node at (ACGridEmu.south) [fonte, anchor=north] () {AC grid emulator}; % ac \\ grid \\ emulator
+    \draw [] (esstrhv.east) to (ACGridEmu.west);
+
+\end{tikzpicture}

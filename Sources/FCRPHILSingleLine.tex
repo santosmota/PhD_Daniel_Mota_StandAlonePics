@@ -1,0 +1,47 @@
+	\ctikzset{bipoles/thickness=1}
+    \ctikzset{bipoles/length=0.8cm}
+    \tikzstyle{trafowind} = [circle, draw, thick, minimum size=0.4cm]
+    \tikzstyle{caixa} = [rectangle, draw, thick, text width=1.6cm, text centered, minimum height=1.2cm, font=\footnotesize ]
+    \tikzstyle{fonte} = [font=\footnotesize]
+    \begin{tikzpicture}
+    %\draw [help lines] (-1,0) grid (10,-10);
+    %\node [color=gray] at (0,0) () {0,0};
+
+    % DC grid emulator
+    \node at (-2,0) (DCGridEmu) [caixa] {DC \\ grid \\ emulator};
+
+    %ESS DC Link
+    \draw [fonte] ($(DCGridEmu.east)+(0.7,0)$)  
+        to [short, *-] ++(0,-0.4)
+        to [C, l=ESSC$_\textrm{dc}$] ++(0,-0.8);
+    %\fill ($(DCGridEmu.east)+(0.7,0)$) circle [radius=1pt];
+    \draw [fonte] (DCGridEmu.east) to [short] (0.3,0); % , i_=$I_{dc}$
+    %\node at (-0.5,0) () [anchor=south, fonte] {$V_{dc}$};
+
+    %LSC ESS
+    \foreach \x/\y in {0.7/0} 
+    {
+	    \node at (0.2,0.2) [shift={(\x,\y)}, rotate=0] () {$\sim$}; %{\tiny AC}; %
+	    \node at (-0.2,-0.2) [shift={(\x,\y)}, rotate=0] () {$=$}; %{\tiny DC};
+	    \draw [shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	    \draw [thick, shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+    }	
+    \node at (0.7,0.4) () [fonte, anchor=south] {ESSGC};
+
+    \draw [fonte] (1.1,0) to [L, l=ESSL$_\textrm{ac}$, -*] (2.5,0); % coordinate (esscf); , i>_=$I_{ac}$
+    \draw [fonte] (2.5,0) to [C, l_=ESSC$_\textrm{ac}$, *-] ++(0,-1.2); % to [R, l=$R_{ac}$]
+    \draw [fonte] (3,0) to [R, l=ESSR$_\textrm{ac}$, *-] ++(0,-1.2); % to [R, l=$R_{ac}$]++(0,-0.8);
+    %\node at (2.5,0) () [anchor=south, fonte] {$V_{ac}$};
+
+    %trafo energy storage system
+    \node at (3.6,0) (esstrlv) [trafowind] {};
+    \node at (3.9,0) (esstrhv) [trafowind] {};
+    \draw [] (2.5,0) to (esstrlv.west);
+
+    \node at (3.75,0.15) () [anchor=south, fonte] {ESSTR};
+
+    % DC grid emulator
+    \node at (5.5,0) (ACGridEmu) [caixa] {AC \\ grid \\ emulator};
+    \draw [] (esstrhv.east) to (ACGridEmu.west);
+
+    \end{tikzpicture}

@@ -1,0 +1,151 @@
+\tikzstyle{caixa} = [rectangle, draw, thick,
+                    text width=1.6cm, text centered, minimum height=1cm,
+                    rounded corners=2, font=\footnotesize ]
+\tikzstyle{legenda} = [rectangle, draw, thick,
+                    text width=0.6cm, text centered, minimum height=0.35cm,
+                    rounded corners=2]
+
+\tikzstyle{fonte} = [font=\footnotesize]
+\tikzstyle{cordecisao} = [fill=red!15] % [fill=white] %
+\tikzstyle{correinicio} = [fill=blue!20]
+\tikzstyle{corstart} = [fill=yellow!20]
+\begin{tikzpicture}[>=stealth]
+
+    %%%%%%%%%%%%%%%%% X = ?? %%%%%%%%%%%%%%%%%%%%%%%%
+    % Legend
+    \node at (9.25,1.0) () [fonte, anchor=south] {\textbf{Gate types}};
+    \node at (9.5,0.8) (legstart) [legenda, corstart] {};
+    \node at (legstart.east) [fonte, anchor=west] {Start};
+    
+    \node at (9.5,0.2) (legrestart) [legenda, correinicio] {};
+    \node at (legrestart.east) [fonte, anchor=west] {Selection};
+
+    \node at (9.5,-0.4) (legcalc) [legenda] {};
+    \node at (legcalc.east) [fonte, anchor=west] {Calculations};
+
+    \node at (9.5,-1.0) (legeval) [legenda, cordecisao] {};
+    \node at (legeval.east) [fonte, anchor=west] {Decisions};
+
+    \draw [->, densely dotted, thick] (legeval.west) to ++(-0.35,0) to ++(0,1.2) to ++(0.35,0);
+    \draw [->, densely dotted, thick] (legstart) to (legrestart);
+    \draw [->, densely dotted, thick] (legrestart) to (legcalc);
+    \draw [->, densely dotted, thick] (legcalc) to (legeval);
+    
+    \draw [] (8.25,1.5) to (11.75,1.5) to (11.75,-1.4) to (8.25,-1.4) to cycle;
+
+    %\draw [] (-4.5,2.75) to (19,2.75) to (19,-6.75) to (-4.5,-6.75) to cycle;
+    %\draw [] (-2.9,2.75) to (17.25,2.75) to (17.25,-6.75) to (-2.9,-6.75) to cycle;
+        
+    %%%%%%%%%%%%%%%%% X = 0 %%%%%%%%%%%%%%%%%%%%%%%%
+    % DC voltage
+    \node at (0,0) (Vdc) [caixa, cordecisao] {Evaluate \\ $V_{bdc}^{sd}$};
+    % \node at (Vdc.north) () [fonte, anchor=south west] {dc path $\downarrow$};
+    \node at (Vdc.north) [fonte, anchor=south] () {$V_{bdc}^{sd} = V_{bac}^{sd} \: \dfrac{V_{bdc}^{f\!s}}{V_{bac}^{f\!s}}$};
+
+    % DC current
+    \node at (0,-2) (Idc) [caixa, cordecisao] {Evaluate \\ $I_{bdc}^{sd}$};
+    \node at (Idc.west) [fonte, anchor=east] () {$ I_{bdc}^{sd} = \dfrac{S_{b}^{sd}}{V_{bdc}^{sd}}$}; 
+
+    % Cdc
+    \node at (0,-4) (Cdc) [caixa, cordecisao] {Choose \\ $C_{dc}^{sd}$};
+    \node at (Cdc.south) () [fonte, anchor=north] {$\dfrac{C_{dc}^{sd}{{V_{bdc}^{sd}}^2}}{2 S_{b}^{sd}}
+    \approx
+    \dfrac{C_{dc}^{f\!s}{{V_{bdc}^{f\!s}}^2}}{2 S_{b}^{f\!s}}$}; % H^{sd}
+
+    %%%%%%%%%%%%%%%%% X = 4 %%%%%%%%%%%%%%%%%%%%%%%%
+    \node at (4,2) (inicio) [caixa, corstart] {Full-Scale \\ Parameters};
+    \node at (inicio.west) () [fonte, anchor=east] {$S_{b}^{f\!s}, V_{bac}^{f\!s}, I_{bac}^{f\!s}, Z_{b}^{f\!s}, \cdots$};
+    \node at (inicio.east) () [fonte, anchor=west] {$V_{bdc}^{f\!s}, I_{bdc}^{f\!s}, C_{dc}^{f\!s}, H^{f\!s}$};
+    
+    % Ensure 
+    %\node at (4,0) (acdc) [caixa] {Calculate \\ $V_{bdc}^{sd}$};
+    %\node at (acdc.north) [fonte, anchor=south] () {$\dfrac{V_{bdc}^{sd}}{V_{bac}^{sd}} = \dfrac{V_{bdc}^{f\!s}}{V_{bac}^{f\!s}}$};
+    
+    % AC voltage
+    \node at (4,0) (Vac) [caixa, correinicio] {Select \\ $V_{bac}^{sd}$, $I_{bac}^{sd}$};    
+    % \node at (Vac.north) () [fonte, anchor=south east] {ac path $\downarrow$};
+
+    
+    % Sn
+    \node at (4,-2) (Sn) [caixa] {Calculate \\ $S_{b}^{sd}$};
+    \node at (Sn.east) [fonte, anchor=west] () {$ S_{b}^{sd} = \sqrt{3} V_{bac}^{sd} I_{bac}^{sd}$};
+    
+    % pu bases
+    % \node at (4,-4) (puBases) [caixa] {Calculate \\ $Z_{b}^{sd}\!,L_{b}^{sd}\!,C_{b}^{sd}$};
+
+    % pu bases   %Z_{b}=\dfrac{V_{bac}}{\sqrt{3} I_{bac}}, L_{b}=\dfrac{V_{bac}}{\omega_{n} \sqrt{3} I_{bac}}, C_{b} = \dfrac{\sqrt{3} I_{bac}}{\omega_n V_{bac}}   % 
+    % \node at (puBases.north) [fonte, anchor=south, text width=2.5cm, text centered ] () { $Z_{b}=\dfrac{V_{bac}}{\sqrt{3} I_{bac}} $ \\ $L_{b}=\dfrac{V_{bac}}{\omega_{n} \sqrt{3} I_{bac}}$ \\ $C_{b}= \dfrac{\sqrt{3} I_{bac}}{\omega_n V_{bac}}$};
+     \node at (4,-4) (puBases) [caixa] {Calculate \\ $Z_{b}^{sd}\!,L_{b}^{sd}\!,C_{b}^{sd}$};
+
+    % Cac
+    \node at (4,-8) (Cac) [caixa, cordecisao] {Choose \\ $C_{bac}^{sd}$};
+    \node at (Cac.west) () [fonte, anchor=east] {$\dfrac{C_{bac}^{sd}}{ C_{b}^{sd}} \approx \dfrac{C_{bac}^{f\!s}}{ C_{b}^{f\!s}}$};
+    
+    %%%%%%%%%%%%%%%%% X = 8 %%%%%%%%%%%%%%%%%%%%%%%%
+    % Converter reactor
+    \node at (8,-4) (L1) [caixa, cordecisao] {Choose \\ $L_{r}^{sd}$};
+    \node at (L1.north) () [fonte, anchor=south] {$\dfrac{L_{r}^{sd}}{ L_{b}^{sd}} \approx \dfrac{L_{r}^{f\!s}}{ L_{b}^{f\!s}}$}; % \eqref{eq:Compare_lr}
+
+     % Transformer Lac, Ltr
+    \node at (8,-6) (Ltr) [caixa, cordecisao] {Choose \\ $L_{t}^{sd}$};
+    \node at (Ltr.north west) () [fonte, anchor=south] {$\dfrac{L_{t}^{sd}}{ L_{b}^{sd}} \approx \dfrac{L_{t}^{f\!s}}{ L_{b}^{f\!s}}$};
+
+    % fres
+    \node at (8,-8) (fres) [caixa, cordecisao] {Evaluate \\ $F_{\textrm{res}}^{sd}$};
+    \node at (fres.north west) () [fonte, anchor=south] {$F_{\textrm{res}}^{sd} \approx F_{\textrm{res}}^{f\!s}$};
+    
+    %%%%%%%%%%%%%%%%% X = 12 %%%%%%%%%%%%%%%%%%%%%%%%
+    % Converter reactor
+    \node at (12,-4) (Rac) [caixa, cordecisao] {Evaluate \\ $R_{r}^{sd}$};
+    \node at (Rac.north) () [fonte, anchor=south] {$\dfrac{R_{r}^{sd}}{ Z_{b}^{sd}} \approx \dfrac{R_{r}^{f\!s}}{ Z_{b}^{f\!s}}$}; %  \eqref{eq:rrsdpu}
+    
+    \node at (12,-6) (Rtr) [caixa, cordecisao] {Evaluate \\ $R_{t}^{sd}$};
+    \node at (Rtr.north) () [fonte, anchor=south] {$\dfrac{R_{t}^{sd}}{ Z_{b}^{sd}} \approx \dfrac{R_{t}^{f\!s}}{ Z_{b}^{f\!s}}$};
+    
+    %% Rshunt
+    %\node at (-4,-8) (Rshunt) [caixa] {Choose \\ $R_{bac}^{sd}$};
+    %\node at (Rshunt.north) () [fonte, anchor=south] {$\dfrac{R_{bac}^{sd}}{ Z_{b}^{sd}} \approx \dfrac{R_{bac}^{f\!s}}{ Z_{b}^{f\!s}}$ \eqref{eq:Rac}};
+    
+    %%%%%%%%%%%%%%%% AC CONNECTORS %%%%%%%%%%%%%%%%%%%%%%%%
+    % AC connectors, and crossovers to DC
+    \draw [fonte, ->] (inicio) to (Vac);
+    
+    %\draw [fonte, ->] (Vac) to (acdc);
+    
+    \draw [fonte, ->] (Vac) to
+        node [fonte, pos=0.0, anchor=south east] () {DC voltage $\leftarrow$}
+        (Vdc);
+  
+    \draw [fonte, ->] (Vac) to node [fonte, pos=0.0, anchor=north west] () {$\downarrow$ AC power} (Sn);
+    
+    \draw [fonte, ->] (Sn) to node [fonte, pos=0.0, anchor=north west] () {$\downarrow$ LCL filter} (puBases);
+    \draw [fonte, ->] (Sn) to node [fonte, pos=0.0, anchor=south east] () {DC side $\leftarrow$} (Idc);
+    \draw [fonte, ->] ($(Sn) + (-2.2,0)$) |- ($(Cdc.east)+(0,-0.15)$);
+    \filldraw [black] ($(Sn) + (-2.2,0)$) circle (1pt);
+    
+    \draw [fonte, ->] (puBases) to node [fonte, pos=0.0, anchor=south west ] () {$\rightarrow$ Reactor} (L1);
+    \draw [fonte, ->] (puBases) to (Cac);
+    \draw [fonte, ->] ($(puBases) + (0,-2)$) to 
+        node [fonte, pos=0, anchor=south west] () {$\rightarrow$ Transformer}
+        node [fonte, pos=0, anchor=north east] () {Shunt branch $\downarrow$ } (Ltr);
+    \filldraw [black] ($(puBases) + (0,-2)$) circle (1pt);
+    
+    \draw [fonte, ->] (L1) to (Rac);
+    \draw [fonte, ->] ($(L1.south)+(0.5,0)$) to ($(L1)+(0.5,-1)$) to ++(1.3,0) |- ($(fres.east)+(0,0)$);
+    
+    \draw [fonte, ->] (Ltr) to (Rtr);
+    \draw [fonte, ->] ($(Ltr.south)+(0.5,0)$) to ($(Ltr)+(0.5,-1)$) to ++(1,0) |- ($(fres.east)+(0,0.3)$);
+
+    %\draw [fonte, ->] ($(Cac.east)+(0,-0.3)$) to ($(fres.west)+(0,-0.3)$);
+    \draw [fonte, ->] (Cac.east) to (fres.west);
+
+    %\draw [fonte, ->] (fres) to (Rshunt);
+
+    %%%%%%%%%%%%%%%% DC CONNECTORS %%%%%%%%%%%%%%%%%%%%%%%%
+    % DC connectors
+    % \draw [fonte, ->] (inicio.east) -| (Vdc.north);
+    \draw [fonte, ->] (Vdc) to node [fonte, pos=0, anchor=north west] () {$\downarrow$ DC current} (Idc);
+    \draw [fonte, ->] ($(Vdc) + (0,-1)$) to ++(1.5,0) |- ($(Cdc.east)+(0,0.15)$);
+    \filldraw [black] ($(Vdc) + (0,-1)$) circle (1pt);
+
+\end{tikzpicture}
