@@ -44,7 +44,7 @@
 
     % DC current
     \node at (0,-2) (Idc) [caixa, cordecisao] {Evaluate \\ $I_{bdc}^{sd}$};
-    \node at (Idc.west) [fonte, anchor=east] () {$ I_{bdc}^{sd} = \dfrac{S_{b}^{sd}}{V_{bdc}^{sd}}$}; 
+    \node at (Idc.south) [fonte, anchor=north] () {$ I_{bdc}^{sd} = \dfrac{S_{b}^{sd}}{V_{bdc}^{sd}}$}; 
 
     % Cdc
     \node at (0,-4) (Cdc) [caixa, cordecisao] {Choose \\ $C_{dc}^{sd}$};
@@ -81,25 +81,25 @@
     \node at (4,-8) (Cac) [caixa, cordecisao] {Choose \\ $C_{bac}^{sd}$};
     \node at (Cac.west) () [fonte, anchor=east] {$\dfrac{C_{bac}^{sd}}{ C_{b}^{sd}} \approx \dfrac{C_{bac}^{f\!s}}{ C_{b}^{f\!s}}$};
     
-    %%%%%%%%%%%%%%%%% X = 8 %%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%% X = 7.5 %%%%%%%%%%%%%%%%%%%%%%%%
     % Converter reactor
-    \node at (8,-4) (L1) [caixa, cordecisao] {Choose \\ $L_{r}^{sd}$};
+    \node at (7.5,-4) (L1) [caixa, cordecisao] {Choose \\ $L_{r}^{sd}$};
     \node at (L1.north) () [fonte, anchor=south] {$\dfrac{L_{r}^{sd}}{ L_{b}^{sd}} \approx \dfrac{L_{r}^{f\!s}}{ L_{b}^{f\!s}}$}; % \eqref{eq:Compare_lr}
 
      % Transformer Lac, Ltr
-    \node at (8,-6) (Ltr) [caixa, cordecisao] {Choose \\ $L_{t}^{sd}$};
+    \node at (7.5,-6) (Ltr) [caixa, cordecisao] {Choose \\ $L_{t}^{sd}$};
     \node at (Ltr.north west) () [fonte, anchor=south] {$\dfrac{L_{t}^{sd}}{ L_{b}^{sd}} \approx \dfrac{L_{t}^{f\!s}}{ L_{b}^{f\!s}}$};
 
     % fres
-    \node at (8,-8) (fres) [caixa, cordecisao] {Evaluate \\ $F_{\textrm{res}}^{sd}$};
+    \node at (7.5,-8) (fres) [caixa, cordecisao] {Evaluate \\ $F_{\textrm{res}}^{sd}$};
     \node at (fres.north west) () [fonte, anchor=south] {$F_{\textrm{res}}^{sd} \approx F_{\textrm{res}}^{f\!s}$};
     
-    %%%%%%%%%%%%%%%%% X = 12 %%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%% X = 11 %%%%%%%%%%%%%%%%%%%%%%%%
     % Converter reactor
-    \node at (12,-4) (Rac) [caixa, cordecisao] {Evaluate \\ $R_{r}^{sd}$};
+    \node at (11,-4) (Rac) [caixa, cordecisao] {Evaluate \\ $R_{r}^{sd}$};
     \node at (Rac.north) () [fonte, anchor=south] {$\dfrac{R_{r}^{sd}}{ Z_{b}^{sd}} \approx \dfrac{R_{r}^{f\!s}}{ Z_{b}^{f\!s}}$}; %  \eqref{eq:rrsdpu}
     
-    \node at (12,-6) (Rtr) [caixa, cordecisao] {Evaluate \\ $R_{t}^{sd}$};
+    \node at (11,-6) (Rtr) [caixa, cordecisao] {Evaluate \\ $R_{t}^{sd}$};
     \node at (Rtr.north) () [fonte, anchor=south] {$\dfrac{R_{t}^{sd}}{ Z_{b}^{sd}} \approx \dfrac{R_{t}^{f\!s}}{ Z_{b}^{f\!s}}$};
     
     %% Rshunt
