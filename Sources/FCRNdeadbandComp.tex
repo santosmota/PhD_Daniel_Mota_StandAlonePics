@@ -1,0 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRN and FCRD - FREQUENCY TO POWER CHARACTERISTIC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{line0} = [color=DaltBlue, dashed, thick]
+\tikzstyle{text0} = [color=DaltBlue]
+\tikzstyle{line1} = [color=DaltRed, densely dotted, very thick]
+\tikzstyle{text1} = [color=DaltRed]
+\tikzstyle{line2} = [color=black, dashdotted, thick]
+\tikzstyle{text2} = [color=black]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[>=latex'] %https://www.youtube.com/watch?v=5jmIHOWpEg0 minute 12:16
+\begin{axis}[   %clip=false,
+                xmin=-3, xmax=3,
+                ymin=-10.5, ymax=11,
+                axis lines=middle,
+                grid style=dotted,
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                xlabel=$\widetilde{F}$,
+                xtick={-2,-0.5,0.5,2},  % FN = 1,  FD = 2
+                xticklabels={$-\widetilde{F}_{\textrm{N}}$,$-F_{\textrm{dbN}}$,$F_{\textrm{dbN}}$,$\widetilde{F}_{\textrm{N}}$},
+                xticklabel style={anchor=north},
+                xmajorgrids=true,
+                xlabel style={anchor=south east},
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                ylabel=$P_\textrm{FCR}$,
+                ytick={-8,8}, % PN = 3  , PD = 9
+                yticklabels={$-P_{\textrm{N}}$,$P_{\textrm{N}}$},
+                ymajorgrids=true,
+                ylabel style={anchor=west}
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                ] %axis lines=left
+
+\node at (-3,8) [anchor=south west, fonte] () {FCR$_\textrm{N}$ saturated};
+\node at (3,-8) [anchor=north east, fonte] () {FCR$_\textrm{N}$ saturated};
+
+%%%%%%%%%%%%%%
+% FCRN: with dead band no compensation
+\addplot[line1, samples=2, domain=-3:-2.5]{8};
+\addplot[line1, samples=2, domain=-2.5:-0.5]{-4*x-2};
+\addplot[line1, samples=2, domain=-0.5:0.5]{0};
+\addplot[line1, samples=2, domain=0.5:2.5]{-4*x+2};
+\addplot[line1, samples=2, domain=2.5:3]{-8};
+    %node [pos=0, anchor=south west, text2] {FCR$_\textrm{N}$};
+
+\addplot[line1, samples=2, domain=0.4:0.95]{7}
+    node [pos=1, anchor=west, text1] {$K_\textrm{N}=\dfrac{P_\textrm{N}}{\widetilde{F}_\textrm{N}}$};
+
+%%%%%%%%%%%%%%
+% FCRN: with dead band AND compensation
+\addplot[line0, samples=2, domain=-3:-2]{8};
+\addplot[line0, samples=2, domain=-2.0:-0.5]{-5.3333*x-2.6667};
+\addplot[line0, samples=2, domain=-0.5:0.5]{0};
+\addplot[line0, samples=2, domain=0.5:2]{-5.3333*x+2.6667};
+\addplot[line0, samples=2, domain=2:3]{-8};
+
+\addplot[line0, samples=2, domain=0.4:0.95]{4}
+    node [pos=1, anchor=west, text0] {$K_\textrm{N}=\dfrac{P_\textrm{N}}{\widetilde{F}_\textrm{N}- F_\textrm{dnN}}$};
+
+%%%%%%%%%%%%
+% System
+%\addplot[line2, samples=2, domain=-2.75:-2]{9}
+%    node [pos=0, anchor=south west, text2] {FCR$_\textrm{N}$+FCR$_\textrm{D}$};
+%\addplot[line2, samples=2, domain=-2:-1]{-6*x-3};
+%\addplot[line2, samples=2, domain=-1:1]{-3*x};
+%\addplot[line2, samples=2, domain=1:2]{-6*x+3};
+%\addplot[line2, samples=2, domain=2:2.75]{-9}
+%    node [pos=1, anchor=north east, text2] {FCR$_\textrm{N}$+FCR$_\textrm{D}$};;
+\end{axis}
+\end{tikzpicture}
