@@ -40,7 +40,7 @@
     % DC voltage
     \node at (0,0) (Vdc) [caixa, cordecisao] {Evaluate \\ $V_{bdc}^{sd}$};
     % \node at (Vdc.north) () [fonte, anchor=south west] {dc path $\downarrow$};
-    \node at (Vdc.north) [fonte, anchor=south] () {$V_{bdc}^{sd} = V_{bac}^{sd} \: \dfrac{V_{bdc}^{f\!s}}{V_{bac}^{f\!s}}$};
+    \node at (Vdc.north west) [fonte, anchor=south west] () {$V_{bdc}^{sd} = V_{bac}^{sd} \: \dfrac{V_{bdc}^{f\!s}}{V_{bac}^{f\!s}}$};
 
     % DC current
     \node at (0,-2) (Idc) [caixa, cordecisao] {Evaluate \\ $I_{bdc}^{sd}$};
@@ -48,7 +48,7 @@
 
     % Cdc
     \node at (0,-4) (Cdc) [caixa, cordecisao] {Choose \\ $C_{dc}^{sd}$};
-    \node at (Cdc.south) () [fonte, anchor=north] {$\dfrac{C_{dc}^{sd}{{V_{bdc}^{sd}}^2}}{2 S_{b}^{sd}}
+    \node at (Cdc.south west) () [fonte, anchor=north west] {$\dfrac{C_{dc}^{sd}{{V_{bdc}^{sd}}^2}}{2 S_{b}^{sd}}
     \approx
     \dfrac{C_{dc}^{f\!s}{{V_{bdc}^{f\!s}}^2}}{2 S_{b}^{f\!s}}$}; % H^{sd}
 
@@ -78,8 +78,8 @@
      \node at (4,-4) (puBases) [caixa] {Calculate \\ $Z_{b}^{sd}\!,L_{b}^{sd}\!,C_{b}^{sd}$};
 
     % Cac
-    \node at (4,-8) (Cac) [caixa, cordecisao] {Choose \\ $C_{bac}^{sd}$};
-    \node at (Cac.west) () [fonte, anchor=east] {$\dfrac{C_{bac}^{sd}}{ C_{b}^{sd}} \approx \dfrac{C_{bac}^{f\!s}}{ C_{b}^{f\!s}}$};
+    \node at (4,-8) (Cac) [caixa, cordecisao] {Choose \\ $C_{ac}^{sd}$};
+    \node at (Cac.west) () [fonte, anchor=east] {$\dfrac{C_{ac}^{sd}}{ C_{b}^{sd}} \approx \dfrac{C_{ac}^{f\!s}}{ C_{b}^{f\!s}}$};
     
     %%%%%%%%%%%%%%%%% X = 7.5 %%%%%%%%%%%%%%%%%%%%%%%%
     % Converter reactor
