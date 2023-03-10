@@ -8,7 +8,7 @@
     %\node [color=gray] at (0,0) () {0,0};
 
     % DC grid emulator
-    \node at (-2,0) (DCGridEmu) [caixa] {DC \\ grid \\ emulator};
+    \node at (-2,0) (DCGridEmu) [caixa] {Grid \\ emulator \\ ac side};
 
     %ESS DC Link
     \draw [fonte] ($(DCGridEmu.east)+(0.7,0)$)  
@@ -41,7 +41,7 @@
     \node at (3.75,0.15) () [anchor=south, fonte] {ESSTR};
 
     % DC grid emulator
-    \node at (5.5,0) (ACGridEmu) [caixa] {AC \\ grid \\ emulator};
+    \node at (5.5,0) (ACGridEmu) [caixa] {Grid \\ emulator \\ dc side};
     \draw [] (esstrhv.east) to (ACGridEmu.west);
 
     \end{tikzpicture}
