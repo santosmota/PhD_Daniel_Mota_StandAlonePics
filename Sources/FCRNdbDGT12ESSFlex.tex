@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Droop chart - System - GT1 GT2 ESS Flex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{ESSline} = [color=DaltRed, dashed, thick]
+\tikzstyle{ESStext} = [color=DaltRed]
+\tikzstyle{GTsline} = [color=DaltGray, thick]
+\tikzstyle{GT1line} = [color=DaltGray, thick, dashed]
+\tikzstyle{GT2line} = [color=DaltGray, thick, densely dotted]
+\tikzstyle{GTstext} = [color=DaltGray]
+\tikzstyle{Flexline} = [color=DaltBlue, densely dotted, thick]
+\tikzstyle{Flextext} = [color=DaltBlue]
+\tikzstyle{SYSline} = [color=DaltGreen, thick]
+\tikzstyle{SYStext} = [color=DaltGreen]
+\begin{tikzpicture} %https://www.youtube.com/watch?v=5jmIHOWpEg0 minute 12:16
+\begin{axis}[   %clip=false,
+                %xmin=-3.5, xmax=3.54,
+                xmin=-3.99, xmax=3.99,
+                ymin=-4.5, ymax=4.5,
+                axis lines=middle,
+                xlabel=$\widetilde{F} (\si{\hertz})$,
+                xtick={-3,-2,-1,0,1,2,3},
+                %xticklabels={$0$, $2 \pi /2$},
+                xticklabel style={anchor=north},
+                xmajorgrids=true,
+                ylabel=$P_\textrm{FCR} (\si{\mega \watt})$,
+                ytick={-4,-3,-2,-1,0,1,2,3,4},
+                ymajorgrids=true,
+                grid style=dotted
+                ] %axis lines=left
+% Legend
+\addplot[SYSline, samples=2, domain=1.1:1.75]{3.1}
+    node[pos=1, anchor=west, SYStext]{System FCR$_\textrm{N}$};
+\addplot[ESSline, samples=2, domain=1.1:1.75]{2.6}
+    node[pos=1, anchor=west, ESStext]{Battery (BTC)};
+\addplot[Flexline, samples=2, domain=1.1:1.75]{2.1}
+    node[pos=1, anchor=west, Flextext]{Flex. load (FLX)};
+\addplot[GT1line, samples=2, domain=1.1:1.75]{1.6}
+    node[pos=1, anchor=west, GTstext]{GT$_\textrm{1}$};
+\addplot[GT2line, samples=2, domain=1.1:1.75]{1.1}
+    node[pos=1, anchor=west, GTstext]{GT$_\textrm{2}$};
+%
+%%%%%%%%%%%%%
+% ESS
+\addplot[ESSline, samples=2, domain=-4:-1]{1.54};
+\addplot[ESSline, samples=2, domain=-1:-0.125]{-1.76*x-0.22};
+\addplot[ESSline, samples=2, domain=-0.125:0.125]{0};
+\addplot[ESSline, samples=2, domain=0.125:1]{-1.76*x+0.22};
+\addplot[ESSline, samples=2, domain=1:4]{-1.54}
+    node[pos=0.5, anchor=south, ESStext]{BTC};
+%%%%%%%%%%%%%
+% Flex
+\addplot[Flexline, samples=2, domain=-4:-1]{1.52};
+\addplot[Flexline, samples=2, domain=-1:-0.125]{-1.737143*x-0.217143};
+\addplot[Flexline, samples=2, domain=-0.125:0.125]{0};
+\addplot[Flexline, samples=2, domain=0.125:1]{-1.737143*x+0.217143};
+\addplot[Flexline, samples=2, domain=1:4]{-1.52}
+    node[pos=0.5, anchor=north, Flextext]{FLX};
+%%%%%%%%%%%%%%
+% GTs
+%    node[pos=0.5, anchor=north, GTstext]{Flex};
+\addplot[GT1line, samples=2, domain=-3:-1]{-3*x-3};
+\addplot[GT1line, samples=2, domain=-1:1]{0};
+\addplot[GT1line, samples=2, domain=1:3]{-3*x+3}
+    node[pos=0.5, anchor=east, GTstext]{GT1}
+    node[pos=0.5, anchor=west, GTstext]{GT2};
+%\addplot[color=black, dashed, mark=*, samples=20]{x^3};
+\addplot[GT2line, samples=2, domain=-3:-1]{-3*x-3};
+\addplot[GT2line, samples=2, domain=-1:1]{0};
+\addplot[GT2line, samples=2, domain=1:3]{-3*x+3};
+%%%%%%%%%%%%%%
+% SYS
+%\addplot[GTsline, samples=2, domain=-2:-1]{-6*x-6}
+%    node[pos=0.5, anchor=east, GTstext]{GT1 and GT2};;
+\addplot[SYSline, samples=2, domain=-3:-1]{-6*x-2.94};
+    %node[pos=0.96, anchor=east, SYStext]{System};
+\addplot[SYSline, samples=2, domain=-1:-0.125]{-3.497143*x-0.437143};
+\addplot[SYSline, samples=2, domain=-0.125:0.125]{0};
+\addplot[SYSline, samples=2, domain=0.125:1]{-3.497143*x+0.437143};
+\addplot[SYSline, samples=2, domain=1:3]{-6*x+2.94}
+    node[pos=0.09, anchor=east, SYStext]{System};;
+%\addplot[GTsline, samples=2, domain=1:2]{-6*x+6};
+\end{axis}
+\end{tikzpicture}
