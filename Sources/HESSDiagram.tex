@@ -1,0 +1,103 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The ESS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+\tikzstyle{trafowind} = [circle, draw, thick, minimum size=0.6cm]
+\tikzstyle{caixa} = [rectangle, draw, thick, text width=1.6cm, text centered, minimum height=1.5cm, font=\footnotesize ] %,
+%\tikzstyle{converter} = [shape=regular polygon, regular polygon sides=4, minimum size=0.9cm,draw]
+\begin{tikzpicture}
+%\draw [help lines] (-5,-5) grid (7,5);
+%\node at (-5,-5) () [] {(-5,-5)};
+%\node at (7,5) () [] {(7,5)};
+%\node at (4,2) () [] {(4,2)};
+
+%Battery
+\node at (-5.5,0) (battery) [caixa] {Battery};
+\node at (-2,0) (batconv) [caixa] {Battery\\Converter\\(BTC)};
+\draw ($(battery.east) + (0,0.5)$) to [inductor, i=$i_{bt}$, l=$L_{bt}$] ($(batconv.west) + (0,0.5)$);
+\draw ($(battery.east) + (0,-0.5)$) to [short] ($(batconv.west) + (0,-0.5)$);
+\draw ($(battery.east) + (0,-0.5)$) to [open, v>=$v_b$] ($(battery.east) + (0,+0.5)$);
+\draw ($(batconv.west) + (0,-0.5)$) to [open, v^>=$v_{bc}$] ($(batconv.west) + (0,+0.5)$);
+
+%Fuel cell
+\node at (-5.5,-2) (fc) [caixa] {Fuel\\Cell};
+\node at (-2,-2) (fcc) [caixa] {Fuel Cell\\Converter\\(FCC)};
+\draw ($(fc.east) + (0,0.5)$) to [inductor, i=$i_{f\!c}$, l=$L_{f\!c}$] ($(fcc.west) + (0,0.5)$);
+\draw ($(fc.east) + (0,-0.5)$) to [short] ($(fcc.west) + (0,-0.5)$);
+\draw ($(fc.east) + (0,-0.5)$) to [open, v>=$v_{f\!c}$] ($(fc.east) + (0,+0.5)$);
+
+%electrolyzer
+\node at (-5.5,-4) (el) [caixa] {Electrolyzer};
+\node at (-2,-4) (elc) [caixa] {Electrolyzer\\Converter\\(ELC)};
+\draw ($(el.east) + (0,0.5)$) to [inductor, i<=$i_{el}$,  l=$L_{el}$] ($(elc.west) + (0,0.5)$);
+\draw ($(el.east) + (0,-0.5)$) to [short] ($(elc.west) + (0,-0.5)$);
+\draw ($(el.east) + (0,-0.5)$) to [open, v>=$v_{el}$] ($(el.east) + (0,+0.5)$);
+
+%grid convertrer
+\node at (3,0) (gc) [caixa] {Grid\\Converter\\(GC)};
+
+%From Battery converter to Capacitor and to grid converter
+\draw ($(batconv.east) + (0,0.5)$)
+	to [short] (0,0.5)
+	to [short, -*, i=$i_{sd}$] (1,0.5)
+	to [capacitor, l=$C_{dc}$,-*] ++(0,-1)
+	to [short] ($(batconv.east) + (0,-0.5)$);
+
+\draw (0.85,0.5) to [open, v=$v_{dc}$] (0.85,-0.5);
+
+\draw (1,0.5) to [short, i=$i_{dc}$] ($(gc.west) + (0,0.5)$);
+\draw (1,-0.5) to [short] ($(gc.west) + (0,-0.5)$);
+
+\node at (5.75,0) () [anchor=south] {$v_{ac}$};
+
+%From grid converter to capacitor
+\draw ($(gc.east)$)
+	to [short, i=$i_{r}$] (4.5,0)
+	to [inductor, -*, l=$L_{r}$] ++(1,0)
+	to [capacitor, l_=$C_{ac}$] ++(0,-1)
+	to [resistor, l_=$R_{ac}$,-*] ++(0,-1);
+
+\draw (5.3,-1.85) -- (5.3,-2) -- (5.7,-2) -- (5.7,-1.85); 
+
+%from capacitor to trafo and grid
+\node at (6.5,0) (trlv) [trafowind] {};
+\node at (6.8,0) (trhv) [trafowind] {};
+\draw (5.5,0) to [short] (trlv.west);
+\draw (trhv.east) to [short,-*] (7.5,0);
+
+\node at (7.5,0) () [anchor=south] {$v_{g}$};
+\node at (7.5,0.5) () [anchor=south, font=\footnotesize] {HV Grid};
+\node at (6.65,-0.6) () [font=\footnotesize] {Transformer};
+
+%From Fuel cell converter to dc link
+\draw ($(fcc.east) + (0,0.5)$) 
+	to [short] (-0.8,-1.5)
+	to [short, -*] (-0.8,0.5);
+\draw ($(fcc.east) + (0,-0.5)$) 
+	to [short] (-0.6,-2.5)
+	to [short, -*] (-0.6,-0.5);
+
+%From ECC converter to dc link
+\draw ($(elc.east) + (0,0.5)$) 
+	to [short] (-0.4,-3.5)
+	to [short, -*] (-0.4,0.5);
+\draw ($(elc.east) + (0,-0.5)$) 
+	to [short] (-0.2,-4.5)
+	to [short, -*] (-0.2,-0.5);
+
+% Boundary between energy storage and dc link
+\draw [densely dotted] (0,1.25) to (0,-2);
+\node at (-3.5,1.25) () [font=\footnotesize] {ENERGY STORAGE DEVICES};
+
+% Boundary between DC LINK AND GRID CONVERTER
+\draw [densely dotted] (1.9,1.25) to (1.9,-2);
+\node at (1,1.25) () [font=\footnotesize] {DC LINK};
+
+% Boundary between GRID CONVERTER and LCL
+%\draw [dotted] (4.3,-1.5) to (4.3,-2);
+\node at (3,1.25) () [font=\footnotesize] {DC$\, \leftrightarrow \,$AC};
+
+
+
+\end{tikzpicture}
