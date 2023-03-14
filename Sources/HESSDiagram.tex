@@ -17,22 +17,22 @@
 \node at (-2,0) (batconv) [caixa] {Battery\\Converter\\(BTC)};
 \draw ($(battery.east) + (0,0.5)$) to [inductor, i=$i_{bt}$, l=$L_{bt}$] ($(batconv.west) + (0,0.5)$);
 \draw ($(battery.east) + (0,-0.5)$) to [short] ($(batconv.west) + (0,-0.5)$);
-\draw ($(battery.east) + (0,-0.5)$) to [open, v>=$v_b$] ($(battery.east) + (0,+0.5)$);
-\draw ($(batconv.west) + (0,-0.5)$) to [open, v^>=$v_{bc}$] ($(batconv.west) + (0,+0.5)$);
+\draw ($(battery.east) + (0.1,-0.5)$) to [open, v>=$v_{bt}$] ($(battery.east) + (0.1,+0.5)$);
+%\draw ($(batconv.west) + (0,-0.5)$) to [open, v^>=$v_{bc}$] ($(batconv.west) + (0,+0.5)$);
 
 %Fuel cell
 \node at (-5.5,-2) (fc) [caixa] {Fuel\\Cell};
 \node at (-2,-2) (fcc) [caixa] {Fuel Cell\\Converter\\(FCC)};
 \draw ($(fc.east) + (0,0.5)$) to [inductor, i=$i_{f\!c}$, l=$L_{f\!c}$] ($(fcc.west) + (0,0.5)$);
 \draw ($(fc.east) + (0,-0.5)$) to [short] ($(fcc.west) + (0,-0.5)$);
-\draw ($(fc.east) + (0,-0.5)$) to [open, v>=$v_{f\!c}$] ($(fc.east) + (0,+0.5)$);
+\draw ($(fc.east) + (0.1,-0.5)$) to [open, v>=$v_{f\!c}$] ($(fc.east) + (0.1,+0.5)$);
 
 %electrolyzer
 \node at (-5.5,-4) (el) [caixa] {Electrolyzer};
 \node at (-2,-4) (elc) [caixa] {Electrolyzer\\Converter\\(ELC)};
 \draw ($(el.east) + (0,0.5)$) to [inductor, i<=$i_{el}$,  l=$L_{el}$] ($(elc.west) + (0,0.5)$);
 \draw ($(el.east) + (0,-0.5)$) to [short] ($(elc.west) + (0,-0.5)$);
-\draw ($(el.east) + (0,-0.5)$) to [open, v>=$v_{el}$] ($(el.east) + (0,+0.5)$);
+\draw ($(el.east) + (0.1,-0.5)$) to [open, v>=$v_{el}$] ($(el.east) + (0.1,+0.5)$);
 
 %grid convertrer
 \node at (3,0) (gc) [caixa] {Grid\\Converter\\(GC)};
@@ -40,7 +40,7 @@
 %From Battery converter to Capacitor and to grid converter
 \draw ($(batconv.east) + (0,0.5)$)
 	to [short] (0,0.5)
-	to [short, -*, i=$i_{sd}$] (1,0.5)
+	to [short, -*, i=$i_{es}$] (1,0.5)
 	to [capacitor, l=$C_{dc}$,-*] ++(0,-1)
 	to [short] ($(batconv.east) + (0,-0.5)$);
 

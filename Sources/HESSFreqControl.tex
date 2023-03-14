@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Battery Controller
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.25cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{junction} = [coordinate]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[auto, >=latex']
+
+%Primary, secondary, and inertial response
+\node at (0,1.5) [caixa] (Kp) {Proport.\\$k$};
+\node at (0,0) [rectangle, draw, fill=white, text width=2cm, text centered, minimum height=1cm, font=\footnotesize] (Ti) {Anti-windup\\integrator: $T_i$};
+\node at (0,-1.5) [caixa] (Td) {Low-pass\\ filter: $T_d$};
+\node at (2,-1.5) [caixa] (Kd) {Derivat.\\$k_d$};
+
+%summing point powers
+\node at (3,0) [sum] (soma) {$\Sigma$};
+
+%texts of the responses and other texts
+\node at (Kp.north) [fonte, anchor=south] () {Primary response};
+\node at (Ti.north) [fonte, anchor=south] () {Secondary response};
+\node at (Td.north) [fonte, anchor=south] () {Inertial response};
+\node at (3,2) [fonte, anchor=south] () {Power management};
+\node at (3,1.7) [fonte, anchor=south] () {and secondary response};
+
+%division box
+\node at (5,-0.25) [caixa] (div) {};
+\node at ($(div.west) + (0,0.25)$) [fonte, anchor=west] (pin) {$p$}; 
+\node at ($(div.west) + (0,-0.25)$) [fonte, anchor=west] (vin) {$v$}; 
+\node at (div.east) [fonte, anchor=east] (vin) {$\dfrac{p}{v}=i$}; 
+\node at (div.north) [fonte, anchor=south] () {Power to current};
+
+%limiters
+\draw (5.8,-1.0) to (6.2,-1.0) to (6.4,0.5) to (6.8,0.5);
+\node at (6,-1) [fonte, anchor=north] () {$\overset{*}{i}_{bt\min}$}; 
+\node at (6.6,0.5) [fonte, anchor=south] () {$\overset{*}{i}_{bt\max}$}; 
+%\node at (7,1.25) [fonte, anchor=south] () {Dynamic limits of $\overset{*}{i}_{b}$};
+\node at (7.5,-0.9) [fonte, anchor=north] () {Dynamic limiters};
+
+%battery converter
+\node at (7.5,-0.25) [caixa] (didtlim) {$\inftsml \overset{*}{i}_{bt}/\inftsml t$\\ $\max,\min$};
+%\draw [->] (div) to node[fonte, anchor=south, pos=0.4] () {$\overset{*}{i}_{b\textrm{ulim}}$} (didtlim);
+\draw [->] (div) to (didtlim);
+\draw [->] (didtlim) to node[fonte, anchor=south, pos=1] () {$\overset{*}{i}_{bt}$} (9,-0.25);
+\node at (8.6,0.5) [fonte, anchor=south] () {Reference};
+\node at (8.6,0.25) [fonte, anchor=south] () {to controller};
+
+
+%frequency measurement and other lines
+%summing point frequency
+\node at (-2,1.5) [sum] (somaf) {$\Sigma$};
+\draw [->] (-2.75,0.5) -| node[fonte, anchor=south, pos=0.0] () {$\widehat{f}$} node[fonte, anchor=east, pos=0.8] () {$-$} (somaf);
+\draw [->] (-2.75,1.5) to node[fonte, anchor=south, pos=0.0] () {$1$} node[fonte, anchor=south, pos=0.8] () {$+$} (somaf);
+\node at (-2.4,0.5) [fonte, anchor=north] () {Grid freq.};
+\draw [->] (somaf) to (Kp);
+\fill (-1.5,1.5) circle [radius=1pt];
+\fill (-1.5,0) circle [radius=1pt];
+\draw [->] (-1.5,0) to (Ti.west);
+\draw [->] (-1.5,1.5) |- (Td.west);
+
+%power management reference
+\draw [->]  (3,1.25) to node[fonte, anchor=west, pos=0.8] () {$+$} node[fonte, anchor=south, pos=0.0] () {$\overset{*}{p}_{\textrm{S}}$} (soma.north);
+
+%lines from blocks the power summation point
+\draw [->] (Kp.east) to ++(1,0) to node[fonte, anchor=west, pos=0.75] () {$+$} (soma.135);
+\draw [->] (Ti) to node[fonte, anchor=south, pos=0.85] () {$+$} (soma);
+\draw [->] (Td) to (Kd);
+\draw [->] (Kd) -| node[fonte, anchor=east, pos=0.9] () {$+$} (soma);
+
+%lines from the summation to the division block
+\draw [->] (soma) to ($(div.west) + (0,0.25)$);
+\draw [->] (3.8,-1) |- node[fonte, anchor=north, pos=0.0] () {$\widehat{v}_{bt}$} ($(div.west) + (0,-0.25)$);
+
+\end{tikzpicture}
