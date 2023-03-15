@@ -3,16 +3,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
 \tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.25cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{caixinha} = [rectangle, draw, fill=white, text width=0.75cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
 \tikzstyle{sum} = [draw, circle, font=\footnotesize]
 \tikzstyle{junction} = [coordinate]
 \tikzstyle{fonte} = [font=\footnotesize]
 \begin{tikzpicture}[auto, >=latex']
 
 %Primary, secondary, and inertial response
-\node at (0,1.5) [caixa] (Kp) {Proport.\\$k$};
-\node at (0,0) [rectangle, draw, fill=white, text width=2cm, text centered, minimum height=1cm, font=\footnotesize] (Ti) {Anti-windup\\integrator: $T_i$};
-\node at (0,-1.5) [caixa] (Td) {Low-pass\\ filter: $T_d$};
-\node at (2,-1.5) [caixa] (Kd) {Derivat.\\$k_d$};
+%\node at (0,1.5) [caixa] (Kp) {Proport.\\$k$};
+\node at (0.5,1.5) [caixinha] (Kp) {$k$};
+%\node at (0,0) [rectangle, draw, fill=white, text width=2cm, text centered, minimum height=1cm, font=\footnotesize] (Ti) {Anti-windup\\integrator: $T_i$};
+%\node at (0.5,0) [rectangle, draw, fill=white, text width=2.5cm, text centered, minimum height=1cm, font=\footnotesize] (Ti) {Anti-windup: $\dfrac{1}{sT_i}$};
+\node at (0.5,0) [caixinha] (Ti) {$\dfrac{1}{sT_i}$};
+%\node at (0,-1.5) [caixa] (Td) {Low-pass\\ filter: $T_d$};
+\node at (-0.25,-1.5) [caixa] (Td) {$\dfrac{1}{sT_d + 1}$};
+%\node at (2,-1.5) [caixa] (Kd) {Derivat.\\$k_d$};
+\node at (1.75,-1.5) [caixinha] (Kd) {$sk_d$};
 
 %summing point powers
 \node at (3,0) [sum] (soma) {$\Sigma$};
@@ -20,7 +26,7 @@
 %texts of the responses and other texts
 \node at (Kp.north) [fonte, anchor=south] () {Primary response};
 \node at (Ti.north) [fonte, anchor=south] () {Secondary response};
-\node at (Td.north) [fonte, anchor=south] () {Inertial response};
+\node at ($(Td.north)+(0.75,0)$) [fonte, anchor=south] () {Inertial response};
 \node at (3,2) [fonte, anchor=south] () {Power management};
 \node at (3,1.7) [fonte, anchor=south] () {and secondary response};
 
@@ -51,10 +57,11 @@
 %summing point frequency
 \node at (-2,1.5) [sum] (somaf) {$\Sigma$};
 \draw [->] (-2.75,0.5) -| node[fonte, anchor=south, pos=0.0] () {$\widehat{f}$} node[fonte, anchor=east, pos=0.8] () {$-$} (somaf);
-\draw [->] (-2.75,1.5) to node[fonte, anchor=south, pos=0.0] () {$1$} node[fonte, anchor=south, pos=0.8] () {$+$} (somaf);
+\draw [->] (-2.75,1.5) to node[fonte, anchor=south, pos=0.0] () {$1$} node[fonte, anchor=south east, pos=1] () {$+$} (somaf);
 \node at (-2.4,0.5) [fonte, anchor=north] () {Grid freq.};
 \draw [->] (somaf) to (Kp);
 \fill (-1.5,1.5) circle [radius=1pt];
+\node at (-1.5,1.5) [fonte, anchor=south] () {$-\widetilde{f}$};
 \fill (-1.5,0) circle [radius=1pt];
 \draw [->] (-1.5,0) to (Ti.west);
 \draw [->] (-1.5,1.5) |- (Td.west);
