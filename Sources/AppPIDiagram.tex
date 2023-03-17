@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DC Voltage Controller Grid Converter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.5cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{caixinha} = [rectangle, draw, fill=white, text width=0.75cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{junction} = [coordinate]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[auto, >=latex']
+
+% Limiters for Ti
+\draw ($(1,-2)+(-0.4,-0.75)$) to node[fonte,anchor=north,pos=0.5] () {$y_{\min}$}
+    ++(0.2,0) to
+    ++(0.4,1.5) to node[fonte,anchor=south,pos=0.5] () {$y_{\max}$}
+    ++(0.2,0);
+
+% Kg
+\node at (-3.5,0) [caixinha] (Kg) {$k_g$};
+\draw [<-] (Kg.west) to node[fonte, anchor=south, pos=1] () {$x$} ++(-0.5,0);
+
+% Kp
+\node at (-0.5,0) [caixinha] (Kp) {$k_p$};
+\draw [->] (Kg) to (Kp);
+
+% Ti Logic
+\node at (-1,-2) [caixa] (LogicTi) {Anti-windup\\Logic};
+\fill ($(Kg.east) + (0.25,0)$) circle [radius=1pt];
+\draw [->] ($(Kg.east) + (0.25,0)$) |- node [fonte, anchor=south east,pos=1] () {$x_w$} (LogicTi);
+\draw [<-] (LogicTi.south) |- node [fonte, anchor=south east,pos=1] () {$y_{u}, y$} ++(-0.5,-0.5); % y_{\min}, y_{\max}, 
+
+% Ti
+\node at (1,-2) [caixinha] (Ti) {$\dfrac{1}{sT_i}$};
+\draw [->] (LogicTi) to node [fonte, anchor=south,pos=0.5] () {$y_w$} (Ti);
+
+%summing point currents
+\node at (2,0) [sum] (somaI) {$\Sigma$};
+\draw [->] (Kp) to node [fonte, anchor=south east,pos=1] () {$+$} (somaI);
+\draw [->] (Ti) -| node [fonte, anchor=north east,pos=1] () {$+$} (somaI);
+\draw [<-] (somaI) |- node [fonte, anchor=south west,pos=0] () {$+$}
+    node [fonte, anchor=east,pos=1] () {$x_{f}$} ++(-0.5,1); % \!f
+
+% Dynamic Limits
+\draw ($(somaI)+(2,0)+(-0.4,-0.75)$) to node[fonte,anchor=north,pos=0.5] () {$y_{\min}$}
+    ++(0.2,0) to
+    ++(0.4,1.5) to node[fonte,anchor=south,pos=0.5] () {$y_{\max}$}
+    ++(0.2,0);
+\node at ($(somaI)+(2,0)$) [caixa] (DynLim) {Dynamic\\Limits};
+\draw [->] (somaI) to node [fonte, anchor=south east,pos=1] () {$y_{u}$} (DynLim);
+\draw [->] (DynLim.east) to node [fonte, anchor=south,pos=1] () {$y$} ++(0.5,0);
+
+\end{tikzpicture}
