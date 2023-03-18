@@ -31,8 +31,8 @@
 \node at (3.2,-2) [fonte, anchor=south] () {Dynamic limits};
 
 %lines to summing point voltages
-\draw [->] (-5,0) to node[fonte, anchor=south, pos=0.0] () {$\widehat{v}_{dc}$} node[fonte, anchor=south, pos=0.8] () {$+$} (soma);
-\draw [->] (-5,-1) -| node[fonte, anchor=south, pos=0.0] () {$1$} node[fonte, anchor=east, pos=0.8] () {$-$} (soma);
+\draw [->] (-5,0) to node[fonte, anchor=south, pos=0.0] () {$1$} node[fonte, anchor=south, pos=0.8] () {$-$} (soma);
+\draw [->] (-5,-1) -| node[fonte, anchor=south, pos=0.0] () {$\widehat{v}_{dc}$} node[fonte, anchor=east, pos=0.8] () {$+$} (soma);
 
 % other lines from blocks the power summation point
 \draw [->] (soma) to (Kg);
