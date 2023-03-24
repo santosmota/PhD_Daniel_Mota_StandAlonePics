@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pedro Rodriguez Double Decoupling ...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{junction} = [coordinate]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[auto, >=latex']
+%the positive sequence blocks
+\node [block] at (0,0) (T1) {$\frac{2}{3} \,\mathcal{T}_+$}; 
+\node [sum] at (1.5,0) (S1) {$\Sigma$}; 
+\node [block] at (3,0) (F1) {$\frac{1}{1+sT_f}$}; 
+\node [block] at (3,-1.5) (T2) {$\frac{2}{3} \,\mathcal{T}_-$}; 
+\node [block] at (4.5,-1.5) (T3) {$\mathcal{T}_+^T$}; 
+
+%the negative sequence blocks
+\node [block] at (0,-4.5) (T4) {$\frac{2}{3} \,\mathcal{T}_-$}; 
+\node [sum] at (1.5,-4.5) (S2) {$\Sigma$}; 
+\node [block] at (3,-4.5) (F2) {$\frac{1}{1+sT_f}$}; 
+\node [block] at (3,-3) (T5) {$\frac{2}{3} \,\mathcal{T}_+$}; 
+\node [block] at (4.5,-3) (T6) {$\mathcal{T}_-^T$}; 
+
+\draw [<-, fonte] (T1) to node[pos=1, anchor=east] () {$\matr{m}_{abc}$} ++(-1,0);
+\draw [->] (T1) -- node[pos=1, anchor=south east] () {$+$} (S1);
+\draw [->] (S1) to (F1);
+\draw [->] (F1) -- node[pos=1, anchor=west] () {$\matr{m}_{dq+}$} ++(3,0);
+\draw [<-] (T3) -| ++(1,1.5);
+\draw [->] (T3) -- (T2);
+\draw [->] (T2) -- +(-0.75,0) -- node[pos=0.95, anchor=west] () {$-$} (S2);
+ 
+\draw [<-, fonte] (T4) to node[pos=1, anchor=east] () {$\matr{m}_{abc}$} ++(-1,0);
+\draw [->] (T4) -- node[pos=1, anchor=south east] () {$+$} (S2);
+\draw [->] (S2) to (F2);
+\draw [->] (F2) -- node[pos=1, anchor=west] () {$\matr{m}_{dq-}$} ++(3,0);
+\draw [<-] (T6) -| ++(1,-1.5);
+\draw [->] (T6) -- (T5);
+\draw [->] (T5) -- +(-0.75,0) -- node[pos=0.95, anchor=west] () {$-$} (S1);
+
+%\draw [->] (5,-2.25) -| node[pos=0, anchor=west] () {$\omega t$} (T2);
+\draw [->] (5,-2.25) -| node[pos=0, anchor=west] () {$\theta$} (T2);
+\draw [->] (4.5,-2.25) -- (T3);
+\draw [->] (3,-2.25) -- (T5);
+\draw [->] (4.5,-2.25) -- (T6);
+
+%\draw [<-] (T1) -- node[pos=1, anchor=north] () {$\omega t$} ++(0,-1);
+%\draw [<-] (T4) -- node[pos=1, anchor=south] () {$\omega t$} ++(0,1);
+\draw [<-] (T1) -- node[pos=1, anchor=north] () {$\theta$} ++(0,-1);
+\draw [<-] (T4) -- node[pos=1, anchor=south] () {$\theta$} ++(0,1);
+
+\fill (5.5,0) circle [radius=1pt];
+\fill (5.5,-4.5) circle [radius=1pt];
+\fill (3,-2.25) circle [radius=1pt];
+\fill (4.5,-2.25) circle [radius=1pt];
+\end{tikzpicture}

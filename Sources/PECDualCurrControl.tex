@@ -8,42 +8,44 @@
 \tikzstyle{fonte} = [font=\footnotesize]
 \begin{tikzpicture}[auto, >=latex']
     \node at (0,0) [draw, rectangle, minimum height=3.4cm, minimum width=1.6cm,fill=white] (abcdq) {};
+    \node [fonte] at (0,0.2) () {Sequence};
+    \node [fonte] at (0,-0.2) () {Separation};
     \node [fonte] at (0,1.2) () {$abc\!\mapsto\!dq_+$};
     \node [fonte] at (0,-1.2) () {$abc\!\mapsto\!dq_-$};
     %\node [fonte] at (0,-1.2) () {$abc\!\mapsto\!dq_{-\omega}$};
-    \draw [->, fonte] (-1.2,0.25) to node[pos=0, anchor=east] () {$\widehat{v}_{abc}$} (-0.8,0.25); 
-    \draw [->, fonte] (-1.2,-0.25) to node[pos=0, anchor=east] () {$\widehat{i}_{abc}$} (-0.8,-0.25); 
+    \draw [->, fonte] (-1.2,0.25) to node[pos=0, anchor=east] () {$\widehat{v}_{g}$} (-0.8,0.25); 
+    \draw [->, fonte] (-1.2,-0.25) to node[pos=0, anchor=east] () {$\widehat{i}$} (-0.8,-0.25); 
     \draw [<-, fonte] (abcdq.south) |- node[pos=1, anchor=east] () {$\theta$} ++(-0.2,-0.5); 
     
     \node [draw, rectangle, minimum height=1cm, minimum width=1.6cm] at (2.5,1.2) (DQplus) {};
     \node [fonte] at (2.5,1.4) () {Regulator};
     \node [fonte] at (2.5,1) () {$dq_+$};
-    \draw [->, fonte] (0.8,1.4) to node[pos=0.5, anchor=south] () {$\widehat{v}_{dq+}$} (1.7,1.4); 
+    \draw [->, fonte] (0.8,1.4) to node[pos=0.5, anchor=south] () {$\widehat{v}_{gdq+}$} (1.7,1.4); 
     \draw [->, fonte] (0.8,1) to node[pos=0.5, anchor=north] () {$\widehat{i}_{dq+}$} (1.7,1); 
     
     \node at (2.5,-1.2) [draw, rectangle, minimum height=1cm, minimum width=1.6cm] (DQminus) {};
     \node [fonte] at (2.5,-1) () {Regulator};
     %\node [fonte] at (2.5,-1.4) () {$dq_-\,\textrm{or}\,dq_{-\omega}$};
     \node [fonte] at (2.5,-1.4) () {$dq_-$};
-    \draw [->, fonte] (0.8,-1) to node[pos=0.5, anchor=south] () {$\widehat{v}_{dq-}$} (1.7,-1); 
+    \draw [->, fonte] (0.8,-1) to node[pos=0.5, anchor=south] () {$\widehat{v}_{gdq-}$} (1.7,-1); 
     \draw [->, fonte] (0.8,-1.4) to node[pos=0.5, anchor=north] () {$\widehat{i}_{dq-}$} (1.7,-1.4); 
     
     \draw [<-] (DQplus.north) |- node [pos=0.7, anchor=east] () {$\overset{*}{i}_{dq+}$} ++(-0.2,+0.5);
     \draw [<-] (DQminus.south) |- node [pos=0.7, anchor=east] () {$\overset{*}{i}_{dq-}$} ++(-0.2,-0.5);
     
     \node [draw, rectangle, minimum height=1cm, minimum width=1.6cm] at (5,1.2) (Tinvplus) {};
-    \draw [->, fonte] (3.3,1.2) -- node [pos=0.5, anchor=south] () {$\overset{*}{v}_{dq+}$} (4.2,1.2);
+    \draw [->, fonte] (3.3,1.2) -- node [pos=0.5, anchor=south] () {$\overset{*}{v}_{cdq+}$} (4.2,1.2);
     \node [fonte] at (5,1.2) () {$dq_+\!\mapsto\!abc$};
     \draw [<-, fonte] (Tinvplus.north) |- node[pos=1, anchor=east] () {$\theta$} ++(-0.2,+0.5); 
     \node [sum] at (5,0) (soma) {$\Sigma$};
-    \draw [->, fonte] (Tinvplus) -- node [pos=0.5, anchor=east] () {$\overset{*}{v}_{abc+}$} (soma);
+    \draw [->, fonte] (Tinvplus) -- node [pos=0.5, anchor=east] () {$\overset{*}{v}_{c+}$} (soma);
     
     \node [draw, rectangle, minimum height=1cm, minimum width=1.6cm] at (5,-1.2) (Tinvminus) {};
-    \draw [->, fonte] (3.3,-1.2) -- node [pos=0.5, anchor=south] () {$\overset{*}{v}_{dq-}$} (4.2,-1.2);
+    \draw [->, fonte] (3.3,-1.2) -- node [pos=0.5, anchor=south] () {$\overset{*}{v}_{cdq-}$} (4.2,-1.2);
     \node [fonte] at (5,-1.2) () {$dq_-\!\mapsto\!abc$};
     \draw [<-, fonte] (Tinvminus.south) |- node[pos=1, anchor=east] () {$\theta$} ++(-0.2,-0.5); 
-    \draw [->, fonte] (Tinvminus) -- node [pos=1, anchor=east] () {$\overset{*}{v}_{abc-}$} (soma);
+    \draw [->, fonte] (Tinvminus) -- node [pos=1, anchor=east] () {$\overset{*}{v}_{c-}$} (soma);
     
     \node[block] at (6.5,0) (pwm) {PWM};
-    \draw [->, fonte] (soma) -- node [pos=0.5, anchor=south] () {$\overset{*}{v}_{abc}$} (pwm);
+    \draw [->, fonte] (soma) -- node [pos=0.5, anchor=south] () {$\overset{*}{v}_{c}$} (pwm);
 \end{tikzpicture}

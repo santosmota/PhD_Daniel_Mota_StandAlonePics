@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Notch
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{junction} = [coordinate]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[auto, >=latex']
+%the positive sequence blocks
+\node [block] at (1.5,0) (T1) {$\frac{2}{3} \,\mathcal{T}_{+}$}; 
+\node [block] at (3.5,0) (n1) {$\frac{s^2 + \omega_{f}^2}{s^2 + 2 \zeta \omega_{f} + \omega_{f}^2}$}; 
+\node [fonte] at (3.5,-1) () {Notch};
+
+%the negative sequence blocks
+\node [block] at (1.5,-2) (T2) {$\frac{2}{3} \,\mathcal{T}_{-}$}; 
+\node [block] at (3.5,-2) (n2) {$\frac{s^2 + \omega_{f}^2}{s^2 + 2 \zeta \omega_{f} + \omega_{f}^2}$}; 
+
+\draw [<-] (T1) |- node[pos=1, anchor=east] () {$\theta$} ++(-0.25,-1);
+\draw [->] (1.5,-1) -- (T2);
+\fill (1.5,-1) circle [radius=1pt];
+
+\draw [->, fonte] (0.25,0) to node[pos=0, anchor=east] () {$\matr{m}_{abc}$} (T1);
+\draw [->] (0.5,0) |- (T2);
+\fill (0.5,0) circle [radius=1pt];
+
+\draw [->] (T1) to (n1);
+\draw [->] (T2) to (n2);
+
+\draw [->] (n1) -- node[pos=1, anchor=west] () {$\matr{m}_{dq+}$} ++(1.5,0);
+\draw [->] (n2) -- node[pos=1, anchor=west] () {$\matr{m}_{dq-}$} ++(1.5,0);
+\end{tikzpicture}
