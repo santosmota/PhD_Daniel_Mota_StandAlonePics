@@ -26,7 +26,7 @@
     ++(-1,0);
 
 % PI regulator id
-\node at ($(SumId)+(2,0)$) [block] (PId) {$k_i \left( \dfrac{1 + s T_{i}}{s T_{i}} \right)$};
+\node at ($(SumId)+(2,0)$) [block] (PId) {$k \left( \dfrac{1 + s T_{i}}{s T_{i}} \right)$};
 \draw [->, fonte] (SumId) to (PId);
 
 % Sum for Decoupling and feed forward 
@@ -79,7 +79,7 @@
     ++(-1,0);
 
 % PI regulator iq
-\node at ($(SumIq)+(2,0)$) [block] (PIq) {$k_i \left( \dfrac{1 + s T_{i}}{s T_{i}} \right)$};
+\node at ($(SumIq)+(2,0)$) [block] (PIq) {$k \left( \dfrac{1 + s T_{i}}{s T_{i}} \right)$};
 \draw [->, fonte] (SumIq) to (PIq);
 
 % Sum for Decoupling and feed forward  iq
@@ -103,7 +103,7 @@
     node[anchor=south east, pos=1] () {$+$} (SumCoupIq);
 
 \draw [fonte,<-] (SumCoupIq) to
-    node[anchor=north east, pos=0] () {$+$} 
+    node[anchor=north east, pos=0] () {$-$} 
     node[anchor=north, pos=1] () {$\omega L i_d$} ++(0,-1);
 
 \draw [fonte,<-] (SumCoupIq) to
