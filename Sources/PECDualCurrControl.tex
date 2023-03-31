@@ -30,8 +30,8 @@
     \draw [->, fonte] (0.8,-1) to node[pos=0.5, anchor=south] () {$\widehat{v}_{gdq-}$} (1.7,-1); 
     \draw [->, fonte] (0.8,-1.4) to node[pos=0.5, anchor=north] () {$\widehat{i}_{dq-}$} (1.7,-1.4); 
     
-    \draw [<-] (DQplus.north) |- node [pos=0.7, anchor=east] () {$\overset{*}{i}_{dq+}$} ++(-0.2,+0.5);
-    \draw [<-] (DQminus.south) |- node [pos=0.7, anchor=east] () {$\overset{*}{i}_{dq-}$} ++(-0.2,-0.5);
+    \draw [<-] (DQplus.north) |- node [pos=0.7, anchor=east, fonte] () {$\overset{*}{i}_{d+},\overset{*}{i}_{q+}$} ++(-0.2,+0.5);
+    \draw [<-] (DQminus.south) |- node [pos=0.7, anchor=east,fonte] () {$\overset{*}{i}_{d-}, \overset{*}{i}_{q-}$} ++(-0.2,-0.7);
     
     \node [draw, rectangle, minimum height=1cm, minimum width=1.6cm] at (5,1.2) (Tinvplus) {};
     \draw [->, fonte] (3.3,1.2) -- node [pos=0.5, anchor=south] () {$\overset{*}{v}_{cdq+}$} (4.2,1.2);

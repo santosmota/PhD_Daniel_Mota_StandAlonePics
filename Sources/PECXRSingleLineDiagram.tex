@@ -1,0 +1,64 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LARGE SINGLE LINE DIAGRAM - OMAE Scenario
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+\tikzstyle{trafowind} = [circle, draw, thick, minimum size=0.4cm]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Main ac busbar
+\draw [ultra thick] (-0.5,0) to (10.75,0);
+%\node at (3,0.25) () [anchor=south, fonte] {High Voltage AC Busbar};
+%\node at (-0.5,0.25) () [anchor=south west, fonte] {Main High Voltage Busbar}; % $\SI{11}{\kilo \volt}$};
+\node at (9.5,0) () [anchor=south, fonte] {$\SI{11}{\kilo \volt}$};
+\node at (9.5,0) () [anchor=north, fonte] {\textbf{Platform HV Busbar}};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PHIL
+%\draw [dashdotted, thick] (2.4,-0.15) --
+%    node[pos=0, anchor=north west, fonte] () {PHIL} ++(3.4,0) --
+%    ++(0,-4.75) -- ++(-3.4,0) -- ++(0,4.75) -- cycle;
+\node at (4.1,0.5) [anchor=north, fonte] () {Energy Storage};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%gas power
+\foreach \x/\y/\t in {0.25/-1/GT1, 1.5/-1/GT2}
+{
+	\draw (\x,\y-0.245) to [sV]	(\x,\y+0.245) to (\x,\y+1);
+	\node at (\x,\y-0.5) () [anchor=north, fonte] {\t};
+	\node at (\x,\y-0.75) () [anchor=north, fonte] {\SI{44}{\mega \voltampere}};
+	\node at (\x,\y-1) () [anchor=north, fonte] {\SI{35.2}{\mega \watt}};
+	\node at (\x,\y-1.25) () [anchor=north, fonte] {$\SI{11}{\kilo \volt}$};
+}
+\node at (0.875,0.5) () [anchor=north, fonte] {Turbogenerators};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%trafo energy storage system
+\node at (3.6,-0.65) (esstrhv) [trafowind] {};
+\node at (3.6,-0.95) (esstrlv) [trafowind] {};
+\draw [] (3.6,0) to (esstrhv.north);
+
+\node at (esstrhv.east) () [anchor=west, fonte] {ESSTR};
+\node at (esstrlv.east) () [anchor=west, fonte] {$\SI{10}{\mega \voltampere}$};
+
+\draw [fonte] (esstrlv.south) to [short] (3.6,-2) to [L, l=ESSL$_{\textrm{ac}}$] (3.6,-3); % coordinate (esscf); 
+%\draw [] (esscf) to [L, l=$L$] ++(0,-1); 
+\draw [fonte] (3.6,-2) to [C, l=ESSC$_{\textrm{ac}}$] ++(1,0) to [R, l=ESSR$_{\textrm{ac}}$] ++(1,0);
+\node at (3.6,-2) () [anchor=east, fonte] {$\SI{0.69}{\kilo \volt}$};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%LSC ESS
+\foreach \x/\y in {3.6/-3.4}
+{
+	\node at (0.2,0.2) [shift={(\x,\y)}, rotate=0] () {$\sim$}; %{\tiny AC}; %
+	\node at (-0.2,-0.2) [shift={(\x,\y)}, rotate=0] () {$=$}; %{\tiny DC};
+	\node at (0.4,0.15) () [anchor=west, fonte, shift={(\x,\y)}, rotate=0] {ESSGC};
+	\node at (0.4,-0.15) () [anchor=west, fonte, shift={(\x,\y)}, rotate=0] {\SI{10}{\mega \voltampere}};
+	\draw [shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+	\draw [thick, shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+}	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\node at (6.5,0.5) () [anchor=north, fonte] {Base Load};
+\draw (6.5,0) to [short] ++(0,-0.4) to [european resistor] ++(0,-1); 
+\node at (6.75,-0.65) [fonte, anchor=west] () {Base Load};
+\node at (6.75,-0.95) [fonte, anchor=west] () {$\SI{44}{\mega \watt}$};
+
+\end{tikzpicture}

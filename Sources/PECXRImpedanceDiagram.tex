@@ -1,0 +1,28 @@
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+\tikzstyle{trafowind} = [circle, draw, minimum size=0.4cm]
+\tikzstyle{fonte} = [font=\footnotesize]
+\tikzstyle{quadrado} = [shape=regular polygon, regular polygon sides=4, minimum size=0.80cm,draw]
+\begin{tikzpicture}
+    %\draw [help lines] (0,3) grid (6,-3);
+    
+    \draw (0,0)
+        to [european resistor,l=$r_r + \textrm{j} x_r$,fonte,*-] ++(2,0)
+        to [european resistor,l=$r_c - \textrm{j} x_c$,fonte,*-] ++(0,-1)
+        to [short, -*] ++(-2,0);
+
+    \draw (2,0)
+        to [european resistor,l=$r_t + \textrm{j} x_t$,fonte,*-] ++(2,0)
+        to [european resistor,l=$r_L$,fonte,*-] ++(0,-1)
+        to [short, -*] ++(-2,0);
+
+    \draw (4,0)
+        to [european resistor,l=$r_s + \textrm{j} x'_d$,fonte] ++(2,0)
+        to [short] ++(0,-1)
+        to [short,-*] ++(-2,0);
+
+    \node at (0,-0.5) [fonte, anchor=east] () {ESSGC};
+    
+
+\end{tikzpicture}
+	
