@@ -12,27 +12,29 @@
 \node [sum] at (1.5,0) (S1) {$\Sigma$}; 
 \node [block] at (3,0) (F1) {$\frac{1}{1+sT_f}$}; 
 \node [block] at (3,-1.5) (T2) {$\frac{2}{3} \,\mathcal{T}_-$}; 
-\node [block] at (4.5,-1.5) (T3) {$\mathcal{T}_+^T$}; 
+\node [block] at (4.5,-1.5) (T3) {$\mathcal{T}_+^\top$}; 
 
 %the negative sequence blocks
 \node [block] at (0,-4.5) (T4) {$\frac{2}{3} \,\mathcal{T}_-$}; 
 \node [sum] at (1.5,-4.5) (S2) {$\Sigma$}; 
 \node [block] at (3,-4.5) (F2) {$\frac{1}{1+sT_f}$}; 
 \node [block] at (3,-3) (T5) {$\frac{2}{3} \,\mathcal{T}_+$}; 
-\node [block] at (4.5,-3) (T6) {$\mathcal{T}_-^T$}; 
+\node [block] at (4.5,-3) (T6) {$\mathcal{T}_-^\top$}; 
 
-\draw [<-, fonte] (T1) to node[pos=1, anchor=east] () {$\matr{m}_{abc}$} ++(-1,0);
+\draw [<-, fonte] (T1.west) to node[pos=1, anchor=east] () {$\matr{m}_{abc}$} ++(-0.6,0);
+\draw [->, fonte] ($(T1.west)+(-0.3,0)$) |- (T4);
+\fill ($(T1.west)+(-0.3,0)$) circle [radius=1pt];
 \draw [->] (T1) -- node[pos=1, anchor=south east] () {$+$} (S1);
 \draw [->] (S1) to (F1);
-\draw [->] (F1) -- node[pos=1, anchor=west] () {$\matr{m}_{dq+}$} ++(3,0);
+\draw [->, fonte] (F1) -- node[pos=1, anchor=west] () {$\matr{m}_{dq+}$} ++(3,0);
 \draw [<-] (T3) -| ++(1,1.5);
 \draw [->] (T3) -- (T2);
 \draw [->] (T2) -- +(-0.75,0) -- node[pos=0.95, anchor=west] () {$-$} (S2);
  
-\draw [<-, fonte] (T4) to node[pos=1, anchor=east] () {$\matr{m}_{abc}$} ++(-1,0);
+%\draw [<-, fonte] (T4) to node[pos=1, anchor=east] () {$\matr{m}_{abc}$} ++(-1,0);
 \draw [->] (T4) -- node[pos=1, anchor=south east] () {$+$} (S2);
 \draw [->] (S2) to (F2);
-\draw [->] (F2) -- node[pos=1, anchor=west] () {$\matr{m}_{dq-}$} ++(3,0);
+\draw [->,fonte] (F2) -- node[pos=1, anchor=west] () {$\matr{m}_{dq-}$} ++(3,0);
 \draw [<-] (T6) -| ++(1,-1.5);
 \draw [->] (T6) -- (T5);
 \draw [->] (T5) -- +(-0.75,0) -- node[pos=0.95, anchor=west] () {$-$} (S1);
