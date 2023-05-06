@@ -1,0 +1,65 @@
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=0.8cm}
+\tikzstyle{trafowind} = [circle, draw, minimum size=0.4cm]
+\tikzstyle{fonte} = [font=\footnotesize]
+\tikzstyle{quadrado} = [shape=regular polygon, regular polygon sides=4, minimum size=0.80cm,draw]
+\begin{tikzpicture}
+    %\draw [help lines] (0,3) grid (6,-3);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Busbar
+    %\draw [thick] (-0.5,0) to node [fonte, anchor=south west, pos=0.12] () {Common busbar} (6.5,0);
+	
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % converter
+
+   \foreach \x/\y in {-0.4/0}
+    {
+    	\node at (0.2,0.2) [shift={(\x,\y)}, rotate=0] () {$\sim$}; %{\tiny AC}; %
+    	\node at (-0.2,-0.2) [shift={(\x,\y)}, rotate=0] () {$=$}; %{\tiny DC};
+    	\node at (0,+0.4) () [anchor=south, fonte, shift={(\x,\y)}, rotate=0] {Converter};
+        %\node at (-0.4,0.15) () [anchor=east, fonte, shift={(\x,\y)}, rotate=0] {Converter};
+    	%\node at (0.4,-0.15) () [anchor=west, fonte, shift={(\x,\y)}, rotate=0] {\SI{10}{\mega \voltampere}};
+    	\draw [shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,-0.4);
+    	\draw [shift={(\x,\y)}, rotate=0] (-0.4,0.4) to (0.4,0.4) to (0.4,-0.4) to (-0.4,-0.4) to (-0.4,0.4) to cycle;
+    }	
+
+    \draw [fonte] (0,0) 
+        to [short] ++(0.5,0)
+        to [R,l=$R$] ++(1,0)
+        to [short,i=$i$] ++(0.5,0)
+        to [L,l=$L$] ++(1,0)
+        to [short] ++(0.5,0);
+        
+    \draw (3.75,0) circle [radius=0.25];
+    \node at (3.75,-0.025) [] () {$\sim$};
+
+    \node at (3.75,0.4) [fonte, anchor=south] () {Grid};
+    \node at (0.25,0) [fonte, anchor=south] () {$v_c$};
+    \node at (3.25,0) [fonte, anchor=south] () {$v_g$};
+
+    \draw [fonte] (-0.8, 0.2) 
+        to [short] ++(-0.5,0)
+        to [short] ++(0,0.5)
+        to [short,-*] ++(-1.5,0.0)
+        to [open,-*] ++(0.5,0)
+        to [C,l=$C_{dc}$, v=$v_{dc}$] ++(0,-1.4)
+        to [open,-*] ++(-0.5,0)
+        to [short,-*] ++(0.5,0)
+        to [short] ++(1,0.0)
+        to [short] ++(0,0.5)
+        to [short] ++(0.5,0)
+        ;
+
+    \node at (-2.9,0.7) [fonte, anchor=south] () {dc link};
+    
+    %\draw [fonte] (0,2) 
+    %    to [sV,v=$v_c$] ++(0,1)
+    %    to [R,l=$R$] ++(1,0)
+    %    to [short,i=$i$] ++(0.5,0)
+    %    to [L,l=$L$] ++(1,0)
+    %    to [sV,v<=$v_g$] ++(0,-1)
+    %    to [short] ++(-1.5,0);
+	
+\end{tikzpicture}
+	
