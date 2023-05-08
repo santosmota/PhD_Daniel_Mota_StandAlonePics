@@ -3,40 +3,56 @@
 % one of the first tikz diagrams I worked with...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tikzstyle{block} = [draw, rectangle, minimum height=1cm, minimum width=1cm]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.5cm, text centered, minimum height=1cm] %,text width=2cm minimum width=2.2cm
+\tikzstyle{caixalonga} = [rectangle, draw, fill=white, text width=2.5cm, text centered, minimum height=1cm]
 \tikzstyle{sum} = [draw, circle, node distance=1cm]
 \tikzstyle{junction} = [coordinate, node distance=1cm]
+\tikzstyle{fonte} = [font=\footnotesize]
 \begin{tikzpicture}[auto, node distance=1.5cm,>=latex']
-	
-    %placing the blocks
-	\node [junction, name=input] {};
-	\node [block, right of=input, node distance=1.25cm] (gain) {$\frac{1}{n}$};
-	\node [junction, right of=gain, node distance=1.5cm] (junta1) {};
-	\node [junction, right of=junta1] (topoZn) {};
-	\node [block, below of=topoZn] (zN) {$z^{-N}$};
-	\node [junction, below of=zN] (fromPLL) {};
-	\node [sum, right of=topoZn] (sum1) {$\Sigma$};
-	\node [junction, right of=sum1, node distance=2.4cm] (meio) {};
-	\node [sum, right of=meio] (sum2) {$\Sigma$};
-	\node [junction, right of=sum2] (topoZ1) {};
-	\node [above of=topoZ1, node distance=0.75cm] (acctitle) {Accumulator};
-	\node [block, below of=topoZ1] (z1) {$z^{-1}$};
-	\node [junction, right of=topoZ1] (junta2) {};
-	\node [junction, right of=junta2] (output) {};
 
-	\coordinate [above of=meio, node distance=1cm] (topdotted);
-	\coordinate [below of=meio, node distance=2cm] (bottdotted);
-	\draw [dotted] (topdotted) -- (bottdotted);
-	
-	\draw [->] (input) -- node[pos=0.0] {$x(k)$} (gain);
-	\draw [->] (gain) -- node[pos=0.4] {$x_{\textrm{acc}}=\frac{x(k)}{N}$} node[pos=1, anchor=south east] {$+$} (sum1);
-	\draw [->] (junta1) |- (zN);
-	\draw [->] (zN) -| node[near end, anchor=west] {$x_{\textrm{dec}}=\frac{x(k-N)}{N}$} node[pos=1, anchor=north east] {$-$} (sum1);
-	\draw [->] (sum1) -- node [pos=0.35] {$x_{\textrm{acc}_{\textrm{in}}}(k)$} node[pos=1, anchor=south east] {$+$} (sum2);
-	\draw [->] (z1) -| node[pos=1, anchor=north east] {$+$} (sum2);
-	\draw [->] (junta2) |- (z1);
-	\draw [->] (sum2) -- node[pos=1] {$\overline{x}(k)$} (output);
+    % division box at the input
+    \node at (0,2) [caixa] (divn) {};
+    \node at ($(divn.west) + (0,0.25)$) [fonte, anchor=west] (xin) {$x(k)$}; 
+    \node at ($(divn.west) + (0,-0.25)$) [fonte, anchor=west] (nin) {$n(k)$}; 
+    \node at (divn.east) [fonte, anchor=east] () {$\dfrac{x(k)}{n(k)}$}; 
+    
+    \draw [fonte,<-] ($(divn.west) + (0,0.25)$) to node[fonte, anchor=east, pos=1] () {$x(k)$} ++(-0.75,0); 
+    \draw [fonte,<-] ($(divn.west) + (0,-0.25)$) to node[anchor=east, pos=1] () {$n(k)$} ++(-0.75,0); 
 
-    \fill (junta1) circle [radius=1pt];
-    \fill (junta2) circle [radius=1pt];
- 
+    % division box, delay block
+    \node at ($(divn)+(2.5,-1.5)$) [caixa] (delay) {};
+    \node at ($(delay.west) + (0,0.25)$) [fonte, anchor=west] (xdelayin) {$x_\textrm{acc}$}; 
+    \node at ($(delay.west) + (0,-0.25)$) [fonte, anchor=west] (ndelayin) {$n(k)$}; 
+    \node at (delay.east) [fonte, anchor=east] (delayout) {$x_\textrm{dec}$}; 
+    \node at (delay.north) [fonte, anchor=south] () {Variable Delay};
+
+    % sum 1
+    \node at ($(divn)+(4,0)$) [sum] (accdec) {$\Sigma$};
+
+    \draw [fonte,->] (divn.east) to node [anchor=south east,pos=1] () {$x_{\textrm{acc}} \quad +$} (accdec); 
+    \draw [fonte,->] ($(divn.east)+(0.25,0)$) |- (xdelayin); 
+    \fill ($(divn.east)+(0.25,0)$) circle [radius=1pt];
+
+    \draw [fonte,->] ($(divn.west)+(-0.35,-0.25)$) |- (ndelayin); 
+    \fill ($(divn.west)+(-0.35,-0.25)$) circle [radius=1pt];
+
+    \draw [->] (delay.east) -| node [fonte,pos=0.7, anchor=west] () {$x_{\textrm{dec}}$}
+         node [fonte, pos=1, anchor=north east] () {$-$} (accdec); % 
+
+    % sum 2
+    \node at ($(accdec)+(3,0)$) [sum] (accum) {$\Sigma$};
+    \draw [dotted] ($(accdec)+(1.5,0.75)$) -- ++(0,-3);
+    \draw [->] (accdec) to node [fonte, pos=1, anchor=south east] () {$+$} (accum); 
+
+    % single delay
+    \node at ($(accum)+(1.25,-1.5)$) [block] (delayz1) {$z^{-1}$};
+    \draw [->, fonte] (accum) -- node[pos=1] {$\overline{x}(k)$} ++(3,0);
+
+    \draw [fonte,->] ($(accum)+(2.5,0)$) |- (delayz1.east);
+    \fill ($(accum)+(2.5,0)$) circle [radius=1pt];
+
+    \draw [fonte,->] (delayz1.west) -| node [pos=1, anchor=north east] () {$+$} (accum);
+    
+    \node at ($(accum)+(1,0.75)$) [] () {Accumulator}; 
+  
 \end{tikzpicture}

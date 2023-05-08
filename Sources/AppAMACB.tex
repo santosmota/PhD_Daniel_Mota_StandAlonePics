@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Moving average block
+% Circular buffers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, minimum height=1cm, minimum width=1cm]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.5cm, text centered, minimum height=1cm] %,text width=2cm minimum width=2.2cm
+\tikzstyle{caixalonga} = [rectangle, draw, fill=white, text width=2.5cm, text centered, minimum height=1cm]
+\tikzstyle{sum} = [draw, circle, node distance=1cm]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[>=latex']
+
+    \draw (-0.5,0.2) to ++(0,-0.4);
+    \foreach \x/\t in {0/0,1/{$\cdots$},2/10,3/11,4/{$\cdots$},5/40,6/{$\cdots$},7/{$N-1$}}
+    {
+        \draw (\x+0.5,0.2) to ++(0,-0.4);
+        \node at (\x,-0.5) [fonte] () {\t};
+    }
+
+    \draw (-0.5,0.2) to (7.5,0.2);
+    \draw (-0.5,-0.2) to (7.5,-0.2);
+
+    \node at (-3.2,0) [fonte, anchor=west] () {Circular buffer slots:};
+    \node at (-3.2,-0.5) [fonte, anchor=west] () {Slot indexes:}; 
+    \node at (-3.2,-1) [fonte, anchor=west] () {Pointers:}; 
+
+    \draw [->] (2,-1.2) to node [fonte, pos=0, anchor=north] () {$r(k)$} ++(0,0.5); % =k\mod N
+    \node [fonte, anchor=north] at (2,-1.6) () {Retrieval};
+    \draw [->] (5,-1.2) to node [fonte, pos=0, anchor=north] () {$j(k)$} ++(0,0.5); % =(k+n(k))\mod N
+    \node [fonte, anchor=north] at (5,-1.6) () {Insertion};
+    
+    \draw [dashed] (2,-1) to node [fonte, pos=0.5, anchor=north] () {$n(k)$} (5,-1);
+
+    \draw [->] (2,0.2) |-
+        node [fonte, pos=1, anchor=east] () {Retrieve and clear slot} ++(-0.25,0.5); % =k\mod N
+    \draw [<-] (5,0.2) |- node [fonte, pos=1, anchor=west] () {Sum new value to slot} ++(0.25,0.5); % =k\mod N
+          
+\end{tikzpicture}
