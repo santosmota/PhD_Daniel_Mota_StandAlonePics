@@ -1,0 +1,200 @@
+\tikzstyle{caixa} = [rectangle, draw, thick,
+                    text width=3cm, text centered, minimum height=1cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{linha} = [line width=1.5mm, black!75, opacity=0.55] % [fill=white] %
+\tikzstyle{curvas} = [smooth, tension=0.5]
+
+\tikzstyle{fonte} = [font=\footnotesize]
+
+\begin{tikzpicture}[>=stealth]
+
+    %%%%%%%%%%%%%%%%% Publications
+    \coordinate (CoorPubFCR) at (0,0);
+    \coordinate (CoorPubOMAE) at (0,-1.5);
+    \coordinate (CoorPubPHIL) at (0,-3);
+    \coordinate (CoorPubSiz) at (0,-4.5);
+    \coordinate (CoorPubDSC) at (0,-6);
+    \coordinate (CoorPubUnd) at (0,-7.5);
+    \coordinate (CoorPubAMA) at (0,-9);
+
+    %%%%%%%%%%%%%%%%% Contributions
+    \coordinate (CoorContCont) at (5,0);
+    \coordinate (CoorContFCR) at (5,-1.5);
+    \coordinate (CoorContSiz) at (5,-3);
+    \coordinate (CoorContPHIL) at (5,-4.5); 
+    \coordinate (CoorContDSC) at (5,-6);
+    \coordinate (CoorContAMA) at (5,-7.5);
+    
+    %%%%%%%%%%%%%%%%% Chapter
+    \coordinate (CoorCha2) at (10,0);
+    \coordinate (CoorCha3) at (10,-1.5);
+    \coordinate (CoorCha4) at (10,-3);
+    \coordinate (CoorCha5) at (10,-4.5);
+    \coordinate (CoorCha6) at (10,-6);
+    \coordinate (CoorCha7) at (10,-7.5);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % PUBLICATIONS
+    %%%%%%%%%%%%%%%%% Lines %%%%% Publication I FCR to Contribution
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorPubFCR)
+                    ($(CoorPubFCR)+(1.8,0)$)
+                    ($(CoorContFCR)+(-1.6,0)$)
+                    (CoorContFCR) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Publication II OMAE to Contribution
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorPubOMAE)
+                    ($(CoorPubOMAE)+(1.6,0)$)
+                    ($(CoorContCont)+(-1.8,0)$)
+                    (CoorContCont) } ;
+
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorPubOMAE)
+                    ($(CoorPubOMAE)+(1.5,0)$)
+                    ($(CoorContFCR)+(-1.5,0)$)
+                    (CoorContFCR) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Publication III PHIL Scaling to Contribution
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorPubPHIL)
+                    ($(CoorPubPHIL)+(1.8,0)$)
+                    ($(CoorContPHIL)+(-1.8,0)$)
+                    (CoorContPHIL) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Publication IV Sizing to Contribution
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorPubSiz)
+                    ($(CoorPubSiz)+(1.8,0)$)
+                    ($(CoorContSiz)+(-1.8,0)$)
+                    (CoorContSiz) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Publication V DSCdq to Contribution
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorPubDSC)
+                    ($(CoorPubDSC)+(1.5,0)$)
+                    ($(CoorContDSC)+(-1.5,0)$)
+                    (CoorContDSC) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Publication VI Exponential DC to Contribution
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorPubUnd)
+                    ($(CoorPubUnd)+(1.9,0)$)
+                    ($(CoorContDSC)+(-1.6,0)$)
+                    (CoorContDSC) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Publication VII AMA to Contribution
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorPubAMA)
+                    ($(CoorPubAMA)+(1.8,0)$)
+                    ($(CoorContAMA)+(-1.8,0)$)
+                    (CoorContAMA) } ;
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % CONTRIBUTIONS
+    %%%%%%%%%%%%%%%%% Lines %%%%% Contribution I to Chapters
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContCont)
+                    ($(CoorContCont)+(1.5,0)$)
+                    ($(CoorCha3)+(-1.5,0)$)
+                    (CoorCha3) } ;
+
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContCont)
+                    ($(CoorContCont)+(1.5,0)$)
+                    ($(CoorCha4)+(-1.5,0)$)
+                    (CoorCha4) } ;
+
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContCont)
+                    ($(CoorContCont)+(1.5,0)$)
+                    ($(CoorCha5)+(-1.5,0)$)
+                    (CoorCha5) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Contribution II to Chapters
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContFCR)
+                    ($(CoorContFCR)+(1.5,0)$)
+                    ($(CoorCha5)+(-1.5,0)$)
+                    (CoorCha5) } ;
+
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContFCR)
+                    ($(CoorContFCR)+(1.5,0)$)
+                    ($(CoorCha6)+(-1.5,0)$)
+                    (CoorCha6) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Contribution III Sizing to Chapters
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContSiz)
+                    ($(CoorContSiz)+(1.5,0)$)
+                    ($(CoorCha3)+(-1.5,0)$)
+                    (CoorCha3) } ;
+
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContSiz)
+                    ($(CoorContSiz)+(1.5,0)$)
+                    ($(CoorCha5)+(-1.5,0)$)
+                    (CoorCha5) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Contribution IV Scaling PHIL to Chapters
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContPHIL)
+                    ($(CoorContPHIL)+(1.5,0)$)
+                    ($(CoorCha6)+(-1.5,0)$)
+                    (CoorCha6) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Contribution V DSCdq to Chapters
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContDSC)
+                    ($(CoorContDSC)+(1.5,0)$)
+                    ($(CoorCha3)+(-1.5,0)$)
+                    (CoorCha3) } ;
+
+    %%%%%%%%%%%%%%%%% Lines %%%%% Contribution VI AMA to Chapters
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContAMA)
+                    ($(CoorContAMA)+(1.5,0)$)
+                    ($(CoorCha3)+(-1.5,0)$)
+                    (CoorCha3) } ;
+
+    \draw [linha] plot [curvas] 
+        coordinates {(CoorContAMA)
+                    ($(CoorContAMA)+(1.5,0)$)
+                    ($(CoorCha6)+(-1.5,0)$)
+                    (CoorCha6) } ;
+
+    %%%%%%%%%%%%%%%%% X = -5 %%%%%%%%%%%%%%%%%%%%%%%%
+    \node at (CoorContCont) (ContCont) [caixa] {\textbf{Contribution I} \\ Control Structures};
+    \node at (CoorContFCR) (ContFCR) [caixa] {\textbf{Contribution II} \\ Reserve Coordination};
+    \node at (CoorContSiz) (ContSiz) [caixa] {\textbf{Contribution III} \\ Sizing ESS};
+    \node at (CoorContPHIL) (ContPHIL) [caixa] {\textbf{Contribution IV} \\ Scaling PHIL};
+    \node at (CoorContDSC) (ContDSC) [caixa] {\textbf{Contribution V} \\ DSC$_{dq}$};
+    \node at (CoorContAMA) (ContAMA) [caixa] {\textbf{Contribution VI} \\ AMA};
+
+    %%%%%%%%%%%%%%%%% X = 0 %%%%%%%%%%%%%%%%%%%%%%%%
+    \node at (CoorCha2) (Cha2) [caixa] {\textbf{Chapter 2} \\ Autonomous Grid};
+    \node at (CoorCha3) (Cha3) [caixa] {\textbf{Chapter 3} \\ Power Elec. Converters};
+    \node at (CoorCha4) (Cha4) [caixa] {\textbf{Chapter 4} \\ Voltage and Reactive};
+    \node at (CoorCha5) (Cha5) [caixa] {\textbf{Chapter 5} \\ Frequency};
+    \node at (CoorCha6) (Cha6) [caixa] {\textbf{Chapter 6} \\ Laboratory Validation};
+    \node at (CoorCha7) (Cha7) [caixa] {\textbf{Chapter 7} \\ Conclusion};
+
+    %%%%%%%%%%%%%%%%% X = 5 %%%%%%%%%%%%%%%%%%%%%%%%
+    \node at (CoorPubFCR) (PubFCR) [caixa] {\textbf{Publication I} \\ Reserve Coordination};
+    \node at (CoorPubOMAE) (PubOMAE) [caixa] {\textbf{Publication II} \\ Wind and O\&G Platforms};
+    \node at (CoorPubPHIL) (PubPHIL) [caixa] {\textbf{Publication III} \\ PHIL Scaling};
+    \node at (CoorPubSiz) (PubSiz) [caixa] {\textbf{Publication IV} \\ Sizing ESS};
+    \node at (CoorPubDSC) (PubDSC) [caixa] {\textbf{Publication V} \\ DSC$_{dq}$};
+    \node at (CoorPubUnd) (PubUnd) [caixa] {\textbf{Publication VI} \\ Decaying DC in $dq$};
+    \node at (CoorPubAMA) (PubAMA) [caixa] {\textbf{Publication VII} \\ AMA};
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [->,line width=0.75mm, black!75] (Cha2) to (Cha3);
+    \draw [->,line width=0.75mm, black!75] (Cha3) to (Cha4);
+    \draw [->,line width=0.75mm, black!75] (Cha4) to (Cha5);
+    \draw [->,line width=0.75mm, black!75] (Cha5) to (Cha6);
+    \draw [->,line width=0.75mm, black!75] (Cha6) to (Cha7);
+   
+\end{tikzpicture}
