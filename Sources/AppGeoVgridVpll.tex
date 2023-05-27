@@ -1,0 +1,79 @@
+%https://ctan.uib.no/graphics/pgf/contrib/tikz-3dplot/tikz-3dplot_documentation.pdf
+\tdplotsetmaincoords{70}{130}
+\tikzstyle{every node} = [font=\small]
+\begin{tikzpicture}[tdplot_main_coords,>=stealth]
+	\draw[->] (-3,0,0) -- (3,0,0) node[anchor=north east]{$a$};
+	\draw[->] (0,-2,0) -- (0,3,0) node[anchor=north west]{$b$};
+	\draw[->] (0,0,-2) -- (0,0,2) node[anchor=south]{$c$};
+
+	\pgfmathsetmacro{\amp}{2}
+	\pgfmathsetmacro{\ang}{160}
+	\pgfmathsetmacro{\va}{\amp*cos(\ang)}
+	\pgfmathsetmacro{\vb}{\amp*cos(\ang-120)}
+	\pgfmathsetmacro{\vc}{\amp*cos(\ang+120)}
+	\draw[densely dotted,red] (\va,0,0) -- (\va,\vb,0) -- (0,\vb,0);
+	\draw[densely dotted,red] (\va,\vb,0) -- (\va,\vb,\vc);
+	\draw[->,thick,red] (0,0,0) -- (\va,\vb,\vc) node [right] {$\matr{v}_{\mathrm{PLL}}\left(\widehat{\theta}\right)$};
+
+	\pgfmathsetmacro{\amp}{0.8*\amp}
+	\pgfmathsetmacro{\angstart}{\ang}
+	\pgfmathsetmacro{\angend}{\angstart+10}
+	\pgfmathsetmacro{\vastart}{\amp*cos(\angstart)}
+	\pgfmathsetmacro{\vbstart}{\amp*cos(\angstart-120)}
+	\pgfmathsetmacro{\vcstart}{\amp*cos(\angstart+120)}
+	\pgfmathsetmacro{\vaend}{\amp*cos(\angend)}
+	\pgfmathsetmacro{\vbend}{\amp*cos(\angend-120)}
+	\pgfmathsetmacro{\vcend}{\amp*cos(\angend+120)}
+	\draw[->,red] (\vastart,\vbstart,\vcstart) -- (\vaend,\vbend,\vcend) node [anchor=south] {$\widehat{\omega}$};
+
+	\pgfmathsetmacro{\amp}{0.35}
+	\foreach \ang in {75,80,...,155}
+		\pgfmathsetmacro{\vastart}{\amp*cos(\ang-5)}
+		\pgfmathsetmacro{\vbstart}{\amp*cos(\ang-120-5)}
+		\pgfmathsetmacro{\vcstart}{\amp*cos(\ang+120-5)}
+		\pgfmathsetmacro{\vaend}{\amp*cos(\ang+5)}
+		\pgfmathsetmacro{\vbend}{\amp*cos(\ang-120+5)}
+		\pgfmathsetmacro{\vcend}{\amp*cos(\ang+120+5)}
+		\draw[black] (\vastart,\vbstart,\vcstart) -- (\vaend,\vbend,\vcend);
+        
+    \pgfmathsetmacro{\amp}{0.5}
+    \pgfmathsetmacro{\atheta}{\amp*cos(88)}
+	\pgfmathsetmacro{\btheta}{\amp*cos(88-120)}
+	\pgfmathsetmacro{\ctheta}{\amp*cos(88+120)}
+	\node at (\atheta,\btheta,\atheta) [anchor=west] {$\delta(t)$};
+        
+	\pgfmathsetmacro{\amp}{1.6}
+	\pgfmathsetmacro{\ang}{70}
+	\pgfmathsetmacro{\va}{\amp*cos(\ang)}
+	\pgfmathsetmacro{\vb}{\amp*cos(\ang-120)}
+	\pgfmathsetmacro{\vc}{\amp*cos(\ang+120)}
+	\draw[densely dotted,blue] (\va,0,0) -- (\va,\vb,0) -- (0,\vb,0);
+	\draw[densely dotted,blue] (\va,\vb,0) -- (\va,\vb,\vc);
+	\draw[->,thick,blue] (0,0,0) -- (\va,\vb,\vc) node [right] {$\matr{v}(\theta)$};
+
+	\pgfmathsetmacro{\amp}{0.8*\amp}
+	\pgfmathsetmacro{\angstart}{\ang}
+	\pgfmathsetmacro{\angend}{\angstart+10}
+	\pgfmathsetmacro{\vastart}{\amp*cos(\angstart)}
+	\pgfmathsetmacro{\vbstart}{\amp*cos(\angstart-120)}
+	\pgfmathsetmacro{\vcstart}{\amp*cos(\angstart+120)}
+	\pgfmathsetmacro{\vaend}{\amp*cos(\angend)}
+	\pgfmathsetmacro{\vbend}{\amp*cos(\angend-120)}
+	\pgfmathsetmacro{\vcend}{\amp*cos(\angend+120)}
+	\draw[->,blue] (\vastart,\vbstart,\vcstart) -- (\vaend,\vbend,\vcend) node [anchor=west] {$\omega$};
+
+    % DOES NOT SHOW WELL
+	%\foreach \angini/\angend in {0,5,...,360}
+	%{ 
+	%\pgfmathsetmacro{\amp}{2}
+	%\pgfmathsetmacro{\vaini}{\amp*sin(\angini)}
+	%\pgfmathsetmacro{\vbini}{\amp*sin(\angini-120)}
+	%\pgfmathsetmacro{\vcini}{\amp*sin(\angini+120)}
+	%\pgfmathsetmacro{\vaend}{\amp*sin(\angend+5)}
+	%\pgfmathsetmacro{\vbend}{\amp*sin(\angend-120+5)}
+	%\pgfmathsetmacro{\vcend}{\amp*sin(\angend+120+5)}
+	%\draw[densely dotted, blue] (\vaini,\vbini,\vcini) -- (\vaend,\vbend,\vcend);
+    %}
+
+
+\end{tikzpicture}

@@ -1,0 +1,47 @@
+\tdplotsetmaincoords{30}{-45}
+\tikzstyle{every node} = [font=\small]
+\begin{tikzpicture}[tdplot_main_coords,>=stealth]
+		
+	\pgfmathsetmacro{\amp}{2.5}
+
+	\foreach \ang in {0,8,...,360}
+		\pgfmathsetmacro{\vastart}{\amp*cos(\ang-4)}
+		\pgfmathsetmacro{\vbstart}{\amp*cos(\ang-120-4)}
+		\pgfmathsetmacro{\vcstart}{\amp*cos(\ang+120-4)}
+		\pgfmathsetmacro{\vaend}{\amp*cos(\ang+4)}
+		\pgfmathsetmacro{\vbend}{\amp*cos(\ang-120+4)}
+		\pgfmathsetmacro{\vcend}{\amp*cos(\ang+120+4)}
+		\draw[thick,blue] (\vastart,\vbstart,\vcstart) -- (\vaend,\vbend,\vcend);
+
+	\foreach \passo in {-0.8,-0.6,...,0.8}
+		\pgfmathsetmacro{\anglestep}{asin(\passo)}
+		\pgfmathsetmacro{\angstart}{\anglestep)}
+		\pgfmathsetmacro{\angend}{180-\anglestep)}
+		\pgfmathsetmacro{\vastart}{\amp*cos(\angstart)}
+		\pgfmathsetmacro{\vbstart}{\amp*cos(\angstart-120)}
+		\pgfmathsetmacro{\vcstart}{\amp*cos(\angstart+120)}
+		\pgfmathsetmacro{\vaend}{\amp*cos(\angend)}
+		\pgfmathsetmacro{\vbend}{\amp*cos(\angend-120)}
+		\pgfmathsetmacro{\vcend}{\amp*cos(\angend+120)}
+		\draw[ultra thin,blue] (\vastart,\vbstart,\vcstart) -- (\vaend,\vbend,\vcend);
+
+	\foreach \passo in {-0.8,-0.6,...,0.8}
+		\pgfmathsetmacro{\anglestep}{acos(\passo)}
+		\pgfmathsetmacro{\angstart}{\anglestep)}
+		\pgfmathsetmacro{\angend}{360-\anglestep)}
+		\pgfmathsetmacro{\vastart}{\amp*cos(\angstart)}
+		\pgfmathsetmacro{\vbstart}{\amp*cos(\angstart-120)}
+		\pgfmathsetmacro{\vcstart}{\amp*cos(\angstart+120)}
+		\pgfmathsetmacro{\vaend}{\amp*cos(\angend)}
+		\pgfmathsetmacro{\vbend}{\amp*cos(\angend-120)}
+		\pgfmathsetmacro{\vcend}{\amp*cos(\angend+120)}
+		\draw[ultra thin,blue] (\vastart,\vbstart,\vcstart) -- (\vaend,\vbend,\vcend);
+
+	\draw[thick,->] (0,0,0) -- (3,0,0) node[anchor=south]{$a$};
+	\draw[thick,->] (0,0,0) -- (0,3,0) node[anchor=south]{$b$};
+	\draw[thick,->] (0,0,0) -- (0,0,3) node[anchor=south]{$c$};
+
+	\pgfmathsetmacro{\r}{0.5}
+	\draw[] (\r,0,0) -- (\r,\r,0) -- (0,\r,0) -- (0,\r,\r) -- (0,0,\r) -- (\r,0,\r) -- (\r,0,0);
+	
+\end{tikzpicture}
