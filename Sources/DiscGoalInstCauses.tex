@@ -1,0 +1,123 @@
+\tikzstyle{caixa} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixabranca} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixaalta} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixasuperalta} = [rectangle, draw, thick, 
+                    text width=3cm, text centered, minimum height=2.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{linha} = [line width=1.5mm, black!75, opacity=0.55] % [fill=white] %
+\tikzstyle{curvas} = [smooth, tension=0.5]
+
+\tikzstyle{fonte} = [font=\footnotesize]
+
+\begin{tikzpicture}[>=stealth]
+
+    %%%%%%%%%%%%%%%%
+    % SEQUENCE
+    %%%%%%%%%%%%%%%%
+    \node at (-10,0) (Goal) [caixaalta] {\textbf{Research Goal I} \\ Identify and address causes of instability};
+    \node at (-10,-2.35) (RQ1) [caixa] {\textbf{Research Question I} \\ Which phenomena may lead to and how to mitigate converter-driven instabilities?};
+    \node at (-10,-5) [caixabranca] (causes) {\textbf{Phenomena}};
+    \node at (-10,-7.5) [caixabranca] (motiv) {\textbf{Scientific Publications}};
+    \node at (-10,-10) [caixabranca] (contrib) {\textbf{Contributions}};
+    \node at (-10,-12.5) [caixabranca] (chap) {\textbf{Chapters}};
+    \node at (-10,-15) [caixabranca] (future) {\textbf{Future Work}};
+    
+    %%%%%%%%%%%%%%%%%%
+    % PHENOMENA Y = -5
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-5) (Exp) [caixaalta] {Exponentially decaying dc components in ac systems};
+    \node at (-4,-5) (Delays) [caixaalta] {Phase shifts introduced by measurement and sequence isolation algorithms};
+    \node at (-1,-5) (CPL) [caixaalta] {Constant power loads and sources and other converters};
+    \node at (2,-5) (PLL) [caixaalta] {Converter synchronization (PLL) algorithms};
+    
+    %%%%%%%%%%%%%%%%%%
+    % UBLICATIONS Y = -7.5
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-7.5) (PubExp) [caixaalta] {\textbf{Publication III} \\ Exponentially decaying dc currents};
+    \node at (-4,-7.5) (PubDSC) [caixaalta] {\textbf{Publication IV} \\ Sequence separation methods DSC$_\textrm{dq}$};
+    \node at (-1,-7.5) (PubAMA) [caixaalta] {\textbf{Publication V} \\ Frequency adaptive
+moving averages};
+    \node at (2,-7.5) (PubSharing) [caixaalta] {\textbf{Publication VI} \\ Coordination of primary power reserves};
+    
+    %%%%%%%%%%%%%%%%%%
+    % CONTRIBUTIONS Y = -10
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-10) (ContOscRoot) [caixaalta] {\textbf{Contribuition II} \\ Analysis of the causes of oscillations};
+    \node at (-4,-10) (ContDSC) [caixaalta] {\textbf{Contribuition III} \\ Sequence separation algorithm for dual controllers};
+    \node at (2,-10) (ContFCR) [caixaalta] {\textbf{Contribuition IV} \\ Coordination of primary reserves};
+    
+    %%%%%%%%%%%%%%%%%%
+    % CHAPTERS Y = -12.5
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-12.5) (Chap4) [caixaalta] {\textbf{Chapter 4} \\ Current control in power converters};
+    \node at (2,-12.5) (Chap5) [caixaalta] {\textbf{Chapter 5} \\ Sharing of primary power reserves};
+
+    %%%%%%%%%%%%%%%%%%
+    % FUTURE Y = -15
+    %%%%%%%%%%%%%%%%%%
+    \node at (-4,-15) (Fut2) [caixaalta] {Analyze consequence of PLL dynamic under faults or unbalanced operation};
+    \node at (-1,-15) (Fut3) [caixaalta] {Sharing of primary reserves under balanced and unbalanced transients};
+    %\node at (4,-15) (Fut3) [caixaalta] {Harmonic analysis};
+            
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [->,line width=0.75mm, black!75] (Goal) to (RQ1);
+    \draw [->,line width=0.75mm, black!75] (RQ1) to (causes);
+    \draw [->,line width=0.75mm, black!75] (causes) to (motiv);
+    \draw [->,line width=0.75mm, black!75] (motiv) to (contrib);
+    \draw [->,line width=0.75mm, black!75] (contrib) to (chap);
+    \draw [->,line width=0.75mm, black!75] (chap) to (future);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [->] (Exp.south) to ++(0,-0.65) -| (PubExp);
+    \draw [->] (Exp.south) to ++(0,-0.65) -| ($(PubDSC.north)+(-0.5,0)$);
+    \fill ($(Exp.south)+(0.,-0.65)$) circle [radius=1pt];
+    
+    \draw [->] (Delays.south) to ++(0,-0.35) -| ($(PubExp.north)+(+0.5,0)$);
+    \draw [->] (Delays.south) to ++(0,-0.35) -| (PubDSC);
+    \draw [->] (Delays.south) to ++(0,-0.35) -| ($(PubAMA.north)+(-0.5,0)$);
+    \fill ($(Delays.south)+(0.,-0.35)$) circle [radius=1pt];
+
+    \draw [->] (CPL.south) to ++(0,-0.65) -| ($(PubSharing.north)+(-0.5,0)$);
+    \draw [->] (PLL.south) to ++(0,-0.65) -| (PubSharing);
+
+    \draw [->] (PubExp.south) to ++(0,-0.65) -| ($(ContDSC.north)+(-0.5,0)$);
+    \draw [->] (PubExp.south) to ++(0,-0.65) -| (ContOscRoot);
+    \fill ($(PubExp.south)+(0.,-0.65)$) circle [radius=1pt];
+
+    \draw [->] (PubDSC.south) to (ContDSC);    
+    \draw [->] ($(PubAMA.south)+(-0.5,0)$) to ++(0,-0.65) -|  ($(ContDSC.north)+(+0.5,0)$);    
+
+    \draw [->] (ContOscRoot.south) to (Chap4); 
+    \draw [->] (ContDSC.south) to ++(0,-0.65) -| ($(Chap4.north)+(0.25,0)$); 
+
+    \draw [->] (PubSharing.south) to ++(0,-0.65) -| (ContFCR);
+
+    \draw [->] (ContFCR.south) to (Chap5);
+
+    \draw [->] (Chap4.south) to ++(0,-0.65) -| ($(Fut2.north)+(-0.25,0)$);
+    \draw [->] ($(Chap4.south)+(2.75,-0.65)$) -| ($(Fut3.north)+(-0.25,0)$);
+    \fill ($(Chap4.south)+(2.75,-0.65)$) circle [radius=1pt];
+
+    %\draw [->] (Chap5.south) to ++(0,-0.35) -| ($(Fut3.north)+(0.25,0)$);
+    %\draw [->] ($(Chap5.south)+(-3.75,-0.35)$) -| ($(Fut2.north)+(0.25,0)$);
+    %\fill ($(Chap5.south)+(-3.75,-0.35)$) circle [radius=1pt];
+    \draw [->] (Chap5.south) to ++(0,-0.65) -| ($(Fut3.north)+(0.25,0)$);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [densely dotted] (-11.25,-3.75) to ++(14.5,0); 
+    \draw [densely dotted] (-11.25,-6.25) to ++(14.5,0); 
+    \draw [densely dotted] (-11.25,-8.75) to ++(14.5,0); 
+    \draw [densely dotted] (-11.25,-11.25) to ++(14.5,0); 
+    \draw [densely dotted] (-11.25,-13.75) to ++(14.5,0); 
+   
+\end{tikzpicture}

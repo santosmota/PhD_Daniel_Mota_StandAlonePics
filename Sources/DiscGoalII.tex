@@ -1,0 +1,116 @@
+\tikzstyle{caixa} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixabranca} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixaalta} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixasuperalta} = [rectangle, draw, thick, 
+                    text width=3cm, text centered, minimum height=2.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{linha} = [line width=1.5mm, black!75, opacity=0.55] % [fill=white] %
+\tikzstyle{curvas} = [smooth, tension=0.5]
+
+\tikzstyle{fonte} = [font=\footnotesize]
+
+\begin{tikzpicture}[>=stealth]
+
+    %%%%%%%%%%%%%%%%
+    % SEQUENCE
+    %%%%%%%%%%%%%%%%
+    \node at (-10,0) (Goal) [caixaalta] {\textbf{Research Goal II} \\ Propose robust control structures};
+    \node at (-10,-2.35) (RQ) [caixa] {\textbf{Research Question II} \\ How to build a robust control structures for frequency/reactive support?};
+    \node at (-10,-5) [caixabranca] (WorkHyp) {\textbf{Constraints and Tools}};
+    \node at (-10,-7.5) [caixabranca] (publications) {\textbf{Scientific Publications}};
+    \node at (-10,-10) [caixabranca] (contrib) {\textbf{Contributions}};
+    \node at (-10,-12.5) [caixabranca] (chap) {\textbf{Chapters}};
+    \node at (-10,-15) [caixabranca] (future) {\textbf{Future Work}};
+    
+    %%%%%%%%%%%%%%%%%%
+    % PHENOMENA Y = -5
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-5) (Exp) [caixaalta] {Based on traditional PI regulators};
+    \node at (-4,-5) (Delays) [caixaalta] {Independent from fast communication links between different converters};
+    \node at (-1,-5) (PLL) [caixaalta] {Nordic Synchronous Area Grid Codes};
+    
+    %%%%%%%%%%%%%%%%%%
+    % UBLICATIONS Y = -7.5
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-7.5) (PubOMAE) [caixaalta] {\textbf{Publication I} \\ Wind and O\&G Platforms Possibilities};
+    \node at (-4,-7.5) (PubSizing) [caixaalta] {\textbf{Publication II} \\ Sizing Energy Storage Systems};
+    \node at (-1,-7.5) (PubSharing) [caixaalta] {\textbf{Publication VI} \\ Coordination of primary power reserves};
+    
+    %%%%%%%%%%%%%%%%%%
+    % CONTRIBUTIONS Y = -10
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-10) (ContControl) [caixaalta] {\textbf{Contribution I} \\ Control structures for storage systems};
+    \node at (-1,-10) (ContFCR) [caixaalta] {\textbf{Contribution IV} \\ Coordination of primary reserves};
+    
+    %%%%%%%%%%%%%%%%%%
+    % CHAPTERS Y = -12.5
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-12.5) (Chap3) [caixaalta] {\textbf{Chapter 1} \\ Control Structures for Storage Systems};
+    \node at (-1,-12.5) (Chap5) [caixaalta] {\textbf{Chapter 5} \\ Sharing of primary power reserves};
+
+    %%%%%%%%%%%%%%%%%%
+    % FUTURE Y = -15
+    %%%%%%%%%%%%%%%%%%
+    \node at (-4,-15) (Fut2) [caixaalta] {Analyze consequence of PLL dynamic under faults or unbalanced operation};
+    \node at (-1,-15) (Fut3) [caixaalta] {Sharing of primary reserves under balanced and unbalanced transients};
+    %\node at (4,-15) (Fut3) [caixaalta] {Harmonic analysis};
+            
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [->,line width=0.75mm, black!75] (Goal) to (RQ);
+    \draw [->,line width=0.75mm, black!75] (RQ) to (WorkHyp);
+    \draw [->,line width=0.75mm, black!75] (WorkHyp) to (publications);
+    \draw [->,line width=0.75mm, black!75] (publications) to (contrib);
+    \draw [->,line width=0.75mm, black!75] (contrib) to (chap);
+    \draw [->,line width=0.75mm, black!75] (chap) to (future);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [->] (Exp.south) to ++(0,-0.65) -| (PubOMAE);
+    \draw [->] (Exp.south) to ++(0,-0.65) -| ($(PubSizing.north)+(-0.5,0)$);
+    \draw [->] ($(Exp.south)+(2.5,-0.65)$) -| ($(PubSharing.north)+(-0.5,0)$);
+    \fill ($(Exp.south)+(0.,-0.65)$) circle [radius=1pt];
+    \fill ($(Exp.south)+(2.5,-0.65)$) circle [radius=1pt];
+    
+    \draw [->] (Delays.south) to ++(0,-0.35) -| ($(PubOMAE.north)+(+0.5,0)$);
+    \draw [->] ($(Delays.south)+(0,-0.35)$) -| ($(PubSharing.north)+(0,0)$);
+    \draw [->] (Delays.south) to ++(0,-0.35) -| (PubSizing);
+    \fill ($(Delays.south)+(0.,-0.35)$) circle [radius=1pt];
+
+    \draw [->] ($(PLL.south)+(0.5,0)$) to ($(PubSharing.north)+(0.5,0)$);
+
+    \draw [->] (PubOMAE.south) to ++(0,-0.65) -| (ContControl);
+    \draw [->] (PubSizing.south) to ++(0,-0.65) -| ($(ContControl.north)+(0.5,0)$);
+    %\fill ($(PubOMAE.south)+(0.,-0.65)$) circle [radius=1pt];
+
+    \draw [->] (ContControl.south) to (Chap3); 
+    \draw [->] (PubSharing.south) to ++(0,-0.65) -| (ContFCR);
+
+    \draw [->] (ContFCR.south) to (Chap5);
+
+    \draw [->] (Chap3.south) to ++(0,-0.65) -| ($(Fut2.north)+(-0.25,0)$);
+    \draw [->] ($(Chap3.south)+(2.75,-0.65)$) -| ($(Fut3.north)+(-0.5,0)$);
+    \fill ($(Chap3.south)+(2.75,-0.65)$) circle [radius=1pt];
+
+    \draw [->] (Chap5.south) to ++(0,-0.35) -| ($(Fut2.north)+(0.25,0)$);
+    %\draw [->] ($(Chap5.south)+(-3.75,-0.35)$) -| ($(Fut2.north)+(0.25,0)$);
+    %\fill ($(Chap5.south)+(-3.75,-0.35)$) circle [radius=1pt];
+    \fill ($(Chap5.south)+(0,-0.35)$) circle [radius=1pt];
+    \draw [->] (Chap5.south) to ++(0,-0.65) -| ($(Fut3.north)+(0.0,0)$);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [densely dotted] (-11.25,-3.75) to ++(11.5,0); 
+    \draw [densely dotted] (-11.25,-6.25) to ++(11.5,0); 
+    \draw [densely dotted] (-11.25,-8.75) to ++(11.5,0); 
+    \draw [densely dotted] (-11.25,-11.25) to ++(11.5,0); 
+    \draw [densely dotted] (-11.25,-13.75) to ++(11.5,0); 
+   
+\end{tikzpicture}
