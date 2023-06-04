@@ -65,8 +65,8 @@ moving averages};
     %%%%%%%%%%%%%%%%%%
     % FUTURE Y = -15
     %%%%%%%%%%%%%%%%%%
-    \node at (-4,-15) (Fut2) [caixaalta] {Analyze consequence of PLL dynamic under faults or unbalanced operation};
-    \node at (-1,-15) (Fut3) [caixaalta] {Sharing of primary reserves under balanced and unbalanced transients};
+    \node at (-7,-15) (Fut2) [caixaalta] {Analyze consequence of PLL dynamic under faults or unbalanced operation};
+    \node at (2,-15) (Fut3) [caixaalta] {Sharing of primary reserves under balanced and unbalanced transients};
     %\node at (4,-15) (Fut3) [caixaalta] {Harmonic analysis};
             
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,14 +104,14 @@ moving averages};
 
     \draw [->] (ContFCR.south) to (Chap5);
 
-    \draw [->] (Chap4.south) to ++(0,-0.65) -| ($(Fut2.north)+(-0.25,0)$);
-    \draw [->] ($(Chap4.south)+(2.75,-0.65)$) -| ($(Fut3.north)+(-0.25,0)$);
-    \fill ($(Chap4.south)+(2.75,-0.65)$) circle [radius=1pt];
+    \draw [->] (Chap4.south) to ++(0,-0.65) -| ($(Fut2.north)+(0.0,0)$);
+    \draw [->] ($(Chap4.south)+(0,-0.65)$) -| ($(Fut3.north)+(-0.5,0)$);
+    \fill ($(Chap4.south)+(0,-0.65)$) circle [radius=1pt];
 
     %\draw [->] (Chap5.south) to ++(0,-0.35) -| ($(Fut3.north)+(0.25,0)$);
     %\draw [->] ($(Chap5.south)+(-3.75,-0.35)$) -| ($(Fut2.north)+(0.25,0)$);
     %\fill ($(Chap5.south)+(-3.75,-0.35)$) circle [radius=1pt];
-    \draw [->] (Chap5.south) to ++(0,-0.65) -| ($(Fut3.north)+(0.25,0)$);
+    \draw [->] (Chap5.south) to ++(0,-0.65) -| ($(Fut3.north)+(0.0,0)$);
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \draw [densely dotted] (-11.25,-3.75) to ++(14.5,0); 

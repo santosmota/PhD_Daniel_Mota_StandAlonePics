@@ -25,7 +25,9 @@
     % SEQUENCE
     %%%%%%%%%%%%%%%%
     \node at (-10,0) (Goal) [caixaalta] {\textbf{Research Goal II} \\ Propose robust control structures};
-    \node at (-10,-2.35) (RQ) [caixa] {\textbf{Research Question II} \\ How to build a robust control structures for frequency/reactive support?};
+    \node at (-10,-2.25) (RQ) [caixa] {\textbf{Research Question II} \\ How to build a robust control structure for storage systems?};
+    \node at (-7,-2.25) (RQ3) [caixa] {\textbf{Research Question III} \\ How to provide robust sharing of fast power reserves? \\~};
+    \node at (-4,-2.25) (RQ4) [caixa] {\textbf{Research Question IV} \\ What are the consequences of shifting reserves from the GTs to the ESS?};
     \node at (-10,-5) [caixabranca] (WorkHyp) {\textbf{Constraints and Tools}};
     \node at (-10,-7.5) [caixabranca] (publications) {\textbf{Scientific Publications}};
     \node at (-10,-10) [caixabranca] (contrib) {\textbf{Contributions}};
@@ -55,18 +57,22 @@
     %%%%%%%%%%%%%%%%%%
     % CHAPTERS Y = -12.5
     %%%%%%%%%%%%%%%%%%
-    \node at (-7,-12.5) (Chap3) [caixaalta] {\textbf{Chapter 1} \\ Control Structures for Storage Systems};
+    \node at (-7,-12.5) (Chap3) [caixaalta] {\textbf{Chapter 3} \\ Control Structures for Storage Systems};
     \node at (-1,-12.5) (Chap5) [caixaalta] {\textbf{Chapter 5} \\ Sharing of primary power reserves};
 
     %%%%%%%%%%%%%%%%%%
     % FUTURE Y = -15
     %%%%%%%%%%%%%%%%%%
-    \node at (-4,-15) (Fut2) [caixaalta] {Analyze consequence of PLL dynamic under faults or unbalanced operation};
+    %\node at (-7,-15) (Fut2) [caixaalta] {Analyze consequence of PLL dynamic under faults or unbalanced operation};
     \node at (-1,-15) (Fut3) [caixaalta] {Sharing of primary reserves under balanced and unbalanced transients};
     %\node at (4,-15) (Fut3) [caixaalta] {Harmonic analysis};
             
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \draw [->,line width=0.75mm, black!75] (Goal) to (RQ);
+    \draw [->,line width=0.75mm, black!75] (Goal.east) -| (RQ3);
+    \draw [->,line width=0.75mm, black!75] (RQ3.south) - ++(0,-0.25) -| (WorkHyp.north);
+    \draw [->,line width=0.75mm, black!75] (Goal.east) -| (RQ4);
+    \draw [->,line width=0.75mm, black!75] (RQ4.south) - ++(0,-0.25) -| (WorkHyp.north);
     \draw [->,line width=0.75mm, black!75] (RQ) to (WorkHyp);
     \draw [->,line width=0.75mm, black!75] (WorkHyp) to (publications);
     \draw [->,line width=0.75mm, black!75] (publications) to (contrib);
@@ -88,7 +94,7 @@
     \draw [->] ($(PLL.south)+(0.5,0)$) to ($(PubSharing.north)+(0.5,0)$);
 
     \draw [->] (PubOMAE.south) to ++(0,-0.65) -| (ContControl);
-    \draw [->] (PubSizing.south) to ++(0,-0.65) -| ($(ContControl.north)+(0.5,0)$);
+    \draw [->] (PubSizing.south) to ++(0,-0.35) -| ($(ContControl.north)+(0.5,0)$);
     %\fill ($(PubOMAE.south)+(0.,-0.65)$) circle [radius=1pt];
 
     \draw [->] (ContControl.south) to (Chap3); 
@@ -96,14 +102,14 @@
 
     \draw [->] (ContFCR.south) to (Chap5);
 
-    \draw [->] (Chap3.south) to ++(0,-0.65) -| ($(Fut2.north)+(-0.25,0)$);
-    \draw [->] ($(Chap3.south)+(2.75,-0.65)$) -| ($(Fut3.north)+(-0.5,0)$);
-    \fill ($(Chap3.south)+(2.75,-0.65)$) circle [radius=1pt];
+    %\draw [->] (Chap3.south) to ++(0,-0.65) -| ($(Fut2.north)+(-0.0,0)$);
+    \draw [->] ($(Chap3.south)+(0,0)$) to ++(0,-0.35) -| ($(Fut3.north)+(-0.5,0)$);
+    %\fill ($(Chap3.south)+(0,-0.65)$) circle [radius=1pt];
 
-    \draw [->] (Chap5.south) to ++(0,-0.35) -| ($(Fut2.north)+(0.25,0)$);
+    %\draw [->] (Chap5.south) to ++(0,-0.35) -| ($(Fut2.north)+(0.5,0)$);
     %\draw [->] ($(Chap5.south)+(-3.75,-0.35)$) -| ($(Fut2.north)+(0.25,0)$);
     %\fill ($(Chap5.south)+(-3.75,-0.35)$) circle [radius=1pt];
-    \fill ($(Chap5.south)+(0,-0.35)$) circle [radius=1pt];
+    %\fill ($(Chap5.south)+(0,-0.35)$) circle [radius=1pt];
     \draw [->] (Chap5.south) to ++(0,-0.65) -| ($(Fut3.north)+(0.0,0)$);
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

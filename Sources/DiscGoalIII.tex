@@ -1,0 +1,99 @@
+\tikzstyle{caixa} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixabranca} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixaalta} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixasuperalta} = [rectangle, draw, thick, 
+                    text width=3cm, text centered, minimum height=2.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{linha} = [line width=1.5mm, black!75, opacity=0.55] % [fill=white] %
+\tikzstyle{curvas} = [smooth, tension=0.5]
+
+\tikzstyle{fonte} = [font=\footnotesize]
+
+\begin{tikzpicture}[>=stealth]
+
+    %%%%%%%%%%%%%%%%
+    % SEQUENCE
+    %%%%%%%%%%%%%%%%
+    \node at (-10,0) (Goal) [caixaalta] {\textbf{Research Goal III} \\ Assess and validate experimentaly};
+    \node at (-10,-2.25) (RQ) [caixa] {\textbf{Research Question V} \\ How reproduce the study case in a PHIL test setup?};
+    \node at (-10,-5) [caixabranca] (WorkHyp) {\textbf{Constraints and Tools}};
+    \node at (-10,-7.5) [caixabranca] (publications) {\textbf{Scientific Publications}};
+    \node at (-10,-10) [caixabranca] (contrib) {\textbf{Contributions}};
+    \node at (-10,-12.5) [caixabranca] (chap) {\textbf{Chapters}};
+    \node at (-10,-15) [caixabranca] (future) {\textbf{Future Work}};
+    
+    %%%%%%%%%%%%%%%%%%
+    % PHENOMENA Y = -5
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-5) (NSGL) [caixaalta] {National Smart Grid Laboratory\\ ac and dc grid emulators};
+    \node at (-4,-5) (Red) [caixaalta] {Reduced scale converter representing the ESSGC};
+    %\node at (-1,-5) (PLL) [caixaalta] {Nordic Synchronous Area Grid Codes};
+    
+    %%%%%%%%%%%%%%%%%%
+    % UBLICATIONS Y = -7.5
+    %%%%%%%%%%%%%%%%%%
+    %\node at (-7,-7.5) (PubSharing) [caixaalta] {\textbf{Publication VI} \\ Coordination of primary power reserves};
+    \node at (-7,-7.5) (PubPHIL) [caixaalta] {\textbf{Publication VII} \\ Scaling PHIL Test Beds};
+        
+    %%%%%%%%%%%%%%%%%%
+    % CONTRIBUTIONS Y = -10
+    %%%%%%%%%%%%%%%%%%
+    \node at (-7,-10) (Contrib) [caixaalta] {\textbf{Contribution V} \\ Guidelines for scaling PHIL test beds};
+    %\node at (-1,-10) (ContFCR) [caixaalta] {\textbf{Contribution IV} \\ Coordination of primary reserves};
+    
+    %%%%%%%%%%%%%%%%%%
+    % CHAPTERS Y = -12.5
+    %%%%%%%%%%%%%%%%%%
+    %\node at (-7,-12.5) (Chap5) [caixaalta] {\textbf{Chapter 5} \\ Sharing of primary power reserves};
+    \node at (-7,-12.5) (Chap6) [caixaalta] {\textbf{Chapter 6} \\ Scaling PHIL test beds};
+    
+
+    %%%%%%%%%%%%%%%%%%
+    % FUTURE Y = -15
+    %%%%%%%%%%%%%%%%%%
+    %\node at (-7,-15) (Fut2) [caixaalta] {Analyze consequence of PLL dynamic under faults or unbalanced operation};
+    %\node at (-1,-15) (Fut3) [caixaalta] {Sharing of primary reserves under balanced and unbalanced transients};
+    \node at (-7,-15) (Fut) [caixaalta] {PHIL and harmonics introduced by converters};
+            
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [->,line width=0.75mm, black!75] (Goal) to (RQ);
+    \draw [->,line width=0.75mm, black!75] (RQ) to (WorkHyp);
+    \draw [->,line width=0.75mm, black!75] (WorkHyp) to (publications);
+    \draw [->,line width=0.75mm, black!75] (publications) to (contrib);
+    \draw [->,line width=0.75mm, black!75] (contrib) to (chap);
+    \draw [->,line width=0.75mm, black!75] (chap) to (future);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [->] (NSGL.south) to ++(0,-0.65) -| (PubPHIL);
+    %\draw [->] (NSGL.south) to ++(0,-0.65) -| ($(PubPHIL.north)+(-0.5,0)$);
+    %\fill ($(NSGL.south)+(0.,-0.65)$) circle [radius=1pt];
+        
+    %\draw [->] (Red.south) to ++(0,-0.35) -| ($(PubSharing.north)+(+0.5,0)$);
+    \draw [->] ($(Red.south)+(0,0)$) to ++(0,-0.35) -|  ($(PubPHIL.north)+(0.5,0)$);
+    %\fill ($(Red.south)+(0.,-0.35)$) circle [radius=1pt];
+
+    %\draw [->] (PubSharing.south) to (Contrib);
+    \draw [->] (PubPHIL.south) to ($(Contrib.north)+(0.0,0)$);
+        
+    \draw [->] (Contrib.south) to (Chap6); 
+    
+    \draw [->] (Chap6) to (Fut);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw [densely dotted] (-11.25,-3.75) to ++(8.5,0); 
+    \draw [densely dotted] (-11.25,-6.25) to ++(8.5,0); 
+    \draw [densely dotted] (-11.25,-8.75) to ++(8.5,0); 
+    \draw [densely dotted] (-11.25,-11.25) to ++(8.5,0); 
+    \draw [densely dotted] (-11.25,-13.75) to ++(8.5,0); 
+   
+\end{tikzpicture}
