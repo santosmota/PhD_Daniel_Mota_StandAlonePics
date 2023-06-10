@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FCRI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{line0} = [color=blue, dashed, thick]
+\tikzstyle{text0} = [color=blue]
+\tikzstyle{line1} = [color=red, densely dotted, very thick]
+\tikzstyle{text1} = [color=red]
+\tikzstyle{line2} = [color=black, dashdotted, thick]
+\tikzstyle{text2} = [color=black]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[>=latex'] %https://www.youtube.com/watch?v=5jmIHOWpEg0 minute 12:16
+\begin{axis}[   %clip=false,
+                xmin=-2.75, xmax=2.75,
+                ymin=-10.5, ymax=11,
+                axis lines=middle,
+                grid style=dotted,
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                xlabel=$\widetilde{F}$,
+                xtick={-2,-1,1,2},  % FN = 1,  FD = 2
+                xticklabels={},
+                %xticklabels={$-\widetilde{f}_{\textrm{D}}$,$-\widetilde{f}_{\textrm{N}}$,$\widetilde{f}_{\textrm{N}}$,$\widetilde{f}_{\textrm{D}}$},
+                xticklabel style={anchor=north},
+                xmajorgrids=true,
+                xlabel style={anchor=north east},
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                ylabel=$P_\textrm{FCR}$,
+                ytick={-9,-6,-3,3,6,9}, % PN = 3  , PD = 9
+                yticklabels={},
+                %yticklabels={$-P_{\textrm{D}}$,$-P_{\textrm{D}}+P_{\textrm{N}}$,$-P_{\textrm{N}}$,$P_{\textrm{N}}$,$P_{\textrm{D}}-P_{\textrm{N}}$,$P_{\textrm{D}}$},
+                ymajorgrids=true,
+                ylabel style={anchor=west}
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                ] %axis lines=left
+%%%%%%%%%%%%
+% System
+\addplot[line2, samples=2, domain=-2.75:-2]{9}
+    node [pos=0, anchor=south west, text2] {FCR$_\textrm{I}$};
+\addplot[line2, samples=2, domain=-2:2]{-4.5*x};
+\addplot[line2, samples=2, domain=2:2.75]{-9}
+    node [pos=1, anchor=north east, text2] {FCR$_\textrm{I}$};
+\end{axis}
+\end{tikzpicture}
+

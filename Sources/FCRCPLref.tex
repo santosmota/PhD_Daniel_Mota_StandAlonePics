@@ -1,0 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Battery Controller
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
+\tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.25cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{caixinha} = [rectangle, draw, fill=white, text width=0.75cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{sum} = [draw, circle, font=\footnotesize]
+\tikzstyle{junction} = [coordinate]
+\tikzstyle{fonte} = [font=\footnotesize]
+\begin{tikzpicture}[auto, >=latex']
+
+%division box / power to current
+\node at (5,-0.25) [caixa] (div) {};
+\node at ($(div.west) + (0,0.25)$) [fonte, anchor=west] (pin) {$p$}; 
+\node at ($(div.west) + (0,-0.25)$) [fonte, anchor=west] (vin) {$v$}; 
+\node at (div.east) [fonte, anchor=east] (iout) {$\dfrac{p}{v}=i$}; 
+\node at (div.north) [fonte, anchor=south] () {Power to current};
+
+\draw [<-] (pin) to node [anchor=south, pos=1] () {$\overset{*}{p}$} ++(-1.5,0);
+\draw [->] (iout) to node [anchor=south, pos=1] () {$\overset{*}{i}_{dc}$} ++(+1.5,0);
+
+%voltage filtering
+\node at ($(vin)+(-2,-0.5)$) [caixa] (Tv) {$\dfrac{1}{sT_v + 1}$};
+\draw [->] (Tv.east) to ++(0.5,0) |- (vin);
+\draw [<-] (Tv.west) to node [anchor=south, pos=1] () {$v_{dc}$} ++(-1,0);;
+
+
+\end{tikzpicture}
