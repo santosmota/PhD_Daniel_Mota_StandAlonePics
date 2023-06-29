@@ -1,21 +1,21 @@
 \tikzstyle{block} = [draw, rectangle, fill=white, minimum height=1cm, minimum width=1cm, font=\footnotesize]
 \tikzstyle{caixa} = [rectangle, draw, fill=white, text width=1.25cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
-\tikzstyle{caixalarga} = [rectangle, draw, fill=white, text width=2.5cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
+\tikzstyle{caixalarga} = [rectangle, draw, fill=white, text width=2.0cm, text centered, minimum height=1cm, font=\footnotesize ] %,text width=2cm minimum width=2.2cm
 \tikzstyle{sum} = [draw, circle, font=\footnotesize]
 \tikzstyle{fonte} = [font=\footnotesize]
     
 \begin{tikzpicture}[>=latex'] %https://www.youtube.com/watch?v=5jmIHOWpEg0 minute 12:16
 %%%%%%%%%%%%%%%%%%%%%%%%
 % FCR - frequency summation
-   \node at (-2.75,0.755) [fonte] () {\textbf{Voltage to be tracked}};
+   \node at (-2.75,0.755) [fonte] () {Voltage to be tracked};
    
    \node at (0,0) [sum] (dotprod) {$\bullet$};
-   \node at ($(dotprod)+(2,0)$) [caixa] (PI) {PI\\regulator}; 
+   \node at ($(dotprod)+(1.5,0)$) [caixa] (PI) {PI\\regulator}; 
    \node at ($(dotprod)+(0,0.5)$) [fonte,anchor=south] () {Dot product}; % {\begin{tabular}Dot\\product\end{tabular}};
-   \node at ($(PI)+(2,0)$) [sum] (SumOmega) {$\Sigma$};
-   \node at ($(SumOmega)+(2,0)$) [caixa] (Int) {Integrator};
+   \node at ($(PI)+(1.8,0)$) [sum] (SumOmega) {$\Sigma$};
+   \node at ($(SumOmega)+(1.75,0)$) [caixa] (Int) {Integrator};
     %\node at (Int.north) [anchor=south,fonte] () {Wrapped around $2\pi$};
-   \node at ($(Int)+(3.5,0)$) [caixalarga] (coseno) {{$\cos  ( \, \widehat{\theta} \, )$\\$\cos ( \, \widehat{\theta} -2 \pi/3)$\\$\cos ( \, \widehat{\theta} + 2\pi /3)$}}; 
+   \node at ($(Int)+(2.75,0)$) [caixalarga] (coseno) {{$\cos  ( \, \widehat{\theta} \, )$\\$\cos ( \, \widehat{\theta} -2 \pi/3)$\\$\cos ( \, \widehat{\theta} + 2\pi /3)$}}; 
     %\node at ($(coseno)+(0,2)$) [caixalarga] (seno) {{$\sin(\omega_\textrm{PLL} t)$\\$\sin(\omega_\textrm{PLL} t -2 \pi/3 )$\\$\sin(\omega_\textrm{PLL} t + 2\pi /3)$}}; 
     
     \node at (coseno.north) [fonte, anchor=south] () {Internal voltage generator};
@@ -28,7 +28,7 @@
     \node at ($(dotprod)+(-2.6,-1.25)$) [anchor=south, fonte] () {$\theta (t)\!=\!\int_{0}^{t} \omega (\tau) \textrm{d} \tau$};
         
     \draw [fonte,->] (dotprod) --
-        node [anchor=south,pos=0.5] () {$\epsilon$} (PI);
+        node [anchor=south,pos=0.5] () {$\varepsilon$} (PI);
     \draw [fonte,->] (PI) --
         node [anchor=south,pos=0.3] () {$\Delta \widehat{\omega}$} 
         node [anchor=south,pos=0.9] () {$+$} (SumOmega);
@@ -44,18 +44,18 @@
     %\draw [fonte,->] ($(coseno.west)+(-0.4,0)$) -- ++(0,2) -- (seno);
     %\fill ($(coseno.west)+(-0.4,0)$) circle [radius=1pt];
     \draw [fonte,->] (coseno.east) 
-        -- ++(0.75,0) -- ++(0,-1.5)
+        -- ++(0.35,0) -- ++(0,-1.5)
         -- (0,-1.5) -- 
         node [anchor=west,pos=0.5] () {$\matr{v}_\textrm{PLL} ( \, \widehat{\theta}\,)$}
         (dotprod);
 
-    \draw [densely dotted, ->] ($(SumOmega)+(0.75,-0.1)$) to
-        node [pos=1, anchor=north, fonte] () {\textbf{Estimated value of} $\omega$}
-        ++(-1.5,-0.75);
+    \draw [densely dotted, ->] ($(SumOmega)+(0.65,-0.1)$) to
+        node [pos=1, anchor=north, fonte] () {Estimated value of $\omega$}
+        ++(-0.4,-0.75);
 
-    \draw [densely dotted, ->] ($(Int)+(1.25,-0.1)$) to
-        node [pos=1, anchor=north, fonte] () {\textbf{Estimated value of} $\theta$}
-        ++(-0.75,-0.75);
+    \draw [densely dotted, ->] ($(Int)+(1.2,-0.1)$) to
+        node [pos=1, anchor=north, fonte] () {Estimated value of $\theta$}
+        ++(0.1,-0.75);
         
 \end{tikzpicture}
 

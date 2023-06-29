@@ -6,24 +6,24 @@
                     rounded corners=2]
 
 \tikzstyle{fonte} = [font=\footnotesize]
-\tikzstyle{cordecisao} = [fill=red!15] % [fill=white] %
-\tikzstyle{correinicio} = [fill=blue!20]
-\tikzstyle{corstart} = [fill=yellow!20]
+\tikzstyle{cordecisao} = [fill=DaltPink] % [fill=red!15] % [fill=white] %
+\tikzstyle{correinicio} = [fill=DaltBlue] % [fill=blue!20]
+\tikzstyle{corstart} = [fill=DaltYellow]  % [fill=yellow!20]
 \begin{tikzpicture}[>=stealth]
 
     %%%%%%%%%%%%%%%%% X = ?? %%%%%%%%%%%%%%%%%%%%%%%%
     % Legend
-    \node at (9.25,1.0) () [fonte, anchor=south] {\textbf{Gate types}};
-    \node at (9.5,0.8) (legstart) [legenda, corstart] {};
+    \node at (8.75,1.0) () [fonte, anchor=south] {\textbf{Gate types}};
+    \node at (9.0,0.8) (legstart) [legenda, corstart] {};
     \node at (legstart.east) [fonte, anchor=west] {Start};
     
-    \node at (9.5,0.2) (legrestart) [legenda, correinicio] {};
+    \node at (9.0,0.2) (legrestart) [legenda, correinicio] {};
     \node at (legrestart.east) [fonte, anchor=west] {Selection};
 
-    \node at (9.5,-0.4) (legcalc) [legenda] {};
+    \node at (9.0,-0.4) (legcalc) [legenda] {};
     \node at (legcalc.east) [fonte, anchor=west] {Calculations};
 
-    \node at (9.5,-1.0) (legeval) [legenda, cordecisao] {};
+    \node at (9.0,-1.0) (legeval) [legenda, cordecisao] {};
     \node at (legeval.east) [fonte, anchor=west] {Decisions};
 
     \draw [->, densely dotted, thick] (legeval.west) to ++(-0.35,0) to ++(0,1.2) to ++(0.35,0);
@@ -31,7 +31,7 @@
     \draw [->, densely dotted, thick] (legrestart) to (legcalc);
     \draw [->, densely dotted, thick] (legcalc) to (legeval);
     
-    \draw [] (8.25,1.5) to (11.75,1.5) to (11.75,-1.4) to (8.25,-1.4) to cycle;
+    \draw [] (7.75,1.5) to (11.25,1.5) to (11.25,-1.4) to (7.75,-1.4) to cycle;
 
     %\draw [] (-4.5,2.75) to (19,2.75) to (19,-6.75) to (-4.5,-6.75) to cycle;
     %\draw [] (-2.9,2.75) to (17.25,2.75) to (17.25,-6.75) to (-2.9,-6.75) to cycle;
@@ -96,10 +96,10 @@
     
     %%%%%%%%%%%%%%%%% X = 11 %%%%%%%%%%%%%%%%%%%%%%%%
     % Converter reactor
-    \node at (11,-4) (Rac) [caixa, cordecisao] {Evaluate \\ $R_{r}^{sd}$};
+    \node at (10.5,-4) (Rac) [caixa, cordecisao] {Evaluate \\ $R_{r}^{sd}$};
     \node at (Rac.north) () [fonte, anchor=south] {$\dfrac{R_{r}^{sd}}{ Z_{b}^{sd}} \approx \dfrac{R_{r}^{f\!s}}{ Z_{b}^{f\!s}}$}; %  \eqref{eq:rrsdpu}
     
-    \node at (11,-6) (Rtr) [caixa, cordecisao] {Evaluate \\ $R_{t}^{sd}$};
+    \node at (10.5,-6) (Rtr) [caixa, cordecisao] {Evaluate \\ $R_{t}^{sd}$};
     \node at (Rtr.north) () [fonte, anchor=south] {$\dfrac{R_{t}^{sd}}{ Z_{b}^{sd}} \approx \dfrac{R_{t}^{f\!s}}{ Z_{b}^{f\!s}}$};
     
     %% Rshunt
