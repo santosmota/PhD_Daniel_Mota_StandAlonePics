@@ -34,8 +34,9 @@
 \node at (3.3,0.75) [fonte, anchor=south] () {$\overset{*}{i}_{rq_{\max}}$}; 
 \node at (3.2,-2) [fonte, anchor=south] () {Dynamic limits};
 
-\node at (3.9,0) [fonte, anchor=north] () {Reference};
-\node at (3.9,-0.25) [fonte, anchor=north] () {to controller};
+\node at (4.5,-0.3) [fonte] () {Reference to GC's};
+\node at (4.5,-0.6) [fonte] () {inner-loop current};
+\node at (4.5,-0.9) [fonte] () {regulator};
 
 %lines to summing point voltages
 \draw [->] (-5,0) to node[fonte, anchor=south, pos=0.0] () {$\overset{*}{v}_{ac}$} node[fonte, anchor=south east, pos=1] () {$-$} (soma);
@@ -48,7 +49,7 @@
 \draw [->] (soma) to (Kg);
 \draw [->] (Kg) to (Kp);
 \draw [->] (Kp) to node[fonte, anchor=south, pos=0.85] () {$+$} (somaI);
-\draw [->] (somaI) to node[fonte, anchor=south, pos=1] () {$\overset{*}{i}_{rq}$} (3.5,0);
+\draw [->] (somaI) to node[fonte, anchor=south, pos=1] () {$\overset{*}{i}_{rq}$} (4.5,0);
 \fill ($(Kg.east) + (0.25,0)$) circle [radius=1pt];
 \draw [->] ($(Kg.east) + (0.25,0)$) |- (Ti);
 \draw [->] (Ti) -| node[fonte, anchor=east, pos=0.9] () {$+$} (somaI);

@@ -1,0 +1,73 @@
+\tikzstyle{caixa} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.25cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixabranca} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixaalta} = [rectangle, draw, thick,
+                    text width=2.5cm, text centered, minimum height=1.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{caixasuperalta} = [rectangle, draw, thick, 
+                    text width=3cm, text centered, minimum height=2.5cm,
+                    rounded corners=2, font=\footnotesize, fill=white ]
+
+\tikzstyle{linha} = [line width=1.5mm, black!75, opacity=0.55] % [fill=white] %
+\tikzstyle{curvas} = [smooth, tension=0.5]
+
+\tikzstyle{fonte} = [font=\footnotesize]
+
+\begin{tikzpicture}[>=stealth]
+
+    %%%%%%%%%%%%%%%%
+    % boxes
+    %%%%%%%%%%%%%%%%
+    \node at (0,0) (Concept) [caixa] {Conceptualization};
+    %%%%%
+    \node at (0,-2) (Modeling) [caixa] {Modeling};
+    %%%%%
+    \node at (-3.5,-4) (Propose) [caixa] {Propose and Assess\\Control Structures};
+    \node at (0,-4) (Instab) [caixa] {Assess and Address \\ Converter-Induced Instabilities};
+    \node at (3.5,-4) (Design) [caixa] {Design \\ Laboratory \\ Experiments};
+    %%%%%
+    \node at (0,-6) (Cons) [caixa] {Data \\ Consolidation};
+    \node at (3.5,-6) (Exp) [caixa] {Perform \\ Laboratory \\ Experiments};
+    %%%%%
+    \node at (0,-8) (Thesis) [caixa] {Thesis};
+
+    %%%%%%%%%%%%%%%%
+    % phase labels
+    %%%%%%%%%%%%%%%%
+    \foreach \y/\t in {0/1,-2/2,-4/3,-6/4,-8/5}
+    {
+       \node at (-6,\y) [fonte] () {\textbf{Phase \t}};
+    }
+
+    %%%%%%%%%%%%%%%%
+    % dotted lines
+    %%%%%%%%%%%%%%%%
+    \foreach \y in {-1,-3,-5,-7}
+    {
+        \draw [densely dotted] (-6.5,\y) to ++(11.4,0); 
+    }
+
+    %%%%%%%%%%%%%%%%
+    % Lines
+    %%%%%%%%%%%%%%%%
+    \draw [->] (Concept) to (Modeling);
+    \draw [->] (Modeling) to (Instab);
+    
+    \draw [->] ($(Modeling.south)+(0,-0.2)$) -| (Propose);
+    \draw [->] ($(Modeling.south)+(0,-0.2)$) -| (Design);
+    \fill ($(Modeling.south)+(0,-0.2)$) circle [radius=1pt];
+    
+    \draw [->] (Propose.south) |- (Cons);
+    \draw [->] (Instab) to (Cons);
+    \draw [->] (Design) to (Exp);
+    \draw [->] (Exp) to (Cons);
+
+    \draw [->] (Cons) to (Thesis);
+   
+\end{tikzpicture}

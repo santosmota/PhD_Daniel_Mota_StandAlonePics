@@ -48,9 +48,11 @@
 \node at (7.5,-0.25) [caixa] (didtlim) {$\inftsml \overset{*}{i}_{bt}/\inftsml t$\\ $\max,\min$};
 %\draw [->] (div) to node[fonte, anchor=south, pos=0.4] () {$\overset{*}{i}_{b\textrm{ulim}}$} (didtlim);
 \draw [->] (div) to (didtlim);
-\draw [->] (didtlim) to node[fonte, anchor=south, pos=1] () {$\overset{*}{i}_{bt}$} (9,-0.25);
-\node at (8.6,0.5) [fonte, anchor=south] () {Reference};
-\node at (8.6,0.25) [fonte, anchor=south] () {to controller};
+\draw [->] (didtlim) to node[fonte, anchor=south, pos=1] () {$\overset{*}{i}_{bt}$} (9.5,-0.25);
+\node at (9.5,1.1) [fonte] () {Reference to ESD's}; % , anchor=south
+\node at (9.5,0.85) [fonte] () {inner-loop current};
+\node at (9.5,0.6) [fonte] () {regulator};
+
 
 
 %frequency measurement and other lines
@@ -58,7 +60,7 @@
 \node at (-2,1.5) [sum] (somaf) {$\Sigma$};
 \draw [->] (-2.75,0.5) -| node[fonte, anchor=south, pos=0.0] () {$\widehat{f}$} node[fonte, anchor=east, pos=0.8] () {$-$} (somaf);
 \draw [->] (-2.75,1.5) to node[fonte, anchor=south, pos=0.0] () {$1$} node[fonte, anchor=south east, pos=1] () {$+$} (somaf);
-\node at (-2.4,0.5) [fonte, anchor=north] () {Grid freq.};
+\node at (-2.75,0.5) [fonte, anchor=north] () {Ac grid frequency};
 \draw [->] (somaf) to (Kp);
 \fill (-1.5,1.5) circle [radius=1pt];
 \node at (-1.5,1.5) [fonte, anchor=south] () {$-\widetilde{f}$};
